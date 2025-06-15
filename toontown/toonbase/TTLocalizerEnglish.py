@@ -108,6 +108,7 @@ GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
  9000: ('to the', 'in the', 'Playground'),
  9100: ('to', 'on', 'Lullaby Lane'),
  9200: ('to', 'on', 'Pajama Place'),
+ 9300: ('to', 'on', 'Snooze Square'),
  10000: ('to', 'in', 'Bossbot HQ Courtyard'),
  10100: ('to the', 'in the', 'Bossbot HQ Lobby'),
  10200: ('to the', 'in the', 'The Clubhouse'),
@@ -574,6 +575,7 @@ QuestMovieQuestChoiceCancel = 'Come back later if you need a ToonTask! Bye!'
 QuestMovieTrackChoiceCancel = 'Come back when you are ready to decide! Bye!'
 QuestMovieQuestChoice = 'Choose a ToonTask.'
 QuestMovieTrackChoice = 'Ready to decide? Choose a track, or feel free to come back later.'
+SnoozeSquareDialogInfo = "Hello Toontown Fan, welcome to Snooze Square: a demo of an eventual new street! Please note due to the demo nature, fishing has not been implemented. We would love to hear your feedback as it is essential to our of goal of expanding Toontown, together. Have fun!"
 GREETING = 0
 QUEST = 1
 INCOMPLETE = 2

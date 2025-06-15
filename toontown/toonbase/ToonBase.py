@@ -156,6 +156,9 @@ class ToonBase(OTPBase.OTPBase):
         self.oldY = max(1, base.win.getYSize())
         self.aspectRatio = float(self.oldX) / self.oldY
         self.localAvatarStyle = None
+        self.MOVE_UP = ('w'
+                        ''
+                        '')
         return
 
     def openMainWindow(self, *args, **kw):
