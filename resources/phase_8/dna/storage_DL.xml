@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<storage scope="global">
+	<model path="phase_8/models/props/ttr_m_ara_ddl_tree_willow" scope="hood">
+		<store_node root="holiday_prop" code="prop_tree_DL_brickbox_ul" />
+		<store_node root="holiday_prop" code="prop_tree_DL_brickbox_ur" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_softClouds" scope="hood">
+		<store_node root="prop" code="prop_DL_clouds" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_landmarkA1" scope="hood">
+		<store_node root="toon_landmark" code="toon_landmark_DL_A1" node="DL_A1" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_landmarkB1" scope="hood">
+		<store_node root="toon_landmark" code="toon_landmark_DL_B1" node="DL_B1" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_landmarkC1" scope="hood">
+		<store_node root="toon_landmark" code="toon_landmark_DL_C1" node="DL_C1" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_landmarkD1" scope="hood">
+		<store_node root="toon_landmark" code="toon_landmark_DL_D1" node="DL_D1" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_landmarkE1" scope="hood">
+		<store_node root="toon_landmark" code="toon_landmark_DL_E1" node="DL_E1" />
+	</model>
+
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_windows" scope="hood">
+		<store_node root="window" code="window_md_curvedDL_ur" />
+		<store_node root="window" code="window_md_curvedDL_ul" />
+
+		<store_node root="window" code="window_md_curved2DL_ur" />
+		<store_node root="window" code="window_md_curved2DL_ul" />
+
+		<store_node root="window" code="window_sm_shutteredDL_ur" />
+		<store_node root="window" code="window_sm_shutteredDL_ul" />
+
+		<store_node root="window" code="window_sm_squareDL_ur" />
+		<store_node root="window" code="window_sm_squareDL_ul" />
+
+		<store_node root="window" code="window_sm_curvedDL_ur" />
+		<store_node root="window" code="window_sm_curvedDL_ul" />
+
+		<store_node root="window" code="window_sm_curved2DL_ur" />
+		<store_node root="window" code="window_sm_curved2DL_ul" />
+
+		<store_node root="window" code="window_sm_roundDL_ur" />
+		<store_node root="window" code="window_sm_roundDL_ul" />
+
+		<store_node root="window" code="window_sm_round2DL_ur" />
+		<store_node root="window" code="window_sm_round2DL_ul" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_doorsPractical" scope="hood">
+		<!--  hood_model "phase_8/models/modules/DL_doors" [ -->
+		<store_node root="door_double" code="door_double_curvedDL_ur" />
+		<store_node root="door_double" code="door_double_curvedDL_ul" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_ara_ddl_streetlight" scope="hood">
+		<store_node root="holiday_prop" code="prop_DL_post_one_light" node="prop_post_one_light" />
+		<store_node root="holiday_prop" code="prop_DL_post_three_light" node="prop_post_three_light" />
+	</model>
+
+	<store_texture root="texture" code="street_street_DL_tex" path="phase_8/maps/ttr_t_ara_ddl_street_cobblestone.jpg" />
+	<store_texture root="texture" code="street_sidewalk_DL_tex" path="phase_8/maps/ttr_t_ara_ddl_street_sidewalk.jpg" />
+	<store_texture root="texture" code="street_curb_DL_tex" path="phase_8/maps/ttr_t_ara_ddl_street_curb.jpg" />
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_landmarkSigns" scope="hood">
+		<store_node root="sign" code="DL_sign1" />
+		<store_node root="sign" code="DL_sign2" />
+		<store_node root="sign" code="DL_sign3" />
+		<store_node root="sign" code="DL_sign4" />
+		<store_node root="sign" code="DL_sign5" />
+		<store_node root="sign" code="DL_sign6" />
+		<store_node root="sign" code="DL_sign7" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_toonHQ" scope="hood">
+		<store_node root="toon_landmark" code="toon_landmark_hqDL" node="" />
+	</model>
+
+	<model path="phase_3.5/models/props/HQ_telescope-mod" scope="hood">
+		<store_node root="prop" code="animated_prop_HQTelescopeAnimatedProp" node="telescope" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_signCashBotHQ" scope="hood">
+		<store_node root="prop" code="neighborhood_sign_cashBotHQ" node="" />
+	</model>
+
+	<model path="phase_8/models/char/ttr_r_ara_ddl_hydrant" scope="hood">
+		<store_node root="anim_prop" code="animated_prop_generic_phase_8_models_char__ddl_hydrant" node="" />
+	</model>
+
+	<model path="phase_8/models/char/ttr_r_ara_ddl_hydrant" scope="hood">
+		<store_node root="interactive_prop" code="interactive_prop_phase_8_models_char__ddl_hydrant" node="" />
+	</model>
+
+	<model path="phase_8/models/char/ttr_r_ara_ddl_mailbox" scope="hood">
+		<store_node root="anim_prop" code="animated_prop_generic_phase_8_models_char__ddl_mailbox" node="" />
+	</model>
+
+	<model path="phase_8/models/char/ttr_r_ara_ddl_mailbox" scope="hood">
+		<store_node root="interactive_prop" code="interactive_prop_phase_8_models_char__ddl_mailbox" node="" />
+	</model>
+
+	<model path="phase_8/models/char/ttr_r_ara_ddl_trashcan" scope="hood">
+		<store_node root="anim_prop" code="animated_prop_generic_phase_8_models_char__ddl_trashcan" node="" />
+	</model>
+
+	<model path="phase_8/models/char/ttr_r_ara_ddl_trashcan" scope="hood">
+		<store_node root="interactive_prop" code="interactive_prop_phase_8_models_char__ddl_trashcan" node="" />
+	</model>
+
+	<model path="phase_4/models/props/tt_m_ara_gen_tunnelAheadSign" scope="hood">
+		<store_node root="prop" code="prop_tt_m_ara_gen_tunnelAheadSign" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_propFlats" scope="place">
+		<store_node root="prop" code="prop_DL_flat_owl" node="owl" />
+	</model>
+
+	<model path="phase_8/models/props/DL_hydrant" scope="place">
+		<store_node root="prop" code="prop_DL_hydrant" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_piers" scope="hood">
+		<store_node root="prop" code="fishing_spot_DL" node="" />
+		<store_node root="prop" code="fishing_spot_extra_DL" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_walls">
+		<store_node root="wall_collide" code="wall_camera_barrier" node="wall_camera_barrier" />
+
+		<store_node root="wall" code="wall_bricks_ur_DL" node="wall_bricks" />
+		<store_node root="wall" code="wall_md_bricks_ur_DL" node="wall_md_bricks" />
+		<store_node root="wall" code="wall_lg_brick_ur_DL" node="wall_lg_brick" />
+
+		<store_node root="wall" code="wall_md_dental_ur_DL" node="wall_md_dental" />
+
+		<store_node root="wall" code="wall_fence_wood_ur_DL" node="wall_fence_wood" />
+
+		<store_node root="wall" code="wall_md_blank_ur_DL" node="wall_md_blank_ur" />
+		<store_node root="wall" code="wall_md_blank_dr_DL" node="wall_md_blank_dr" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_cornices" scope="hood">
+		<store_node root="cornice" code="cornice_stone_ur_DL" node="cornice_stone" />
+		<store_node root="cornice" code="cornice_brick_ur_DL" node="cornice_brick" />
+		<store_node root="cornice" code="cornice_shingles_ur_DL" node="cornice_shingles" />
+		<store_node root="cornice" code="cornice_marble_ur_DL" node="cornice_marble" />
+		<store_node root="cornice" code="cornice_curved_ur_DL" node="cornice_curved" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_doorsPractical2">
+		<store_node root="door_double" code="door_double_pillars_ur_DL" node="door_double_pillars"/>
+		<store_node root="door_double" code="door_double_curved_ur_DL" node="door_double_curved" />
+		<store_node root="door_double" code="door_double_round_ur_DL" node="door_double_round" />
+		<store_node root="door_double" code="door_double_clothesshop_ur_DL" node="door_double_clothshop" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_windows2">
+		<store_node root="window" code="window_DL_porthole_ur" node="window_porthole_ur" />
+		<store_node root="window" code="window_DL_porthole_ul" node="window_porthole_ul" />
+
+		<store_node root="window" code="window_DL_sm_square_ur" node="window_sm_square_ur" />
+		<store_node root="window" code="window_DL_sm_square_ul" node="window_sm_square_ul" />
+
+		<store_node root="window" code="window_DL_sm_shuttered_ur" node="window_sm_shuttered" />
+
+		<store_node root="window" code="window_DL_sm_curved_ul" node="window_sm_curved_ul" />
+		<store_node root="window" code="window_DL_sm_curved_ur" node="window_sm_curved_ur" />
+
+		<store_node root="window" code="window_DL_sm_round_ur" node="window_sm_round_ur" />
+		<store_node root="window" code="window_DL_sm_round_ul" node="window_sm_round_ul" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_streetModules">
+		<store_node root="street" code="street_tight_corner_DL" node="street_tight_corner" />
+		<store_node root="street" code="street_tight_corner_mirror_DL" node="street_tight_corner_mirror" />
+		<store_node root="street" code="street_full_corner_DL" node="street_full_corner" />
+		<store_node root="street" code="street_20x40_DL" node="street_20x40" />
+		<store_node root="street" code="street_curved_corner_DL" node="street_curved_corner" />
+		<store_node root="street" code="street_40x40_DL" node="street_40x40" />
+		<store_node root="street" code="street_angle_60_DL" node="street_angle_60" />
+		<store_node root="street" code="street_sidewalk_20x20_DL" node="street_sidewalk_20x20" />
+		<store_node root="street" code="street_t_intersection_DL" node="street_t_intersection" />
+		<store_node root="street" code="street_inner_corner_DL" node="street_inner_corner" />
+		<store_node root="street" code="street_4way_intersection_DL" node="street_4way_intersection" />
+		<store_node root="street" code="street_30x40_DL" node="street_30x40" />
+		<store_node root="street" code="street_angle_45_DL" node="street_angle_45" />
+		<store_node root="street" code="street_courtyard_70_exit_DL" node="street_courtyard_70_exit" />
+		<store_node root="street" code="street_courtyard_70_DL" node="street_courtyard_70" />
+		<store_node root="street" code="street_10x40_DL" node="street_10x40" />
+		<store_node root="street" code="street_divided_transition_15_DL" node="street_divided_transition_15" />
+		<store_node root="street" code="street_curved_corner_15_DL" node="street_curved_corner_15" />
+		<store_node root="street" code="street_sidewalk_10x40_DL" node="street_sidewalk_10x40" />
+		<store_node root="street" code="street_sidewalk_40x40_DL" node="street_sidewalk_40x40" />
+		<store_node root="street" code="street_sidewalk_10x10_DL" node="street_sidewalk_10x10" />
+		<store_node root="street" code="street_40x40_15_DL" node="street_40x40_15" />
+		<store_node root="street" code="street_angle_30_DL" node="street_angle_30" />
+		<store_node root="street" code="street_keyboard_40x40_DL" node="street_keyboard_40x40" />
+		<store_node root="street" code="street_keyboard_10x40_DL" node="street_keyboard_10x40" />
+		<store_node root="street" code="street_stairs_40x10x5_DL" node="street_stairs_40x10x5" />
+		<store_node root="street" code="street_sidewalk_10x20_DL" node="street_sidewalk_10x20" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_signMinniesMelodyland">
+		<store_node root="prop" code="DL_neighborhood_sign_MM" node="" />
+    </model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_tunnelSign_purple">
+		<store_node root="sign" code="DL_tunnel_sign_purple" node="g1"/>
+    </model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_tunnelSign_magenta">
+		<store_node root="sign" code="DL_tunnel_sign_magenta" node="g1"/>
+    </model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_donaldTunnelIcon">
+		<store_node root="graphic" code="DL_donald_DL_SZ" node="" />
+    </model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_minnieTunnelIcon">
+		<store_node root="graphic" code="DL_minnie_ML_SZ" node="" />
+    </model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_signDonaldsDreamland">
+		<store_node root="prop" code="DL_neighborhood_sign_DL" node="" />
+    </model>
+
+</storage>

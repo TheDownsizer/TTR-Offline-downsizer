@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<storage scope="global">
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_cogTunnel" scope="place">
+		<store_node root="prop" code="prop_cog_tunnel" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_smokeStack" scope="place">
+		<store_node root="prop" code="prop_cog_smoke_stack" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_waterTower" scope="place">
+		<store_node root="prop" code="prop_cog_water_tower" node="" />
+	</model>
+
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_mickeyOnHorse" scope="place">
+		<store_node root="prop" code="prop_mickey_on_horse" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_lowFence" scope="place">
+		<store_node root="prop" code="post_sandstone" node="p_sandstone" />
+		<store_node root="prop" code="post_sandstone2" node="p_sandstone2" />
+		<store_node root="prop" code="post_stuccobrick" node="p_stuccobrick" />
+		<store_node root="prop" code="post_brick" node="p_brick" />
+		<store_node root="prop" code="post_brick2" node="p_brick2" />
+
+		<store_node root="prop" code="fence_woodflower_sandstone" node="f_woodflower_sandstone" />
+		<store_node root="prop" code="fence_woodflower_brickstucco" node="f_woodflower_brickstucco" />
+		<store_node root="prop" code="fence_ironbar_brick" node="f_ironbar_brick" />
+		<store_node root="prop" code="fence_woodbrush_sandstone" node="f_woodbrush_sandstone" />
+		<store_node root="prop" code="fence_woodbrush_brick" node="f_woodbrush_brick" />
+	</model>
+
+	<model path="phase_8/models/props/mailbox_DL" scope="place">
+		<store_node root="prop" code="prop_DL_mailbox" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_neighborhoodTunnel" scope="place">
+		<store_node root="prop" code="prop_neighborhood_tunnel" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_streetTunnel" scope="place">
+		<store_node root="prop" code="prop_safe_zone_entrance_tunnel" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_ara_ddl_weathervaneCat" scope="place">
+		<store_node root="prop" code="prop_DL_weathervane" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_propFlats" scope="place">
+		<store_node root="prop" code="prop_DL_flat_pillows" node="pillows" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_diner" scope="place">
+		<store_node root="prop" code="prop_diner_entrance" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_cellarDoor" scope="place">
+		<store_node root="prop" code="prop_cellar_door" node="" />
+	</model>
+
+	<model path="phase_5/models/props/roman_entrance" scope="place">
+		<store_node root="prop" code="prop_roman_entrance" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_crate" scope="place">
+		<store_node root="prop" code="prop_crate" node="crate" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_chimneys" scope="place">
+		<store_node root="prop" code="prop_chimney" />
+		<store_node root="prop" code="prop_stovepipe" />
+		<store_node root="prop" code="prop_smokestack" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_roofAccess" scope="place">
+		<store_node root="prop" code="prop_roof_access" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_trashcanStatic" scope="place">
+		<store_node root="prop" code="prop_trashcan_metal" node="trashcanStatic" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_marquee" scope="place">
+		<store_node root="prop" code="prop_marquee" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_billboardAd" scope="place">
+		<!-- <store_node root="prop" code="prop_signpost" node="" /> -->
+
+		<store_node root="prop" code="prop_billboard" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_streetPond" scope="place">
+		<store_node root="street" code="street_DL_pond" node="" />
+	</model>
+</storage>

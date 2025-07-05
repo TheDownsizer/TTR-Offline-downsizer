@@ -849,6 +849,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         spotIndex = len(pendingToons) + len(self.joiningToons)
         self.joiningToons.append(toon)
         openSpot = self.toonPendingPoints[spotIndex]
+        toon.disableBlend()
         pos = openSpot[0]
         hpr = VBase3(openSpot[1], 0.0, 0.0)
         trackName = self.taskName('to-pending-toon-%d' % toon.doId)

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<storage scope="global">
+	<!--  Parties -->
+	<model path="phase_8/models/modules/ttr_m_ara_pty_partyGate_DDL">
+		<store_node root="prop" code="prop_party_gate" node="" />
+	</model>
+
+	<model path="phase_8/models/neighborhoods/ttr_m_ara_ddl_donaldsDreamland" scope="place">
+		<store_node root="prop" code="donalds_dreamland" node="" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_playgroundTunnel" scope="place">
+		<store_node root="prop" code="prop_safe_zone_tunnel" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_trolleyStation" scope="place">
+		<store_node root="prop" code="prop_trolley_station" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_gagShop" scope="place">
+		<store_node root="toon_landmark" code="toon_landmark_DL_gag_shop" node="" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_petShop" scope="place">
+		<store_node root="toon_landmark" code="toon_landmark_DL_pet_shop" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_ddl_clothesShop" scope="place">
+		<store_node root="toon_landmark" code="toon_landmark_DL_clothes_shop" node="" />
+	</model>
+
+	<model path="phase_4/models/props/exteriorfish-zero" scope="place">
+		<store_node root="prop" code="animated_prop_PetShopFishAnimatedProp" node="exteriorfish" />
+	</model>
+
+	<model path="phase_4/models/props/ttr_m_ara_gen_paintBucket" scope="place">
+		<store_node root="prop" code="prop_paintBucket" node="grp_M_paintBucketWhole_001" />
+	</model>
+	<model path="phase_4/models/props/ttr_m_ara_gen_paintBucket" scope="place">
+		<store_node root="prop" code="prop_paint_splash_1" node="geo_M_paintSplash_01" />
+	</model>
+	<model path="phase_4/models/props/ttr_m_ara_gen_paintBucket" scope="place">
+		<store_node root="prop" code="prop_paint_splash_2" node="geo_M_paintSplash_02" />
+	</model>
+	<model path="phase_4/models/props/ttr_m_ara_gen_paintBucket" scope="place">
+		<store_node root="prop" code="prop_paint_splash_3" node="geo_M_paintSplash_03" />
+	</model>
+	<model path="phase_4/models/props/ttr_m_ara_gen_paintBucket" scope="place">
+		<store_node root="prop" code="prop_paint_splash_4" node="geo_M_paintSplash_04" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_crate" scope="place">
+		<store_node root="prop" code="prop_crate" node="crate" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_ddl_trashcanStatic" scope="hood">
+		<store_node root="prop" code="prop_ddl_trashcan_static" node="" />
+	</model>
+
+	<model path="phase_4/models/props/ttr_m_ara_gen_cone" scope="hood">
+		<store_node root="prop" code="prop_traffic_cone" node="" />
+	</model>
+</storage>

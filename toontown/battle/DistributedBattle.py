@@ -83,6 +83,7 @@ class DistributedBattle(DistributedBattleBase.DistributedBattleBase):
         suitPos = point[0]
         suitHpr = VBase3(point[1], 0.0, 0.0)
         toon = self.toons[0]
+        toon.disableBlend()
         point = self.toonPoints[0][0]
         toonPos = point[0]
         toonHpr = VBase3(point[1], 0.0, 0.0)
@@ -192,6 +193,8 @@ class DistributedBattle(DistributedBattleBase.DistributedBattleBase):
         self.playReward(ts)
 
     def playReward(self, ts):
+        for toon in self.activeToons:
+            toon.enableBlend()
         self.movie.playReward(ts, self.uniqueName('reward'), self.handleRewardDone)
 
     def handleRewardDone(self):
