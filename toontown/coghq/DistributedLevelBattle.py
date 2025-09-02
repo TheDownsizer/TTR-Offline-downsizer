@@ -126,7 +126,6 @@ class DistributedLevelBattle(DistributedBattle.DistributedBattle):
             suitIsLeader = 0
             oneSuitTrack = Sequence()
             oneSuitTrack.append(Func(suit.loop, 'neutral'))
-            oneSuitTrack.append(Func(suit.headsUp, toonPos))
             if self.suits.index(suit) == leaderIndex:
                 suitLeader = suit
                 suitIsLeader = 1
@@ -143,7 +142,7 @@ class DistributedLevelBattle(DistributedBattle.DistributedBattle):
             oneSuitTrack.append(Wait(delay))
             if suitIsLeader == 1:
                 oneSuitTrack.append(Func(suit.clearChat))
-            oneSuitTrack.append(self.createAdjustInterval(suit, destPos, destHpr))
+            #oneSuitTrack.append(self.createAdjustInterval(suit, destPos, destHpr))
             suitTrack.append(oneSuitTrack)
 
         suitHeight = suitLeader.getHeight()

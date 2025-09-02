@@ -410,7 +410,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        0,
        0),
-      (8, 9, 10),
+      (8, 9, 10, 11),
       []],
      [11000,
       3,
@@ -541,6 +541,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
      0,
      0,
      0]
+    ZONE_2_CUSTOM_LEVEL_EXTENSION = {
+        10000: 5
+    }
     for currHoodInfo in SuitHoodInfo:
         weight = currHoodInfo[SUIT_HOOD_INFO_BWEIGHT]
         tracks = currHoodInfo[SUIT_HOOD_INFO_TRACK]
@@ -833,6 +836,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         newSuit.initializePath()
         self.zoneChange(newSuit, None, newSuit.zoneId)
         # Determine if we are spawning a special type of suit. 1 is Skelecog, 2 is v2.0.
+        specialSuit = 1
         if specialSuit == 1:
             newSuit.setSkelecog(1)
         elif specialSuit == 2:
@@ -1466,11 +1470,14 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     def pickLevelTypeAndTrack(self, level = None, type = None, track = None):
         if level == None:
             level = random.choice(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL])
+        level_extension = 4
+        if self.zoneId in self.ZONE_2_CUSTOM_LEVEL_EXTENSION:
+            level_extension = self.ZONE_2_CUSTOM_LEVEL_EXTENSION[self.zoneId]
         if type == None:
-            typeChoices = list(range(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES) + 1))
+            typeChoices = list(range(max(level - level_extension, 1), min(level, self.MAX_SUIT_TYPES) + 1))
             type = random.choice(typeChoices)
         else:
-            level = min(max(level, type), type + 4)
+            level = min(max(level, type), type + level_extension)
         if track == None:
             track = SuitDNA.suitDepts[SuitBattleGlobals.pickFromFreqList(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_TRACK])]
         self.notify.debug('pickLevelTypeAndTrack: %d %d %s' % (level, type, track))

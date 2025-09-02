@@ -36,6 +36,7 @@ class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
 
     def load(self, zoneId):
         CogHQLoader.CogHQLoader.load(self, zoneId)
+        self.battleMusic = base.loader.loadMusic('phase_11/audio/bgm/ttr_s_ara_lhq_facilityBattle.ogg')
         Toon.loadSellbotHQAnims()
 
     def unloadPlaceGeom(self):

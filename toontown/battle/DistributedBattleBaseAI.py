@@ -1216,6 +1216,33 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
 
     def exitWaitForJoin(self):
         return None
+    
+    def removeDuplicateSuits(self):
+        """
+        Remove duplicate suits from self.suits and self.activeSuits lists
+        """
+        # Remove duplicates from self.suits while preserving order
+        seen = set()
+        uniqueSuits = []
+        for suit in self.suits:
+            if suit is not None and suit not in seen:
+                seen.add(suit)
+                uniqueSuits.append(suit)
+            elif suit is None and None not in seen:
+                seen.add(None)
+                uniqueSuits.append(suit)
+        self.suits = uniqueSuits
+        
+        # Remove duplicates from self.activeSuits while preserving order
+        seen = set()
+        uniqueActiveSuits = []
+        for suit in self.activeSuits:
+            if suit is not None and suit not in seen:
+                seen.add(suit)
+                uniqueActiveSuits.append(suit)
+        self.activeSuits = uniqueActiveSuits
+        
+        self.notify.debug('removeDuplicateSuits() - suits: %d, activeSuits: %d' % (len(self.suits), len(self.activeSuits)))
 
     def enterWaitForInput(self):
         self.notify.debug('enterWaitForInput()')
@@ -1223,6 +1250,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.runableFsm.request('Runable')
         self.resetResponses()
         self.__requestAdjust()
+        self.removeDuplicateSuits()
         if not self.tutorialFlag:
             self.timer.startCallback(SERVER_INPUT_TIMEOUT, self.__serverTimedOut)
         self.npcAttacks = {}

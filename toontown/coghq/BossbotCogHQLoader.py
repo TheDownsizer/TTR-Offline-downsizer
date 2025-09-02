@@ -45,6 +45,7 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
 
     def load(self, zoneId):
         CogHQLoader.CogHQLoader.load(self, zoneId)
+        self.battleMusic = base.loader.loadMusic('phase_12/audio/bgm/ttr_s_ara_bhq_facilityBattle.ogg')
         Toon.loadBossbotHQAnims()
 
     def startRain(self):

@@ -28,6 +28,7 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
 
     def load(self, zoneId):
         CogHQLoader.CogHQLoader.load(self, zoneId)
+        self.battleMusic = base.loader.loadMusic('phase_10/audio/bgm/ttr_s_ara_chq_facilityBattle.ogg')
         Toon.loadCashbotHQAnims()
 
     def unloadPlaceGeom(self):

@@ -715,6 +715,8 @@ class Suit(Avatar.Avatar):
             self.rightHand = self.find('**/jnt_R_attachProp_01')
             self.shadowJoint = self.find('**/jnt_M_shadow_01')
             self.nametagNull = self.find('**/jnt_M_nameTag_01')
+            self.nametag3d.wrtReparentTo(self.nametagNull)
+            self.nametag3d.setEffect(CompassEffect.make(render, CompassEffect.PScale))
 
         if config.ConfigVariableBool('want-new-cogs', 0).getValue():
             if dept == 'c':
@@ -1004,6 +1006,8 @@ class Suit(Avatar.Avatar):
         self.rightHand = self.find('**/jnt_R_attachProp_01')
         self.shadowJoint = self.find('**/jnt_M_shadow_01')
         self.nametagNull = self.find('**/jnt_M_nameTag_01')
+        self.nametag3d.reparentTo(self.nametagNull)
+        self.nametag3d.setEffect(CompassEffect.make(render, CompassEffect.PScale))
         self.loop(anim)
         self.isSkeleton = 1
 

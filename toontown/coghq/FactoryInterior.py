@@ -76,7 +76,7 @@ class FactoryInterior(BattlePlace.BattlePlace):
         self.parentFSM.getStateNamed('factoryInterior').removeChild(self.fsm)
         del self.fsm
         del self.music
-        self.loader.battleMusic = base.loadMusic('phase_9/audio/bgm/encntr_suit_winning.ogg') 
+        self.loader.battleMusic = base.loadMusic('phase_9/audio/bgm/ttr_s_ara_shq_facilityBattle.ogg') 
         BattlePlace.BattlePlace.unload(self)
 
     def enter(self, requestStatus):

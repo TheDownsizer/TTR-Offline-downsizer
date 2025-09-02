@@ -221,6 +221,33 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
             frame = trap.getNumFrames(trapName) - 1
             trap.pose(trapName, frame)
 
+    def removeDuplicateSuits(self):
+        """
+        Remove duplicate suits from self.suits and self.activeSuits lists
+        """
+        # Remove duplicates from self.suits while preserving order
+        seen = set()
+        uniqueSuits = []
+        for suit in self.suits:
+            if suit is not None and suit not in seen:
+                seen.add(suit)
+                uniqueSuits.append(suit)
+            elif suit is None and None not in seen:
+                seen.add(None)
+                uniqueSuits.append(suit)
+        self.suits = uniqueSuits
+        
+        # Remove duplicates from self.activeSuits while preserving order
+        seen = set()
+        uniqueActiveSuits = []
+        for suit in self.activeSuits:
+            if suit is not None and suit not in seen:
+                seen.add(suit)
+                uniqueActiveSuits.append(suit)
+        self.activeSuits = uniqueActiveSuits
+        
+        self.notify.debug('removeDuplicateSuits() - suits: %d, activeSuits: %d' % (len(self.suits), len(self.activeSuits)))
+
     def removeTrap(self, suit, removeTrainTrack = False):
         self.notify.debug('removeTrap() from suit: %d, removeTrainTrack=%s' % (suit.doId, removeTrainTrack))
         if suit.battleTrapProp == None:
@@ -458,6 +485,9 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
 
             self.suits = validSuits
             self.needAdjustTownBattle = 1
+        
+        # Remove any duplicates that may have been introduced
+        self.removeDuplicateSuits()
         oldtoons = self.toons
         self.toons = []
         toonGone = 0
@@ -893,6 +923,9 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
                 self.pendingSuits.remove(s)
             self.notify.debug('__makeAvsActive() - suit: %d' % s.doId)
             self.activeSuits.append(s)
+        
+        # Remove any duplicates that may have been introduced
+        self.removeDuplicateSuits()
 
         if len(self.activeSuits) >= 1:
             for suit in self.activeSuits:
