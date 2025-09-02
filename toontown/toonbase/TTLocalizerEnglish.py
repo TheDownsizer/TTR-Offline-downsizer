@@ -8896,7 +8896,8 @@ CogPartNames = ('Upper Left Leg',
  'Lower Right Arm',
  'Right Hand')
 CogPartNamesSimple = ('Upper Torso',)
-SellbotLegFactorySpecMainEntrance = 'Front Entrance'
+SellbotLegFactorySpecMainEntrance = 'Entrance Room'
+SellbotLegFactorySpecEntranceRoom = 'Entrance Room'
 SellbotLegFactorySpecLobby = 'Lobby'
 SellbotLegFactorySpecLobbyHallway = 'Lobby Hallway'
 SellbotLegFactorySpecGearRoom = 'Gear Room'
@@ -8907,6 +8908,7 @@ SellbotLegFactorySpecPaintMixerStorageRoom = 'Paint Mixer Storage Room'
 SellbotLegFactorySpecWestSiloCatwalk = 'West Silo Catwalk'
 SellbotLegFactorySpecPipeRoom = 'Pipe Room'
 SellbotLegFactorySpecDuctRoom = 'Duct Room'
+SellbotLegFactorySpecDuctStorageRoom = 'Duct Storage Room'
 SellbotLegFactorySpecSideEntrance = 'Side Entrance'
 SellbotLegFactorySpecStomperAlley = 'Stomper Alley'
 SellbotLegFactorySpecLavaRoomFoyer = 'Lava Room Foyer'

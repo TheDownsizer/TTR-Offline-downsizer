@@ -166,9 +166,9 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
         if config.ConfigVariableBool('want-new-cogs', 0).getValue():
             head = self.find('**/to_head')
             if head.isEmpty():
-                head = self.find('**/joint_head')
+                head = self.find('**/def_M_head_01')
         else:
-            head = self.find('**/joint_head')
+            head = self.find('**/def_M_head_01')
         self.prop.reparentTo(head)
         return
 

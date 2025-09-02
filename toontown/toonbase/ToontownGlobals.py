@@ -3,6 +3,7 @@ from otp.otpbase.OTPGlobals import *
 from direct.showbase.PythonUtil import invertDict
 from enum import Enum
 from panda3d.core import *
+import random
 MapHotkeyOn = 'alt'
 MapHotkeyOff = 'alt-up'
 MapHotkey = 'alt'
@@ -311,6 +312,16 @@ def dept2cogHQ(dept):
 
 
 MockupFactoryId = 0
+
+# Sellbot Scrap Factory Cog Levels
+SellbotScrapFactoryCogLevels = [3, 4, 5, 6]
+SellbotScrapFactoryCogLevel = lambda: random.choice(SellbotScrapFactoryCogLevels)
+SellbotScrapFactorySiloMediumLevel = lambda: 6
+SellbotScrapFactorySiloHigherLevel = lambda: 7
+SellbotScrapFactoryControlRoomMediumLevel = lambda: 5
+SellbotScrapFactoryControlRoomHigherLevel = lambda: 6
+SellbotScrapFactorySupervisorLevel = lambda: 9 # Placeholder, Final Level will be 14
+
 MintNumFloors = {CashbotMintIntA: 20,
  CashbotMintIntB: 20,
  CashbotMintIntC: 20}

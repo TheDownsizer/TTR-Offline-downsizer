@@ -19,13 +19,13 @@ cSize = 4.14
 
 SuitDialogArray = []
 SkelSuitDialogArray = []
-AllSuits = (('walk', 'walk'), ('run', 'walk'), ('neutral', 'neutral'))
+AllSuits = (('walk', 'walk'), ('run', 'walk'), ('neutral', 'neutral'), ('lose', 'lose'))
 AllSuitsMinigame = (('victory', 'victory'),
  ('flail', 'flailing'),
  ('tug-o-war', 'tug-o-war'),
  ('slip-backward', 'slip-backward'),
  ('slip-forward', 'slip-forward'))
-AllSuitsTutorialBattle = (('lose', 'lose'), ('pie-small-react', 'pie-small'), ('squirt-small-react', 'squirt-small'))
+AllSuitsTutorialBattle = (('pie-small-react', 'pie-small'), ('squirt-small-react', 'squirt-small'))
 AllSuitsBattle = (('drop-react', 'anvil-drop'),
  ('flatten', 'drop'),
  ('sidestep-left', 'sidestep-left'),
@@ -173,6 +173,14 @@ else:
 HeadModelDict = {'a': ('/models/char/suitA-', 4),
  'b': ('/models/char/suitB-', 4),
  'c': ('/models/char/suitC-', 3.5)}
+
+ModelDictBody = {'a': ('/models/char/ttr_r_ene_cga_', 3.5),
+     'b': ('/models/char/ttr_r_ene_cgb_', 3.5),
+     'c': ('/models/char/ttr_r_ene_cgc_', 3.5)}
+
+ModelDictBodyAnim = {'a': ('/models/char/ttr_a_ene_cga_', 4),
+     'b': ('/models/char/ttr_a_ene_cgb_', 4),
+     'c': ('/models/char/ttr_a_ene_cgc_', 3.5)}
 
 def loadTutorialSuit():
     loader.loadModel('phase_3.5/models/char/suitC-mod')
@@ -626,21 +634,15 @@ class Suit(Avatar.Avatar):
 
     def generateBody(self):
         animDict = self.generateAnimDict()
-        filePrefix, bodyPhase = ModelDict[self.style.body]
-        if config.ConfigVariableBool('want-new-cogs', 0).getValue():
-            if cogExists(filePrefix + 'zero'):
-                self.loadModel('phase_3.5' + filePrefix + 'zero')
-            else:
-                self.loadModel('phase_3.5' + filePrefix + 'mod')
-        else:
-            self.loadModel('phase_3.5' + filePrefix + 'mod')
+        filePrefix, bodyPhase = ModelDictBody[self.style.body]
+        self.loadModel('phase_3.5' + filePrefix + 'suit')
         self.loadAnims(animDict)
         self.setSuitClothes()
         self.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
 
     def generateAnimDict(self):
         animDict = {}
-        filePrefix, bodyPhase = ModelDict[self.style.body]
+        filePrefix, bodyPhase = ModelDictBodyAnim[self.style.body]
         for anim in AllSuits:
             animDict[anim[0]] = 'phase_' + str(bodyPhase) + filePrefix + anim[1]
 
@@ -648,25 +650,26 @@ class Suit(Avatar.Avatar):
             animDict[anim[0]] = 'phase_4' + filePrefix + anim[1]
 
         for anim in AllSuitsTutorialBattle:
-            filePrefix, bodyPhase = TutorialModelDict[self.style.body]
+            filePrefix, bodyPhase = ModelDictBodyAnim[self.style.body]
             animDict[anim[0]] = 'phase_' + str(bodyPhase) + filePrefix + anim[1]
 
         for anim in AllSuitsBattle:
+            filePrefix, bodyPhase = ModelDictBodyAnim[self.style.body]
             animDict[anim[0]] = 'phase_5' + filePrefix + anim[1]
 
         if not config.ConfigVariableBool('want-new-cogs', 0).getValue():
             if self.style.body == 'a':
-                animDict['neutral'] = 'phase_4/models/char/suitA-neutral'
+                animDict['neutral'] = 'phase_4/models/char/ttr_a_ene_cga_neutral'
                 for anim in SuitsCEOBattle:
                     animDict[anim[0]] = 'phase_12/models/char/suitA-' + anim[1]
 
             elif self.style.body == 'b':
-                animDict['neutral'] = 'phase_4/models/char/suitB-neutral'
+                animDict['neutral'] = 'phase_4/models/char/ttr_a_ene_cgb_neutral'
                 for anim in SuitsCEOBattle:
                     animDict[anim[0]] = 'phase_12/models/char/suitB-' + anim[1]
 
             elif self.style.body == 'c':
-                animDict['neutral'] = 'phase_3.5/models/char/suitC-neutral'
+                animDict['neutral'] = 'phase_3.5/models/char/ttr_a_ene_cgc_neutral'
                 for anim in SuitsCEOBattle:
                     animDict[anim[0]] = 'phase_12/models/char/suitC-' + anim[1]
 
@@ -706,10 +709,10 @@ class Suit(Avatar.Avatar):
             modelRoot.find('**/arms').setTexture(armTex, 1)
             modelRoot.find('**/legs').setTexture(legTex, 1)
             modelRoot.find('**/hands').setColor(self.handColor)
-            self.leftHand = self.find('**/joint_Lhold')
-            self.rightHand = self.find('**/joint_Rhold')
-            self.shadowJoint = self.find('**/joint_shadow')
-            self.nametagJoint = self.find('**/joint_nameTag')
+            self.leftHand = self.find('**/jnt_L_attachProp_01')
+            self.rightHand = self.find('**/jnt_R_attachProp_01')
+            self.shadowJoint = self.find('**/jnt_M_shadow_01')
+            self.nametagNull = self.find('**/jnt_M_nameTag_01')
 
         if config.ConfigVariableBool('want-new-cogs', 0).getValue():
             if dept == 'c':
@@ -727,10 +730,10 @@ class Suit(Avatar.Avatar):
                 if cogExists('/maps/tt_t_ene_' + texType + '.jpg'):
                     bodyTex = loader.loadTexture(filepath)
                     self.find('**/body').setTexture(bodyTex, 1)
-                self.leftHand = self.find('**/def_joint_left_hold')
-                self.rightHand = self.find('**/def_joint_right_hold')
-                self.shadowJoint = self.find('**/def_shadow')
-                self.nametagJoint = self.find('**/def_nameTag')
+                self.leftHand = self.find('**/jnt_L_attachProp_01')
+                self.rightHand = self.find('**/jnt_R_attachProp_01')
+                self.shadowJoint = self.find('**/jnt_M_shadow_01')
+                self.nametagNull = self.find('**/jnt_M_nameTag_01')
         else:
             __doItTheOldWay__()
 
@@ -777,11 +780,11 @@ class Suit(Avatar.Avatar):
         headReferences = headModel.findAllMatches('**/' + headType)
         for i in range(0, headReferences.getNumPaths()):
             if config.ConfigVariableBool('want-new-cogs', 0).getValue():
-                headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'to_head')
+                headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'def_M_head_01')
                 if not headPart:
-                    headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'joint_head')
+                    headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'def_M_head_01')
             else:
-                headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'joint_head')
+                headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'def_M_head_01')
             if self.headTexture:
                 headTex = loader.loadTexture('phase_' + str(phase) + '/maps/' + self.headTexture)
                 headTex.setMinfilter(Texture.FTLinearMipmapLinear)
@@ -814,14 +817,14 @@ class Suit(Avatar.Avatar):
         tie.setTexture(tieTex, 1)
 
     def generateCorporateMedallion(self):
-        icons = loader.loadModel('phase_3/models/gui/cog_icons')
+        icons = loader.loadModel('phase_3/models/gui/ttr_m_gui_gen_cogIcons')
         dept = self.style.dept
         if config.ConfigVariableBool('want-new-cogs', 0).getValue():
-            chestNull = self.find('**/def_joint_attachMeter')
+            chestNull = self.find('**/jnt_M_attachMeter_01')
             if chestNull.isEmpty():
-                chestNull = self.find('**/joint_attachMeter')
+                chestNull = self.find('**/jnt_M_attachMeter_01')
         else:
-            chestNull = self.find('**/joint_attachMeter')
+            chestNull = self.find('**/jnt_M_attachMeter_01')
         if dept == 'c':
             self.corpMedallion = icons.find('**/CorpIcon').copyTo(chestNull)
         elif dept == 's':
@@ -842,11 +845,11 @@ class Suit(Avatar.Avatar):
         button.setH(180.0)
         button.setColor(self.healthColors[0])
         if config.ConfigVariableBool('want-new-cogs', 0).getValue():
-            chestNull = self.find('**/def_joint_attachMeter')
+            chestNull = self.find('**/jnt_M_attachMeter_01')
             if chestNull.isEmpty():
-                chestNull = self.find('**/joint_attachMeter')
+                chestNull = self.find('**/jnt_M_attachMeter_01')
         else:
-            chestNull = self.find('**/joint_attachMeter')
+            chestNull = self.find('**/jnt_M_attachMeter_01')
         button.reparentTo(chestNull)
         self.healthBar = button
         glow = BattleProps.globalPropPool.getProp('glow')
@@ -966,7 +969,7 @@ class Suit(Avatar.Avatar):
         return
 
     def makeSkeleton(self):
-        model = 'phase_5/models/char/cog' + self.style.body.upper() + '_robot-zero'
+        model = 'phase_5/models/char/ttr_r_ene_cg' + self.style.body + '_skelecog'
         anims = self.generateAnimDict()
         anim = self.getCurrentAnim()
         # Remove all of the previous cog except for a few necessary joints
@@ -976,7 +979,7 @@ class Suit(Avatar.Avatar):
         modelRoot.find('**/hands').removeNode()
         modelRoot.find('**/legs').removeNode()
         modelRoot.find('**/').removeNode() # These are feet
-        modelRoot.find('**/joint_head').removeNode()
+        modelRoot.find('**/def_M_head_01').removeNode()
         # Now, to load our skelecog
         self.loadModel(model)
         self.loadAnims(anims)
@@ -995,10 +998,10 @@ class Suit(Avatar.Avatar):
          'dept': self.getStyleDept(),
          'level': self.getActualLevel()}
         self.setDisplayName(nameInfo)
-        self.leftHand = self.find('**/joint_Lhold')
-        self.rightHand = self.find('**/joint_Rhold')
-        self.shadowJoint = self.find('**/joint_shadow')
-        self.nametagNull = self.find('**/joint_nameTag')
+        self.leftHand = self.find('**/jnt_L_attachProp_01')
+        self.rightHand = self.find('**/jnt_R_attachProp_01')
+        self.shadowJoint = self.find('**/jnt_M_shadow_01')
+        self.nametagNull = self.find('**/jnt_M_nameTag_01')
         self.loop(anim)
         self.isSkeleton = 1
 

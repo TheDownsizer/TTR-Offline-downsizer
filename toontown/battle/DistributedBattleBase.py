@@ -137,6 +137,8 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
     def cleanupBattle(self):
         if self.__battleCleanedUp:
             return
+        for toon in self.activeToons:
+            toon.enableBlend()
         self.notify.debug('cleanupBattle(%s)' % self.doId)
         self.__battleCleanedUp = 1
         self.__cleanupIntervals()
@@ -1060,6 +1062,8 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
             self.startTimer(ts)
         if self.needAdjustTownBattle == 1:
             self.__adjustTownBattle()
+        for toon in self.activeToons:
+            toon.disableBlend()
         return None
 
     def exitWaitForInput(self):
@@ -1069,6 +1073,8 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
             base.camLens.setMinFov(self.camFov/(4./3.))
             self.ignore(self.localToonBattleEvent)
             self.__stopTimer()
+        for toon in self.activeToons:
+            toon.disableBlend()
         return None
 
     def __handleLocalToonBattleEvent(self, response):
