@@ -67,8 +67,8 @@ class QuestPoster(DirectFrame):
     confirmDeleteButtonEvent = 'confirmDeleteButtonEvent'
 
     def __init__(self, parent = aspect2d, **kw):
-        bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
-        questCard = bookModel.find('**/questCard')
+        bookModel = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_qst_toontask_scroll')
+        questCard = bookModel.find('**/ttr_t_gui_qst_toontask_scroll')
         optiondefs = (('relief', None, None),
          ('image', questCard, None),
          ('image_scale', (0.8, 1.0, 0.58), None),
@@ -82,9 +82,9 @@ class QuestPoster(DirectFrame):
         self.questInfo = DirectLabel(parent=self.questFrame, relief=None, text='', text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=TEXT_WORDWRAP, textMayChange=1, pos=(0, 0, -0.0625))
         self.rewardText = DirectLabel(parent=self.questFrame, relief=None, text='', text_fg=self.colors['rewardRed'], text_scale=0.0425, text_align=TextNode.ALeft, text_wordwrap=17.0, textMayChange=1, pos=(-0.36, 0, -0.23))
         self.rewardText.hide()
-        self.lPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/questPictureFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=11.0, textMayChange=1)
+        self.lPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/ttr_t_gui_qst_toontask_scroll_iconFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=11.0, textMayChange=1)
         self.lPictureFrame.hide()
-        self.rPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/questPictureFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=11.0, textMayChange=1, pos=(0.18, 0, 0.13))
+        self.rPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/ttr_t_gui_qst_toontask_scroll_iconFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=11.0, textMayChange=1, pos=(0.18, 0, 0.13))
         self.rPictureFrame.hide()
         self.lQuestIcon = DirectFrame(parent=self.lPictureFrame, relief=None, text=' ', text_font=ToontownGlobals.getSuitFont(), text_pos=(0, -0.03), text_fg=self.normalTextColor, text_scale=0.13, text_align=TextNode.ACenter, text_wordwrap=13.0, textMayChange=1)
         self.lQuestIcon.setColorOff(-1)
@@ -369,8 +369,8 @@ class QuestPoster(DirectFrame):
                 holder = quest.getHolder()
                 holderType = quest.getHolderType()
                 if holder == Quests.Any:
-                    cogIcons = loader.loadModel('phase_3/models/gui/cog_icons')
-                    rIconGeom = cogIcons.find('**/cog')
+                    cogIcons = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_qst_toontask_icons')
+                    rIconGeom = cogIcons.find('**/ttr_t_gui_qst_cogGears')
                     cogIcons.removeNode()
                     lPos.setX(-0.18)
                     auxText = TTLocalizer.QuestPosterAuxFrom
@@ -799,8 +799,8 @@ class QuestPoster(DirectFrame):
                     lIconGeom = self.createSuitHead(quest.getCogType())
                     lIconGeomScale = IMAGE_SCALE_SMALL
                 else:
-                    cogIcons = loader.loadModel('phase_3/models/gui/cog_icons')
-                    lIconGeom = cogIcons.find('**/cog')
+                    cogIcons = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_qst_toontask_icons')
+                    lIconGeom = cogIcons.find('**/ttr_t_gui_qst_cogGears')
                     lIconGeomScale = IMAGE_SCALE_SMALL
                     cogIcons.removeNode()
             elif quest.getType() == Quests.CogLevelQuest:
