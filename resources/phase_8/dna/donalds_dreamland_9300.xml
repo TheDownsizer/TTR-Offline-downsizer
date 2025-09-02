@@ -2635,7 +2635,7 @@
 						</cornice>
 					</wall>
 				</flat_building>
-				<landmark_building code="toon_landmark_hqDL" id="tb73:toon_landmark_hqDL_DNARoot">
+				<landmark_building code="toon_landmark_hqDL" id="tb73:toon_landmark_hqDL_DNARoot" type="hq">
 					<pos x="379.9840087890625" y="19.004600524902344" z="-20.0"/>
 					<nhpr h="180.0" p="0.0" r="-0.0"/>
 				</landmark_building>

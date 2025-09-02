@@ -1,30 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <storage scope="global">
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_walls">
+		<store_node root="wall_collide" code="wall_collide" />
+		<store_node root="wall_collide" code="wall_camera_collide" />
+		<store_node root="wall_collide" code="wall_camera_barrier" />
 
-	<model path="phase_8/models/modules/BR_A1" scope="hood">
+		<store_node root="wall" code="wall_lg_brick_ur_BR" node="wall_lg_brick_ur" />
+		<store_node root="wall" code="wall_lg_brick_ul_BR" node="wall_lg_brick_ul" />
+		<store_node root="wall" code="wall_lg_brick_dr_BR" node="wall_lg_brick_dr" />
+		<store_node root="wall" code="wall_lg_brick_dl_BR" node="wall_lg_brick_dl" />
+
+		<store_node root="wall" code="wall_md_blank_ur_BR" node="wall_md_blank_ur" />
+		<store_node root="wall" code="wall_md_blank_ul_BR" node="wall_md_blank_ul" />
+		<store_node root="wall" code="wall_md_blank_dr_BR" node="wall_md_blank_dr" />
+		<store_node root="wall" code="wall_md_blank_dl_BR" node="wall_md_blank_dl" />
+
+		<store_node root="wall" code="wall_md_bricks_ur_BR" node="wall_md_bricks_ur" />
+		<store_node root="wall" code="wall_md_bricks_ul_BR" node="wall_md_bricks_ul" />
+		<store_node root="wall" code="wall_md_bricks_dr_BR" node="wall_md_bricks_dr" />
+		<store_node root="wall" code="wall_md_bricks_dl_BR" node="wall_md_bricks_dl" />
+
+		<store_node root="wall" code="wall_sm_brick_blue_ur_BR" node="wall_sm_brick_blue_ur" />
+		<store_node root="wall" code="wall_sm_brick_blue_ul_BR" node="wall_sm_brick_blue_ul" />
+		<store_node root="wall" code="wall_sm_brick_blue_dr_BR" node="wall_sm_brick_blue_dr" />
+		<store_node root="wall" code="wall_sm_brick_blue_dl_BR" node="wall_sm_brick_blue_dl" />
+
+		<store_node root="wall" code="wall_sm_brick_pink_ur_BR" node="wall_sm_brick_pink_ur" />
+		<store_node root="wall" code="wall_sm_brick_pink_ul_BR" node="wall_sm_brick_pink_ul" />
+		<store_node root="wall" code="wall_sm_brick_pink_dr_BR" node="wall_sm_brick_pink_dr" />
+		<store_node root="wall" code="wall_sm_brick_pink_dl_BR" node="wall_sm_brick_pink_dl" />
+
+		<store_node root="wall" code="wall_bricks_ur_BR" node="wall_bricks_ur" />
+		<store_node root="wall" code="wall_bricks_ul_BR" node="wall_bricks_ul" />
+
+		<store_node root="wall" code="wall_sm_cement_blue_ur_BR" node="wall_sm_cement_blue_ur" />
+		<store_node root="wall" code="wall_sm_cement_blue_ul_BR" node="wall_sm_cement_blue_ul" />
+		<store_node root="wall" code="wall_sm_cement_blue_dr_BR" node="wall_sm_cement_blue_dr" />
+		<store_node root="wall" code="wall_sm_cement_blue_dl_BR" node="wall_sm_cement_blue_dl" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_cornices">
+		<store_node root="cornice" code="cornice_stone_ur_BR" node="cornice_stone_ur" />
+		<store_node root="cornice" code="cornice_stone_ul_BR" node="cornice_stone_ul" />
+
+		<store_node root="cornice" code="cornice_brick_ur_BR" node="cornice_brick_ur" />
+		<store_node root="cornice" code="cornice_brick_ul_BR" node="cornice_brick_ul" />
+
+		<store_node root="cornice" code="cornice_dental_ur_BR" node="cornice_dental_ur" />
+		<store_node root="cornice" code="cornice_dental_ul_BR" node="cornice_dental_ul" />
+
+		<store_node root="cornice" code="cornice_marble_ur_BR" node="cornice_marble_ur" />
+		<store_node root="cornice" code="cornice_marble_ul_BR" node="cornice_marble_ul" />
+
+		<store_node root="cornice" code="cornice_ice_ur_BR" node="cornice_ice_ur" />
+		<store_node root="cornice" code="cornice_ice_ul_BR" node="cornice_ice_ul" />
+
+		<store_node root="cornice" code="cornice_curved_ur_BR" node="cornice_curved_ur" />
+		<store_node root="cornice" code="cornice_curved_ul_BR" node="cornice_curved_ul" />
+
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_doors">
+		<store_node root="door_single" code="door_garage_ur_BR" node="door_garage_ur" />
+		<store_node root="door_single" code="door_garage_ul_BR" node="door_garage_ul" />
+
+		<store_node root="door_single" code="door_single_round_ur_BR" node="door_single_round_ur" />
+		<store_node root="door_single" code="door_single_round_ul_BR" node="door_single_round_ul" />
+
+		<store_node root="door_single" code="door_single_shuttered_ur_BR" node="door_single_shuttered_ur" />
+		<store_node root="door_single" code="door_single_shuttered_ul_BR" node="door_single_shuttered_ul" />
+
+		<store_node root="door_single" code="door_single_square_ur_BR" node="door_single_square_ur" />
+		<store_node root="door_single" code="door_single_square_ul_BR" node="door_single_square_ul" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_doorsPractical" scope="hood">
+		<store_node root="door_double" code="door_double_pillars_ur_BR" node="door_double_pillars_ur" />
+
+		<store_node root="door_double" code="door_double_curved_ur_BR" node="door_double_curved_ur" />
+
+		<store_node root="door_double" code="door_double_square_ur_BR" node="door_double_square_ur" />
+
+		<store_node root="door_double" code="door_double_round_ur_BR" node="door_double_round_ur" />
+
+		<store_node root="door_double" code="door_double_clothesshop_ur_BR" node="door_double_clothshop" />
+		<store_node root="door_double" code="door_double_clothesshop_ul_BR" node="door_double_clothshop" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_tbr_tunnelSign_blue">
+		<store_node root="sign" code="BR_tunnel_sign_blue" node="g1" />
+	</model>
+	<model path="phase_8/models/props/ttr_m_prp_tbr_tunnelSign_red">
+		<store_node root="sign" code="BR_tunnel_sign_red" node="g1" />
+	</model>
+	<model path="phase_8/models/props/ttr_m_prp_tbr_tunnelSign_green">
+		<store_node root="sign" code="BR_tunnel_sign_green" node="g1" />
+	</model>
+	<model path="phase_8/models/props/ttr_m_prp_tbr_tunnelSign_magenta">
+		<store_node root="sign" code="BR_tunnel_sign_magenta" node="g1" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_tbr_piers">
+		<store_node root="prop" code="fishing_spot_BR" node="" />
+		<store_node root="prop" code="fishing_spot_extra_BR" node="" />
+	</model>
+
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_landmarkA1" scope="hood">
 		<store_node root="toon_landmark" code="toon_landmark_BR_A1" node="BR_A1" />
 	</model>
-	<model path="phase_8/models/modules/BR_A2" scope="hood">
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_landmarkA2" scope="hood">
 		<store_node root="toon_landmark" code="toon_landmark_BR_A2" node="BR_A2" />
 	</model>
-	<model path="phase_8/models/modules/BR_B1" scope="hood">
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_landmarkA3" scope="hood">
+		<store_node root="toon_landmark" code="toon_landmark_BR_A3" node="BR_A3" />
+	</model>
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_landmarkB1" scope="hood">
 		<store_node root="toon_landmark" code="toon_landmark_BR_B1" node="BR_B1" />
 	</model>
-	<model path="phase_8/models/modules/BR_B2" scope="hood">
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_landmarkB2" scope="hood">
 		<store_node root="toon_landmark" code="toon_landmark_BR_B2" node="BR_B2" />
 	</model>
-	<model path="phase_8/models/modules/BR_B3" scope="hood">
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_landmarkB3" scope="hood">
 		<store_node root="toon_landmark" code="toon_landmark_BR_B3" node="BR_B3" />
 	</model>
-	<model path="phase_8/models/modules/BR_C1" scope="hood">
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_landmarkC1" scope="hood">
 		<store_node root="toon_landmark" code="toon_landmark_BR_C1" node="BR_C1" />
 	</model>
 
-	<model path="phase_8/models/props/snowman" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_snowMan" scope="hood">
 		<store_node root="prop" code="prop_snowman" node="" />
 	</model>
 
-	<model path="phase_8/models/props/pine_trees" scope="hood">
+	<model path="phase_8/models/props/ttr_m_ara_tbr_pineTrees" scope="hood">
 		<store_node root="holiday_prop" code="prop_snow_tree_large_brickbox_ur" />
 		<store_node root="holiday_prop" code="prop_snow_tree_large_brickbox_ul" />
 		<store_node root="holiday_prop" code="prop_snow_tree_small_brickbox_ur" />
@@ -41,107 +148,155 @@
 		<store_node root="holiday_prop" code="prop_snow_tree_small_ul" node="prop_snow_tree_small_nobox_ul" />
 	</model>
 
-	<model path="phase_8/models/props/streetlight_BR" scope="hood">
+	<model path="phase_8/models/props/ttr_m_ara_tbr_streetlight" scope="hood">
 		<store_node root="holiday_prop" code="prop_post_sign" />
 		<store_node root="holiday_prop" code="prop_post_one_light" />
 		<store_node root="holiday_prop" code="prop_post_three_light" />
 	</model>
 
-	<model path="phase_8/models/modules/BR_windows" scope="hood">
-		<store_node root="window" code="window_BR_porthole_ur" node="window_porthole_ur" />
-		<store_node root="window" code="window_BR_porthole_ul" node="window_porthole_ul" />
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_windows" scope="hood">
+		<store_node root="window" code="window_BR_md_curved_ur" node="window_br_md_curved_ur" />
+		<store_node root="window" code="window_BR_md_curved_ul" node="window_br_md_curved_ul" />
 
-		<store_node root="window" code="window_BR_sm_curved_ur" node="window_sm_curved_ur" />
-		<store_node root="window" code="window_BR_sm_curved_ul" node="window_sm_curved_ul" />
+		<store_node root="window" code="window_BR_porthole_ur" node="window_br_porthole_ur" />
+		<store_node root="window" code="window_BR_porthole_ul" node="window_br_porthole_ul" />
 
-		<store_node root="window" code="window_BR_sm_round_ur" node="window_sm_round_ur" />
-		<store_node root="window" code="window_BR_sm_round_ul" node="window_sm_round_ul" />
+		<store_node root="window" code="window_BR_sm_square_ur" node="window_br_sm_square_ur" />
+		<store_node root="window" code="window_BR_sm_square_ul" node="window_br_sm_square_ul" />
+
+		<store_node root="window" code="window_BR_sm_pointed_ur" node="window_br_sm_pointed_ur" />
+		<store_node root="window" code="window_BR_sm_pointed_ul" node="window_br_sm_pointed_ul" />
+
+		<store_node root="window" code="window_BR_sm_curved_ur" node="window_br_sm_curved_ur" />
+		<store_node root="window" code="window_BR_sm_curved_ul" node="window_br_sm_curved_ul" />
+
+		<store_node root="window" code="window_BR_sm_round_ur" node="window_br_sm_round_ur" />
+		<store_node root="window" code="window_BR_sm_round_ul" node="window_br_sm_round_ul" />
+
+		<store_node root="window" code="window_BR_porthole_snowy_ur" node="window_br_porthole_snowy_ur" />
+		<store_node root="window" code="window_BR_porthole_snowy_ul" node="window_br_porthole_snowy_ul" />
+
+		<store_node root="window" code="window_BR_sm_curved_snowy_ur" node="window_br_sm_curved_snowy_ur" />
+		<store_node root="window" code="window_BR_sm_curved_snowy_ul" node="window_br_sm_curved_snowy_ul" />
+
+		<store_node root="window" code="window_BR_sm_round_snowy_ur" node="window_br_sm_round_snowy_ur" />
+		<store_node root="window" code="window_BR_sm_round_snowy_ul" node="window_br_sm_round_snowy_ul" />
 	</model>
 
+	<store_texture root="texture" code="street_street_BR_tex" path="phase_8/maps/ttr_t_ara_tbr_street_cobblestone.jpg" />
+	<store_texture root="texture" code="street_sidewalk_BR_tex" path="phase_8/maps/ttr_t_ara_tbr_street_sidewalk.jpg" />
+	<store_texture root="texture" code="street_curb_BR_tex" path="phase_8/maps/ttr_t_ara_tbr_street_sidewalk.jpg" />
 
+	<!-- Remastered TBR street modules -->
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_streetModules">
+		<store_node root="street" code="street_sidewalk_10x10" node="street_sidewalk_10x10" />
+		<store_node root="street" code="street_sidewalk_10x20" node="street_sidewalk_10x20" />
+		<store_node root="street" code="street_sidewalk_10x40" node="street_sidewalk_10x40" />
+		<store_node root="street" code="street_sidewalk_20x20" node="street_sidewalk_20x20" />
+		<store_node root="street" code="street_sidewalk_40x40" node="street_sidewalk_40x40" />
+		<store_node root="street" code="street_5x40" node="street_5x40" />
+		<store_node root="street" code="street_10x40" node="street_10x40" />
+		<store_node root="street" code="street_20x40" node="street_20x40" />
+		<store_node root="street" code="street_20x40_15" node="street_20x40_15" />
+		<store_node root="street" code="street_30x40" node="street_30x40" />
+		<store_node root="street" code="street_40x40" node="street_40x40" />
+		<store_node root="street" code="street_keyboard_10x40" node="street_keyboard_10x40" />
+		<store_node root="street" code="street_full_corner" node="street_full_corner" />
+		<store_node root="street" code="street_tight_corner" node="street_tight_corner" />
+		<store_node root="street" code="street_double_corner" node="street_double_corner" />
+		<store_node root="street" code="street_t_intersection" node="street_t_intersection" />
+	</model>
 
-	<store_texture root="texture" code="street_street_BR_tex" path="phase_3.5/maps/cobblestone_blue.jpg" />
-	<store_texture root="texture" code="street_sidewalk_BR_tex" path="phase_3.5/maps/snow.jpg" />
-	<store_texture root="texture" code="street_curb_BR_tex" path="phase_3.5/maps/snow.jpg" />
-
-	<model path="phase_8/models/props/signs_BR" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_landmarkSigns" scope="hood">
 		<store_node root="sign" code="TB_sign1" node="BR_sign1" />
 		<store_node root="sign" code="TB_sign2" node="BR_sign2" />
 		<store_node root="sign" code="TB_sign3" node="BR_sign3" />
 		<store_node root="sign" code="TB_sign4" node="BR_sign4" />
+		<store_node root="sign" code="TB_sign5" node="BR_sign5" />
+		<store_node root="sign" code="TB_sign6" node="BR_sign6" />
+		<store_node root="sign" code="TB_sign7" node="BR_sign7" />
 	</model>
 
-	<model path="phase_8/models/props/snow_pile_full" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_snowPileFull" scope="hood">
 		<store_node root="prop" code="prop_snow_pile_full" node="" />
 	</model>
 
-	<model path="phase_8/models/props/snow_pile_half" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_snowPileHalf" scope="hood">
 		<store_node root="prop" code="prop_snow_pile_half" node="" />
 	</model>
 
-	<model path="phase_8/models/props/snow_pile_quarter" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_snowPileQuarter" scope="hood">
 		<store_node root="prop" code="prop_snow_pile_quarter" node="" />
 	</model>
 
-
-	<model path="phase_5/models/props/chimneys" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_chimneys" scope="hood">
 		<store_node root="prop" code="prop_chimney" />
 		<store_node root="prop" code="prop_stovepipe" />
 		<store_node root="prop" code="prop_smokestack" />
 	</model>
 
-	<model path="phase_8/models/props/BR_flats" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_flats" scope="hood">
 		<store_node root="prop" code="prop_ski_flat" node="Prop_ski" />
 		<store_node root="prop" code="prop_snowman_flat" node="Prop_snowman" />
 		<store_node root="prop" code="prop_skates_flat" node="Prop_skates" />
-	</model>
-
-	<model path="phase_8/models/props/BR_trashcan" scope="hood">
-		<store_node root="prop" code="prop_BR_trashcan" node="" />
 	</model>
 
 	<model path="phase_8/models/props/BR_mailbox" scope="hood">
 		<store_node root="prop" code="BR_mailbox" node="" />
 	</model>
 
-	<model path="phase_8/models/props/icecube" scope="hood">
+	<model path="phase_8/models/props/ttr_m_prp_tbr_iceCube" scope="hood">
 		<store_node root="prop" code="prop_icecube_glove" node="icecube_glove" />
 		<store_node root="prop" code="prop_icecube_ear_protection" node="icecube_ear_protection" />
 		<store_node root="prop" code="prop_icecube_sunglasses" node="icecube_sunglasses" />
 		<store_node root="prop" code="prop_icecube_shoe_v" node="icecube_shoe_v" />
 		<store_node root="prop" code="prop_icecube_shoe_h" node="icecube_shoe_h" />
 	</model>
-	<model path="phase_8/models/modules/hqBR" scope="hood">
+
+	<model path="phase_8/models/modules/ttr_m_ara_tbr_toonHQ" scope="hood">
 		<store_node root="toon_landmark" code="toon_landmark_hqBR" node="" />
 	</model>
 	<model path="phase_3.5/models/props/HQ_periscope-mod" scope="hood">
 		<store_node root="prop" code="animated_prop_HQPeriscopeAnimatedProp" node="periscope" />
 	</model>
-	<model path="phase_8/models/props/neighborhood_sign_lawBotHQ" scope="hood">
+
+	<model path="phase_8/models/props/ttr_m_prp_tbr_signTheBrrrgh">
+		<store_node root="prop" code="BR_neighborhood_sign_BR" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_tbr_signDonaldsDock">
+		<store_node root="prop" code="BR_neighborhood_sign_DD" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_tbr_signMinniesMelodyland">
+		<store_node root="prop" code="BR_neighborhood_sign_MM" node="" />
+	</model>
+
+	<model path="phase_8/models/props/ttr_m_prp_tbr_signLawBotHQ" scope="hood">
 		<store_node root="prop" code="neighborhood_sign_lawBotHQ" node="" />
 	</model>
 
-	<model path="phase_8/models/char/tt_r_ara_tbr_hydrant" scope="hood">
+	<model path="phase_8/models/char/ttr_r_ara_tbr_hydrant" scope="hood">
 		<store_node root="anim_prop" code="animated_prop_generic_phase_8_models_char__tbr_hydrant" node="" />
 	</model>
 
-	<model path="phase_8/models/char/tt_r_ara_tbr_hydrant" scope="hood">
+	<model path="phase_8/models/char/ttr_r_ara_tbr_hydrant" scope="hood">
 		<store_node root="interactive_prop" code="interactive_prop_phase_8_models_char__tbr_hydrant" node="" />
 	</model>
 
-	<model path="phase_8/models/char/tt_r_ara_tbr_mailbox" scope="hood">
+	<model path="phase_8/models/char/ttr_r_ara_tbr_mailbox" scope="hood">
 		<store_node root="anim_prop" code="animated_prop_generic_phase_8_models_char__tbr_mailbox" node="" />
 	</model>
 
-	<model path="phase_8/models/char/tt_r_ara_tbr_mailbox" scope="hood">
+	<model path="phase_8/models/char/ttr_r_ara_tbr_mailbox" scope="hood">
 		<store_node root="interactive_prop" code="interactive_prop_phase_8_models_char__tbr_mailbox" node="" />
 	</model>
 
-	<model path="phase_8/models/char/tt_r_ara_tbr_trashcan" scope="hood">
+	<model path="phase_8/models/char/ttr_r_ara_tbr_trashcan" scope="hood">
 		<store_node root="anim_prop" code="animated_prop_generic_phase_8_models_char__tbr_trashcan" node="" />
 	</model>
 
-	<model path="phase_8/models/char/tt_r_ara_tbr_trashcan" scope="hood">
+	<model path="phase_8/models/char/ttr_r_ara_tbr_trashcan" scope="hood">
 		<store_node root="interactive_prop" code="interactive_prop_phase_8_models_char__tbr_trashcan" node="" />
 	</model>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <storage scope="global">
-	<model path="phase_8/models/props/tt_m_ara_BR_pinetrees_halloween" scope="hood">
+	<model path="phase_8/models/props/ttr_m_ara_tbr_pinetreesHalloween" scope="hood">
 		<store_node root="holiday_prop" code="prop_snow_tree_large_brickbox_ur" />
 		<store_node root="holiday_prop" code="prop_snow_tree_large_brickbox_ul" />
 		<store_node root="holiday_prop" code="prop_snow_tree_small_brickbox_ur" />
@@ -17,7 +17,7 @@
 		<store_node root="holiday_prop" code="prop_snow_tree_small_ul" node="prop_snow_tree_small_nobox_ul" />
 	</model>
 
-	<model path="phase_3.5/models/props/tt_m_ara_TT_streetlight_halloween" scope="hood">
+	<model path="phase_8/models/props/ttr_m_ara_tbr_streetlightHalloween" scope="hood">
 		<store_node root="holiday_prop" code="prop_post_sign" />
 		<store_node root="holiday_prop" code="prop_post_one_light" />
 		<store_node root="holiday_prop" code="prop_post_three_light" />
