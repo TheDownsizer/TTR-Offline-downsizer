@@ -125,6 +125,7 @@ class LevelSuitPlannerAI(DirectObject.DirectObject):
                 if self.__suitCanJoinBattle(cellIndex):
                     battle.suits.append(otherSuit)
                     battle.activeSuits.append(otherSuit)
+                    battle.removeDuplicateSuits()
                 else:
                     if battle:
                         self.notify.warning('battle not joinable: numSuits=%s, joinable=%s, fsm=%s, toonId=%s' % (len(battle.suits),
