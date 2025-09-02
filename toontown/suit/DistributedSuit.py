@@ -481,6 +481,7 @@ class DistributedSuit(DistributedSuitBase.DistributedSuitBase, DelayDeletable):
     def enterWalk(self, leg, time):
         self.enableBattleDetect('bellicose', self.__handleToonCollision)
         self.loop('walk', 0)
+        self.stickSuit()
         a = leg.getPosA()
         b = leg.getPosB()
         h = self.calculateHeading(a, b)

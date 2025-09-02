@@ -9,6 +9,7 @@ from direct.task.Task import Task
 from toontown.battle import BattleProps
 from toontown.toonbase import TTLocalizer
 from panda3d.core import VirtualFileMountHTTP, VirtualFileSystem, Filename, DSearchPath
+from direct.controls.ControlManager import CollisionHandlerRayStart
 from direct.showbase import AppRunnerGlobal
 import string
 import os
@@ -367,6 +368,7 @@ class Suit(Avatar.Avatar):
         self.isDisguised = 0
         self.isWaiter = 0
         self.isRental = 0
+        self.suitsStuckToFloor = []
         return
 
     def delete(self):
@@ -1027,3 +1029,21 @@ class Suit(Avatar.Avatar):
         else:
             loadDialog(1)
             return SuitDialogArray
+    
+    def stickSuit(self):
+        rayNode = CollisionNode('stickSuitToFloor')
+        rayNode.addSolid(CollisionRay(0.0, 0.0, CollisionHandlerRayStart, 0.0, 0.0, -1.0))
+        rayNode.setFromCollideMask(ToontownGlobals.FloorBitmask)
+        rayNode.setIntoCollideMask(BitMask32.allOff())
+        ray = NodePath(rayNode)
+        lifter = CollisionHandlerFloor()
+        lifter.setOffset(ToontownGlobals.FloorOffset)
+        lifter.setReach(10.0)
+        suitRay = ray.instanceTo(self)
+        lifter.addCollider(suitRay, self)
+        base.cTrav.addCollider(suitRay, lifter)
+        self.suitsStuckToFloor.append(suitRay)
+    
+    def unstickSuit(self):
+        for suitRay in self.suitsStuckToFloor:
+            base.cTrav.removeCollider(suitRay)
