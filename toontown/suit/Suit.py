@@ -931,11 +931,12 @@ class Suit(Avatar.Avatar):
                 return self
         if self.loseActor == None:
             if not self.isSkeleton:
-                filePrefix, phase = TutorialModelDict[self.style.body]
-                loseModel = 'phase_' + str(phase) + filePrefix + 'lose-mod'
-                loseAnim = 'phase_' + str(phase) + filePrefix + 'lose'
+                filePrefix, phase = ModelDictBody[self.style.body]
+                filePrefix2, phase2 = ModelDictBodyAnim[self.style.body]
+                loseModel = 'phase_' + str(phase) + filePrefix + 'suit'
+                loseAnim = 'phase_' + str(phase2) + filePrefix2 + 'lose'
                 self.loseActor = Actor.Actor(loseModel, {'lose': loseAnim})
-                loseNeck = self.loseActor.find('**/joint_head')
+                loseNeck = self.loseActor.find('**/def_M_head_01')
                 for part in self.headParts:
                     part.instanceTo(loseNeck)
 
@@ -945,7 +946,7 @@ class Suit(Avatar.Avatar):
                     self.setSuitClothes(self.loseActor)
             else:
                 loseModel = 'phase_5/models/char/cog' + self.style.body.upper() + '_robot-lose-mod'
-                filePrefix, phase = TutorialModelDict[self.style.body]
+                filePrefix, phase = ModelDictBody[self.style.body]
                 loseAnim = 'phase_' + str(phase) + filePrefix + 'lose'
                 self.loseActor = Actor.Actor(loseModel, {'lose': loseAnim})
                 self.generateCorporateTie(self.loseActor)
@@ -957,7 +958,7 @@ class Suit(Avatar.Avatar):
         self.collNode = CollisionNode('loseActor')
         self.collNode.addSolid(self.collTube)
         self.collNodePath = self.loseActor.attachNewNode(self.collNode)
-        shadowJoint = self.loseActor.find('**/joint_shadow')
+        shadowJoint = self.loseActor.find('**/jnt_M_shadow_01')
         dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
         dropShadow.setScale(0.45)
         dropShadow.setColor(0.0, 0.0, 0.0, 0.5)
@@ -1009,6 +1010,7 @@ class Suit(Avatar.Avatar):
         self.nametag3d.reparentTo(self.nametagNull)
         self.nametag3d.setEffect(CompassEffect.make(render, CompassEffect.PScale))
         self.loop(anim)
+        self.setTwoSided(1)
         self.isSkeleton = 1
 
     def getHeadParts(self):

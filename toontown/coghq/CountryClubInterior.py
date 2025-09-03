@@ -87,6 +87,8 @@ class CountryClubInterior(BattlePlace.BattlePlace):
         base.transitions.fadeOut(t=0)
         base.localAvatar.inventory.setRespectInvasions(0)
         base.cr.forbidCheesyEffects(1)
+        self.loader.hood.setWhiteFog()
+        self.loader.hood.startSky()
         self._telemLimiter = TLGatherAllAvs('CountryClubInterior', RotationLimitToH)
 
         def commence(self = self):
@@ -112,6 +114,8 @@ class CountryClubInterior(BattlePlace.BattlePlace):
     def exit(self):
         NametagGlobals.setMasterArrowsOn(0)
         bboard.remove(DistributedCountryClub.DistributedCountryClub.ReadyPost)
+        self.loader.hood.stopSky()
+        self.loader.hood.setNoFog()
         self._telemLimiter.destroy()
         del self._telemLimiter
         base.cr.forbidCheesyEffects(0)

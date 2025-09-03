@@ -254,9 +254,11 @@ def createSuitReviveTrack(suit, toon, battle, npcs = []):
     if hasattr(suit, 'battleTrapProp') and suit.battleTrapProp and suit.battleTrapProp.getName() == 'traintrack' and not suit.battleTrapProp.isHidden():
         suitTrack.append(createTrainTrackAppearTrack(suit, toon, battle, npcs))
     deathSuit = suit.getLoseActor()
+    suit.nametag3d.reparentTo(suit.nametagNull)
+    suit.nametag3d.setEffect(CompassEffect.make(suit, CompassEffect.PScale))
     deathSuit.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
     suitTrack.append(Func(notify.debug, 'before insertDeathSuit'))
-    suitTrack.append(Func(suit.nametag3d.hide))
+    suitTrack.append(Func(insertReviveSuit, suit, deathSuit, battle, suitPos, suitHpr))
     suitTrack.append(Func(notify.debug, 'before actorInterval lose'))
     suitTrack.append(ActorInterval(deathSuit, 'lose', duration=SUIT_LOSE_DURATION))
     suitTrack.append(Func(notify.debug, 'before removeDeathSuit'))

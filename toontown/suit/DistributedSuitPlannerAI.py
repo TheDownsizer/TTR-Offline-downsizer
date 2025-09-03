@@ -836,7 +836,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         newSuit.initializePath()
         self.zoneChange(newSuit, None, newSuit.zoneId)
         # Determine if we are spawning a special type of suit. 1 is Skelecog, 2 is v2.0.
-        specialSuit = 1
+        specialSuit = 2
         if specialSuit == 1:
             newSuit.setSkelecog(1)
         elif specialSuit == 2:
