@@ -332,10 +332,40 @@ class DistributedBuilding(DistributedObject.DistributedObject):
                 corpIcon = cogIcons.find('**/LegalIcon').copyTo(self.cab)
             elif dept == 'm':
                 corpIcon = cogIcons.find('**/MoneyIcon').copyTo(self.cab)
+            elif dept == 'ms':
+                corpIcon = cogIcons.find('**/MoneyIcon').copyTo(self.cab)
+            elif dept == 'mc':
+                corpIcon = cogIcons.find('**/MoneyIcon').copyTo(self.cab)
+            elif dept == 'ml':
+                corpIcon = cogIcons.find('**/MoneyIcon').copyTo(self.cab)
+            elif dept == 'ls':
+                corpIcon = cogIcons.find('**/LegalIcon').copyTo(self.cab)
+            elif dept == 'lm':
+                corpIcon = cogIcons.find('**/LegalIcon').copyTo(self.cab)
+            elif dept == 'lc':
+                corpIcon = cogIcons.find('**/LegalIcon').copyTo(self.cab)
+            elif dept == 'sm':
+                corpIcon = cogIcons.find('**/SalesIcon').copyTo(self.cab)
+            elif dept == 'sl':
+                corpIcon = cogIcons.find('**/SalesIcon').copyTo(self.cab)
+            elif dept == 'sc':
+                corpIcon = cogIcons.find('**/SalesIcon').copyTo(self.cab)
+            elif dept == 'cm':
+                corpIcon = cogIcons.find('**/CorpIcon').copyTo(self.cab)
+            elif dept == 'cl':
+                corpIcon = cogIcons.find('**/CorpIcon').copyTo(self.cab)
+            elif dept == 'cs':
+                corpIcon = cogIcons.find('**/CorpIcon').copyTo(self.cab)
+            elif dept == 'x':
+                corpIcon = cogIcons.find('**/CorpIcon').copyTo(self.cab)
+            
             corpIcon.setPos(0, 6.79, 6.8)
             corpIcon.setScale(3)
             from toontown.suit import Suit
-            corpIcon.setColor(Suit.Suit.medallionColors[dept])
+            try:
+                corpIcon.setColor(Suit.Suit.medallionColors[dept])
+            except:
+                corpIcon.setColor(Suit.Suit.medallionColors['m'])
             cogIcons.removeNode()
         self.leftDoor = self.elevatorModel.find('**/left-door')
         if self.leftDoor.isEmpty():
@@ -442,17 +472,27 @@ class DistributedBuilding(DistributedObject.DistributedObject):
         dnaData = base.cr.playGame.dnaData
         dnaStore = self.cr.playGame.dnaStore
         level = int(self.difficulty / 2) + 1
-        suitNP = dnaStore.findNode('suit_landmark_' + chr(self.track) + str(level))
-        zoneId = dnaData.getBlock(self.block).zone
-        zoneId = ZoneUtil.getTrueZoneId(zoneId, self.interiorZoneId)
-        newParentNP = base.cr.playGame.hood.loader.zoneDict[zoneId]
-        suitBuildingNP = suitNP.copyTo(newParentNP)
+        try:
+            suitNP = dnaStore.findNode('suit_landmark_' + chr(self.track) + str(level))
+            zoneId = dnaData.getBlock(self.block).zone
+            zoneId = ZoneUtil.getTrueZoneId(zoneId, self.interiorZoneId)
+            newParentNP = base.cr.playGame.hood.loader.zoneDict[zoneId]
+            suitBuildingNP = suitNP.copyTo(newParentNP)
+        except:
+            suitNP = dnaStore.findNode('suit_landmark_x' + str(level))
+            zoneId = dnaData.getBlock(self.block).zone
+            zoneId = ZoneUtil.getTrueZoneId(zoneId, self.interiorZoneId)
+            newParentNP = base.cr.playGame.hood.loader.zoneDict[zoneId]
+            suitBuildingNP = suitNP.copyTo(newParentNP)
         buildingTitle = dnaData.getBlock(self.block).title
         if not buildingTitle:
             buildingTitle = TTLocalizer.CogsInc
         else:
             buildingTitle += TTLocalizer.CogsIncExt
-        buildingTitle += '\n%s' % SuitDNA.getDeptFullname(chr(self.track))
+        try:
+            buildingTitle += '\n%s' % SuitDNA.getDeptFullname(chr(self.track))
+        except:
+            buildingTitle += '\nJoint Venture'
         textNode = TextNode('sign')
         textNode.setTextColor(1.0, 1.0, 1.0, 1.0)
         textNode.setFont(ToontownGlobals.getSuitFont())

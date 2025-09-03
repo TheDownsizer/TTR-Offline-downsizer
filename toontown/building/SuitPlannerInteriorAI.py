@@ -15,6 +15,16 @@ class SuitPlannerInteriorAI:
         self.zoneId = zone
         self.numFloors = numFloors
         self.respectInvasions = 1
+        self.BossbotCombinations = ['cm', 'cl', 'cs'] # Bossbot-Cashbot, Cashbot-Lawbot, and Casbot-Sellbot
+        self.LawbotCombinations = ['lc', 'lm', 'ls'] # Lawbot-Bossbot, Lawbot-Cashbot, and Lawbot-Sellbot
+        self.SellbotCombinations = ['sc', 'sl', 'sm'] #Sellbot-Bossbot, Sellbot-Lawbot, and Sellbot-Cashbot
+        self.CashbotCombinations = ['mc', 'ms', 'ml'] # Cashbot-Bossbot, Cashbot-Sellbot, and Cashbot-Lawbot
+        self.jointVenture = 0
+        self.CombonationList = [self.BossbotCombinations, self.LawbotCombinations, self.SellbotCombinations, self.CashbotCombinations]
+        all_combinations = (self.BossbotCombinations + self.LawbotCombinations + 
+                                  self.SellbotCombinations + self.CashbotCombinations)
+        if bldgTrack in all_combinations:
+            self.jointVenture = 1
         dbg_defaultSuitName = config.ConfigVariableString('suit-type', 'random').getValue()
         if dbg_defaultSuitName == 'random':
             self.dbg_defaultSuitType = None
@@ -61,10 +71,25 @@ class SuitPlannerInteriorAI:
                 revives = 0
             for currActive in range(numActive - 1, -1, -1):
                 level = lvls[currActive]
+                
+                # Check if bldgTrack is in any combination list and use getDepartmentComboFromCombination
+                all_combinations = (self.BossbotCombinations + self.LawbotCombinations + 
+                                  self.SellbotCombinations + self.CashbotCombinations)
+                
+                if bldgTrack in all_combinations:
+                    level += 2
+
                 type = self.__genNormalSuitType(level)
                 activeDict = {}
                 activeDict['type'] = type
-                activeDict['track'] = bldgTrack
+                
+                
+                if bldgTrack in all_combinations:
+                    activeDict['track'] = self.getDepartmentComboFromCombination(bldgTrack)
+                    self.notify.debug(f'Using combination {bldgTrack}, assigned track: {activeDict["track"]}')
+                else:
+                    activeDict['track'] = bldgTrack
+                
                 activeDict['level'] = level
                 activeDict['revives'] = revives
                 activeDicts.append(activeDict)
@@ -75,10 +100,24 @@ class SuitPlannerInteriorAI:
             joinChances = self.__genJoinChances(numReserve)
             for currReserve in range(numReserve):
                 level = lvls[currReserve + numActive]
+
+                # Check if bldgTrack is in any combination list and use getDepartmentComboFromCombination
+                all_combinations = (self.BossbotCombinations + self.LawbotCombinations + 
+                                  self.SellbotCombinations + self.CashbotCombinations)
+                if bldgTrack in all_combinations:
+                    level += 2
+
                 type = self.__genNormalSuitType(level)
                 reserveDict = {}
                 reserveDict['type'] = type
-                reserveDict['track'] = bldgTrack
+                
+                
+                if bldgTrack in all_combinations:
+                    reserveDict['track'] = self.getDepartmentComboFromCombination(bldgTrack)
+                    self.notify.debug(f'Using combination {bldgTrack}, assigned track: {reserveDict["track"]}')
+                else:
+                    reserveDict['track'] = bldgTrack
+                
                 reserveDict['level'] = level
                 reserveDict['revives'] = revives
                 reserveDict['joinChance'] = joinChances[currReserve]
@@ -86,11 +125,52 @@ class SuitPlannerInteriorAI:
 
             infoDict['reserveSuits'] = reserveDicts
             self.suitInfos.append(infoDict)
+    
+    def getDepartmentComboFromCombination(self, combo):
+        """Get the department combination and return a choice of the separate departments.
+        
+        Args:
+            combo (str): Two-letter combination code representing department pairing
+                        (e.g., 'cm' = Bossbot-Cashbot, 'cl' = Bossbot-Lawbot, etc.)
+        
+        Returns:
+            str: Randomly selected department from the combination
+        """
+        # Department mapping: c=Bossbot, l=Lawbot, m=Cashbot, s=Sellbot
+        combo_departments = {
+            'cm': ['c', 'm'],  # Bossbot-Cashbot
+            'cl': ['c', 'l'],  # Bossbot-Lawbot  
+            'cs': ['c', 's'],  # Bossbot-Sellbot
+            'lc': ['l', 'c'],  # Lawbot-Bossbot
+            'lm': ['l', 'm'],  # Lawbot-Cashbot
+            'ls': ['l', 's'],  # Lawbot-Sellbot
+            'sc': ['s', 'c'],  # Sellbot-Bossbot
+            'sl': ['s', 'l'],  # Sellbot-Lawbot
+            'sm': ['s', 'm'],  # Sellbot-Cashbot
+            'mc': ['m', 'c'],  # Cashbot-Bossbot
+            'ms': ['m', 's'],  # Cashbot-Sellbot
+            'ml': ['m', 'l']   # Cashbot-Lawbot
+        }
+        
+        if combo not in combo_departments:
+            self.notify.warning(f'Unknown department combination: {combo}. Using default Bossbot.')
+            return 'c'  # Default to Bossbot if unknown combination
+        
+        # Randomly select one of the two departments from the combination
+        departments = combo_departments[combo]
+        chosen_dept = random.choice(departments)
+        
+        self.notify.debug(f'Combination {combo} contains departments {departments}, chose {chosen_dept}')
+        return chosen_dept
+
 
     def __genNormalSuitType(self, lvl):
         if self.dbg_defaultSuitType != None:
             return self.dbg_defaultSuitType
-        return SuitDNA.getRandomSuitType(lvl)
+        if self.jointVenture:
+            return SuitDNA.getRandomSuitTypeJointVenture(lvl)
+        else:
+            return SuitDNA.getRandomSuitType(lvl)
 
     def __genLevelList(self, bldgLevel, currFloor, numFloors):
         bldgInfo = SuitBuildingGlobals.SuitBuildingInfo[bldgLevel]

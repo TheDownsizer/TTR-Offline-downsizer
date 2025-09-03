@@ -340,8 +340,8 @@ MintNumRooms = {CashbotMintIntA: 2 * (6,) + 5 * (7,) + 5 * (8,) + 5 * (9,) + 3 *
 BossbotCountryClubCogLevel = 11
 BossbotCountryClubSkelecogLevel = 12
 BossbotCountryClubBossLevel = 12
-CountryClubNumRooms = {BossbotCountryClubIntA: (4,),
- BossbotCountryClubIntB: 3 * (8,) + 6 * (9,) + 6 * (10,) + 5 * (11,),
+CountryClubNumRooms = {BossbotCountryClubIntA: 4 * (10,) + 10 * (11,) + 6 * (12,),
+ BossbotCountryClubIntB: 4 * (10,) + 10 * (11,) + 6 * (12,),
  BossbotCountryClubIntC: 4 * (10,) + 10 * (11,) + 6 * (12,)}
 CountryClubNumBattles = {BossbotCountryClubIntA: 3,
  BossbotCountryClubIntB: 2,

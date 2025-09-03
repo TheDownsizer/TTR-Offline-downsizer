@@ -108,6 +108,9 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         if not self.isToonBlock():
             return
         self.updateSavedBy(None)
+
+        chance = random.random()
+        
         difficulty = min(difficulty, len(SuitBuildingGlobals.SuitBuildingInfo) - 1)
         minFloors, maxFloors = self._getMinMaxFloors(difficulty)
         if buildingHeight == None:
@@ -116,7 +119,25 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
             numFloors = buildingHeight + 1
             if numFloors < minFloors or numFloors > maxFloors:
                 numFloors = random.randint(minFloors, maxFloors)
-        self.track = suitTrack
+
+
+        # random chance for BOSSBOT to combine with another track
+        if self.track == 'c':
+            if chance < 0.5:
+                self.track = random.choice(['cs', 'cm', 'cl'])
+        
+        if self.track == 'l':
+            if chance < 0.5:
+                self.track = random.choice(['ls', 'lm', 'lc'])
+        
+        if self.track == 'm':
+            if chance < 0.5:
+                self.track = random.choice(['ms', 'mc', 'ml'])
+        
+        if self.track == 's':
+            if chance < 0.5:
+                self.track = random.choice(['sl', 'sc', 'sm'])
+
         self.difficulty = difficulty
         self.numFloors = numFloors
         self.becameSuitTime = time.time()
@@ -163,7 +184,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         return [self.block, interiorZoneId]
 
     def getSuitData(self):
-        return [ord(self.track), self.difficulty, self.numFloors]
+        try:
+            return [ord(self.track), self.difficulty, self.numFloors]
+        except:
+            return [ord('x'), self.difficulty, self.numFloors]
 
     def getState(self):
         return [self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
@@ -429,7 +453,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         return Task.done
 
     def enterBecomingSuit(self):
-        self.sendUpdate('setSuitData', [ord(self.track), self.difficulty, self.numFloors])
+        try:
+            self.sendUpdate('setSuitData', [ord(self.track), self.difficulty, self.numFloors])
+        except:
+            self.sendUpdate('setSuitData', [ord('x'), self.difficulty, self.numFloors])
         self.d_setState('becomingSuit')
         name = self.taskName(str(self.block) + '_becomingSuit-timer')
         taskMgr.doMethodLater(SuitBuildingGlobals.TO_SUIT_BLDG_TIME, self.becomingSuitTask, name)
@@ -453,7 +480,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         return Task.done
 
     def enterSuit(self):
-        self.sendUpdate('setSuitData', [ord(self.track), self.difficulty, self.numFloors])
+        try:
+            self.sendUpdate('setSuitData', [ord(self.track), self.difficulty, self.numFloors])
+        except:
+            self.sendUpdate('setSuitData', [ord('x'), self.difficulty, self.numFloors])
         zoneId, interiorZoneId = self.getExteriorAndInteriorZoneId()
         self.planner = SuitPlannerInteriorAI.SuitPlannerInteriorAI(self.numFloors, self.difficulty, self.track, interiorZoneId)
         self.d_setState('suit')

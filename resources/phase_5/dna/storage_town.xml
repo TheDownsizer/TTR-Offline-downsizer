@@ -57,6 +57,106 @@
 		<store_node root="suit_landmark" code="suit_landmark_m4" node="" />
 		<store_node root="suit_landmark" code="suit_landmark_m5" node="" />
 	</model>
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_x1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_x2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_x3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_x4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_x5" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_x6" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_x7" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_x8" node="" />
+	</model>
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_cm1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cm2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cm3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cm4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cm5" node="" />
+	</model>
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_cl1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cl2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cl3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cl4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cl5" node="" />
+	</model>
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_cs1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cs2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cs3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cs4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_cs5" node="" />
+	</model>
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_lm1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lm2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lm3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lm4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lm5" node="" />
+	</model>
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_lc1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lc2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lc3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lc4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_lc5" node="" />
+	</model>
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_ls1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ls2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ls3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ls4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ls5" node="" />
+	</model>
+
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_ms1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ms2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ms3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ms4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ms5" node="" />
+	</model>
+
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_ml1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ml2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ml3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ml4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_ml5" node="" />
+	</model>
+
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_mc1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_mc2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_mc3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_mc4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_mc5" node="" />
+	</model>
+
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_sc1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sc2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sc3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sc4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sc5" node="" />
+	</model>
+
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_sm1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sm2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sm3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sm4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sm5" node="" />
+	</model>
+
+	<model path="phase_4/models/modules/ttr_m_ara_cbe_suitLandmark_Corp" scope="hood">
+		<store_node root="suit_landmark" code="suit_landmark_sl1" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sl2" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sl3" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sl4" node="" />
+		<store_node root="suit_landmark" code="suit_landmark_sl5" node="" />
+	</model>
 
 	<model path="phase_4/models/modules/elevator" scope="hood">
 		<store_node root="elevator" code="elevator" node="" />

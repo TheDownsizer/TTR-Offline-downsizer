@@ -148,6 +148,9 @@ def getRandomSuitType(level, rng = random):
 def getRandomSuitTypeExtended(level, rng = random):
     return random.randint(max(level - 7, 1), min(level, 8))
 
+def getRandomSuitTypeJointVenture(level, rng = random):
+    return random.randint(max(level - 6, 1), min(level, 8))
+
 
 def getRandomSuitByDept(dept):
     deptNumber = suitDepts.index(dept)

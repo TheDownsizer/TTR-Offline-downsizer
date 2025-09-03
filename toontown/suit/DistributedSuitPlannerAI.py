@@ -803,6 +803,8 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             newSuit.buildingSuit = 1
             if suitTrack == None:
                 suitTrack = self.buildingMgr.getBuildingTrack(blockNumber)
+                if suitTrack not in ['s', 'c', 'm', 'l']:
+                    suitTrack = 'c'
         else:
             newSuit.flyInSuit = 1
             newSuit.attemptingTakeover = self.newSuitShouldAttemptTakeover()
