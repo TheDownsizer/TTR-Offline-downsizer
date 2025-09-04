@@ -17,11 +17,36 @@ class GroupTargetAttackCalculator(BaseCogAttackCalculator):
     
     def calculate_attack_type(self, attack_index):
         """
-        Calculate which attack type the cog should use
+        Calculate which attack type the cog should use - prefer group attacks
         """
         the_suit = self._get_suit(attack_index)
         attacks = SuitAttributes[the_suit.dna.name]['attacks']
-        attack_type = pickSuitAttack(attacks, the_suit.getLevel())
+        
+        # Filter for group attacks first
+        group_attacks = []
+        single_attacks = []
+        
+        for i, attack_data in enumerate(attacks):
+            attack_name = attack_data[0]
+            if attack_name in SuitAttacks:
+                attack_info = SuitAttacks[attack_name]
+                if attack_info[1] == ATK_TGT_GROUP:
+                    group_attacks.append(i)
+                else:
+                    single_attacks.append(i)
+        
+        # Prefer group attacks when available
+        if group_attacks:
+            if self.notify.getDebug():
+                self.notify.debug(f'Group calculator: selecting from {len(group_attacks)} group attacks')
+            # Use weighted selection among group attacks
+            attack_type = self._pick_weighted_attack(attacks, group_attacks, the_suit.getLevel())
+        else:
+            if self.notify.getDebug():
+                self.notify.debug('Group calculator: no group attacks available, using any attack')
+            # Fall back to any attack if no group attacks
+            attack_type = pickSuitAttack(attacks, the_suit.getLevel())
+        
         return attack_type
     
     def calculate_target(self, attack_index):
@@ -29,6 +54,9 @@ class GroupTargetAttackCalculator(BaseCogAttackCalculator):
         For group attacks, target selection is not used as it affects all toons
         Returns -1 to indicate group targeting
         """
+        if self.notify.getDebug():
+            self.notify.debug('Group attack calculator: returning -1 for group targeting')
+        
         # Group attacks don't need specific targeting since they hit all toons
         # We return -1 as a convention for group attacks
         return -1
@@ -89,6 +117,9 @@ class GroupTargetAttackCalculator(BaseCogAttackCalculator):
         """
         Calculate damage for group attack - affects all toons
         """
+        if self.notify.getDebug():
+            self.notify.debug('Group attack calculator: calculating damage for all active toons')
+        
         target_list = self.create_target_list(attack_index)
         attack = self._get_attack_data(attack_index)
         
@@ -128,3 +159,31 @@ class GroupTargetAttackCalculator(BaseCogAttackCalculator):
         # Update stats for all toons hit by group attack
         for curr_tgt in target_list:
             self.battle_calculator._BattleCalculatorAI__updateSuitAtkStat(curr_tgt)
+    
+    def _pick_weighted_attack(self, attacks, attack_indices, suit_level):
+        """
+        Pick an attack from specified indices using weighted selection
+        """
+        if not attack_indices:
+            return None
+        
+        # Create weighted list based on attack probabilities
+        total_weight = 0
+        for idx in attack_indices:
+            total_weight += attacks[idx][3][suit_level]
+        
+        if total_weight == 0:
+            # If no weights, pick randomly
+            return random.choice(attack_indices)
+        
+        # Weighted selection
+        randNum = random.randint(0, total_weight - 1)
+        current_weight = 0
+        
+        for idx in attack_indices:
+            current_weight += attacks[idx][3][suit_level]
+            if randNum < current_weight:
+                return idx
+        
+        # Fallback
+        return attack_indices[0]

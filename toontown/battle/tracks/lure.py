@@ -114,6 +114,9 @@ class LureTrackCalculator(BaseTrackCalculator):
         if not hit_success:
             return
         
+        if self.notify.getDebug():
+            self.notify.debug(f'Starting lure damage calculation. Hit success: {hit_success}, Accuracy: {atk_acc}')
+        
         valid_target_available = False
         lure_did_damage = False
         curr_lure_id = -1
@@ -134,24 +137,28 @@ class LureTrackCalculator(BaseTrackCalculator):
                 if self.notify.getDebug():
                     self.notify.debug('Suit lured, but no trap exists')
                 
-                if self.battle_calculator.SUITS_UNLURED_IMMEDIATELY:
-                    if not self._suit_is_lured(target_id, prev_round=True):
-                        if not self._combatant_dead(target_id, toon=False):
-                            valid_target_available = True
-                        
-                        rounds = self.battle_calculator.NumRoundsLured[atkLevel]
-                        wakeup_chance = 100 - atk_acc * 2
-                        npc_lurer = attack[TOON_TRACK_COL] == NPCSOS
-                        
-                        curr_lure_id = self._add_lured_suit_info(
-                            target_id, -1, rounds, wakeup_chance, 
-                            attack[TOON_ID_COL], atkLevel, 
-                            lure_id=curr_lure_id, npc=npc_lurer)
-                        
-                        if self.notify.getDebug():
-                            self.notify.debug(f'Suit lured for {rounds} rounds max with '
-                                            f'{wakeup_chance}% chance to wake up each round')
-                        target_lured = True
+                # Apply lure if suit is not already lured
+                if not self._suit_is_lured(target_id, prev_round=True):
+                    if not self._combatant_dead(target_id, toon=False):
+                        valid_target_available = True
+                    
+                    rounds = self.battle_calculator.NumRoundsLured[atkLevel]
+                    wakeup_chance = 100 - atk_acc * 2
+                    npc_lurer = attack[TOON_TRACK_COL] == NPCSOS
+                    
+                    curr_lure_id = self._add_lured_suit_info(
+                        target_id, -1, rounds, wakeup_chance, 
+                        attack[TOON_ID_COL], atkLevel, 
+                        lure_id=curr_lure_id, npc=npc_lurer)
+                    
+                    if self.notify.getDebug():
+                        self.notify.debug(f'Suit lured for {rounds} rounds max with '
+                                        f'{wakeup_chance}% chance to wake up each round')
+                    target_lured = True
+                    
+                    # Handle delayed lure processing if needed
+                    if not self.battle_calculator.SUITS_UNLURED_IMMEDIATELY:
+                        self._add_lured_suits_delayed(attack[TOON_ID_COL], target_id)
             else:
                 # Trap exists - trigger it
                 attack_track = TRAP
@@ -181,25 +188,7 @@ class LureTrackCalculator(BaseTrackCalculator):
                     valid_target_available = True
                 target_lured = True
             
-            # Handle delayed lure for non-immediate unlure mode
-            if not self.battle_calculator.SUITS_UNLURED_IMMEDIATELY:
-                if not self._suit_is_lured(target_id, prev_round=True):
-                    if not self._combatant_dead(target_id, toon=False):
-                        valid_target_available = True
-                    
-                    rounds = self.battle_calculator.NumRoundsLured[atkLevel]
-                    wakeup_chance = 100 - atk_acc * 2
-                    npc_lurer = attack[TOON_TRACK_COL] == NPCSOS
-                    
-                    curr_lure_id = self._add_lured_suit_info(
-                        target_id, -1, rounds, wakeup_chance,
-                        attack[TOON_ID_COL], atkLevel,
-                        lure_id=curr_lure_id, npc=npc_lurer)
-                    
-                    target_lured = True
-                
-                if attack_level != -1:
-                    self._add_lured_suits_delayed(attack[TOON_ID_COL], target_id)
+
             
             # Track successful lures
             if (target_lured and 
@@ -235,8 +224,11 @@ class LureTrackCalculator(BaseTrackCalculator):
                                                    attacker_id=curr_info[0])
                             self._clear_lurer(curr_info[0], lure_id=curr_info[2])
         
-        # Give lure experience if trap was triggered
-        if lure_did_damage:
+        if self.notify.getDebug():
+            self.notify.debug(f'Lure calculation complete. Valid targets: {valid_target_available}, Lure did damage: {lure_did_damage}')
+        
+        # Give lure experience 
+        if lure_did_damage or valid_target_available:
             if self._item_is_credit(atkTrack, atkLevel):
                 if self.notify.getDebug():
                     self.notify.debug(f'Giving lure EXP to toon {attack[TOON_ID_COL]}')

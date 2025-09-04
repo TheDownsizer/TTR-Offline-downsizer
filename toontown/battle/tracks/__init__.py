@@ -49,9 +49,9 @@ class BaseTrackCalculator:
         """Helper to get actual track, level and HP"""
         return self.battle_calculator._BattleCalculatorAI__getActualTrackLevelHp(attack)
     
-    def _suit_is_lured(self, suit_id):
+    def _suit_is_lured(self, suit_id, prev_round=False):
         """Helper to check if suit is lured"""
-        return self.battle_calculator._BattleCalculatorAI__suitIsLured(suit_id)
+        return self.battle_calculator._BattleCalculatorAI__suitIsLured(suit_id, prev_round)
     
     def _combatant_dead(self, avId, toon=False):
         """Helper to check if combatant is dead"""

@@ -32,6 +32,9 @@ from toontown.toonbase import TTLocalizer
 from toontown.toon import NPCToons
 from otp.nametag.NametagConstants import *
 from otp.nametag import NametagGlobals
+
+# Import the new modular movie sequence system
+from .movie_sequences.manager import MovieSequenceManager
 camPos = Point3(14, 0, 10)
 camHpr = Vec3(89, -30, 0)
 randomBattleTimestamp = config.ConfigVariableBool('random-battle-timestamp', 0).getValue()
@@ -51,6 +54,9 @@ class Movie(DirectObject.DirectObject):
         self.reset()
         self.rewardHasBeenReset = 0
         self.resetReward()
+        
+        # Initialize the new modular movie sequence system
+        self.sequence_manager = MovieSequenceManager(self)
         return
 
     def cleanup(self):
@@ -64,6 +70,10 @@ class Movie(DirectObject.DirectObject):
             self.rewardPanel.cleanup()
         self.rewardPanel = None
         self.rewardCallback = None
+        
+        # Clean up sequence manager
+        if hasattr(self, 'sequence_manager'):
+            self.sequence_manager = None
         return
 
     def needRestoreColor(self):
@@ -226,7 +236,44 @@ class Movie(DirectObject.DirectObject):
         return
 
     def play(self, ts, callback):
+        """Play battle movie using new modular sequence system"""
         self.hasBeenReset = 0
+        
+        try:
+            # Use the new sequence manager to build the complete movie
+            self.track = self.sequence_manager.build_complete_movie_sequence(
+                self.toonAttackDicts, 
+                self.suitAttackDicts, 
+                callback
+            )
+            
+            # Handle random battle timestamp if enabled
+            if randomBattleTimestamp == 1:
+                randNum = random.randint(0, 99)
+                dur = self.track.getDuration()
+                ts = float(randNum) / 100.0 * dur
+            
+            # Set up delay deletes for proper cleanup
+            self.track.delayDeletes = []
+            for suit in self.battle.suits:
+                self.track.delayDeletes.append(DelayDelete.DelayDelete(suit, 'Movie.play'))
+            
+            for toon in self.battle.toons:
+                self.track.delayDeletes.append(DelayDelete.DelayDelete(toon, 'Movie.play'))
+            
+            # Start the track
+            self.track.start(ts)
+            
+        except Exception as e:
+            self.notify.warning(f'Error in new sequence system: {e}')
+            # Fallback to original system
+            self._play_fallback(ts, callback)
+        
+        return None
+
+    def _play_fallback(self, ts, callback):
+        """Fallback to original sequence building system"""
+        self.notify.debug('Using fallback sequence system')
         ptrack = Sequence()
         camtrack = Sequence()
         if random.random() > 0.5:
@@ -261,11 +308,6 @@ class Movie(DirectObject.DirectObject):
             self.track.delayDeletes.append(DelayDelete.DelayDelete(toon, 'Movie.play'))
 
         self.track.start(ts)
-        return None
-
-    def finish(self):
-        self.track.finish()
-        return None
 
     def playReward(self, ts, name, callback, noSkip = False):
         self.rewardHasBeenReset = 0
