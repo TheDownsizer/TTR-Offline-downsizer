@@ -56,6 +56,7 @@ class DistributedLawbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FSM
         self.weightPerToon = {}
         self.cannonIndexPerToon = {}
         self.battleDifficulty = 0
+        self.bossCogLvlMax = 6
         return
 
     def delete(self):

@@ -322,6 +322,15 @@ SellbotScrapFactoryControlRoomMediumLevel = lambda: 5
 SellbotScrapFactoryControlRoomHigherLevel = lambda: 6
 SellbotScrapFactorySupervisorLevel = lambda: 9 # Placeholder, Final Level will be 14
 
+# Bossbot Cog Golf Course Base Cog Levels
+BossbotCogGolfCouseCogLevelsEasy = [7, 8, 9]
+BossbotCogGolfCouseCogLevelsMedium = [10, 11]
+BossbotCogGolfCouseCogLevelsHard = [12, 13]
+BossbotCogGolfCouseCogLevel = lambda: random.choice(SellbotScrapFactoryCogLevels)
+BossbotCogGolfCouseSupervisorLevel = lambda: 9 # Placeholder, Final Level will be 33
+BossbotCogGolfCouseCogRevivesChance = 0.4
+BossbotCogGolfCouseCogRevive = lambda: if random.random() < BossbotCogGolfCouseCogRevivesChance: 1 else 0
+
 MintNumFloors = {CashbotMintIntA: 20,
  CashbotMintIntB: 20,
  CashbotMintIntC: 20}

@@ -44,6 +44,7 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
         self.attackCode = None
         self.attackAvId = 0
         self.hitCount = 0
+        self.bossCogLvlMax = None
         AllBossCogs.append(self)
         return
 
@@ -467,7 +468,7 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
         return
 
     def invokeSuitPlanner(self, buildingCode, skelecog):
-        planner = SuitPlannerInteriorAI.SuitPlannerInteriorAI(1, buildingCode, self.dna.dept, self.zoneId)
+        planner = SuitPlannerInteriorAI.SuitPlannerInteriorAI(1, buildingCode, self.dna.dept, self.zoneId, bossBattleLvlMax=self.bossCogLvlMax)
         planner.respectInvasions = 0
         suits = planner.genFloorSuits(0)
         if skelecog:

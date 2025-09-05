@@ -63,6 +63,7 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         self.battleFourDuration = simbase.air.config.ConfigVariableInt('battle-four-duration', 1800).getValue()
         self.overtimeOneStart = float(self.overtimeOneTime) / self.battleFourDuration
         self.moveAttackAllowed = True
+        self.bossCogLvlMax = 7
 
     def delete(self):
         self.notify.debug('DistributedBossbotBossAI.delete')

@@ -9,7 +9,7 @@ import types
 class SuitPlannerInteriorAI:
     notify = DirectNotifyGlobal.directNotify.newCategory('SuitPlannerInteriorAI')
 
-    def __init__(self, numFloors, bldgLevel, bldgTrack, zone):
+    def __init__(self, numFloors, bldgLevel, bldgTrack, zone, bossBattleLvlMax=None):
         self.dbg_4SuitsPerFloor = config.ConfigVariableBool('4-suits-per-floor', 0).getValue()
         self.dbg_1SuitPerFloor = config.ConfigVariableBool('1-suit-per-floor', 0).getValue()
         self.zoneId = zone
@@ -20,6 +20,7 @@ class SuitPlannerInteriorAI:
         self.SellbotCombinations = ['sc', 'sl', 'sm'] #Sellbot-Bossbot, Sellbot-Lawbot, and Sellbot-Cashbot
         self.CashbotCombinations = ['mc', 'ms', 'ml'] # Cashbot-Bossbot, Cashbot-Sellbot, and Cashbot-Lawbot
         self.jointVenture = 0
+        self.bossBattleLvlMax = bossBattleLvlMax
         self.CombonationList = [self.BossbotCombinations, self.LawbotCombinations, self.SellbotCombinations, self.CashbotCombinations]
         all_combinations = (self.BossbotCombinations + self.LawbotCombinations + 
                                   self.SellbotCombinations + self.CashbotCombinations)
@@ -170,7 +171,10 @@ class SuitPlannerInteriorAI:
         if self.jointVenture:
             return SuitDNA.getRandomSuitTypeJointVenture(lvl)
         else:
-            return SuitDNA.getRandomSuitType(lvl)
+            if self.bossBattleLvlMax != None:
+                return SuitDNA.getRandomSuitTypeCustom(lvl, customRange=self.bossBattleLvlMax)
+            else:
+                return SuitDNA.getRandomSuitType(lvl)
 
     def __genLevelList(self, bldgLevel, currFloor, numFloors):
         bldgInfo = SuitBuildingGlobals.SuitBuildingInfo[bldgLevel]

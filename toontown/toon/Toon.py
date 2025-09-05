@@ -3049,7 +3049,7 @@ class Toon(Avatar.Avatar, ToonHead):
         for part in suit.getHeadParts():
             part.hide()
 
-        suitHeadNull = suit.find('**/joint_head')
+        suitHeadNull = suit.find('**/def_M_head_01')
         toonHead = self.getPart('head', '1000')
         Emote.globalEmote.disableAll(self)
         toonGeom = self.getGeomNode()
@@ -3108,7 +3108,7 @@ class Toon(Avatar.Avatar, ToonHead):
         suitType = self.suit.style.name
         toonHeadNull = self.find('**/1000/**/def_head')
         if not toonHeadNull:
-            toonHeadNull = self.find('**/1000/**/joint_head')
+            toonHeadNull = self.find('**/1000/**/def_M_head_01')
         toonHead = self.getPart('head', '1000')
         toonHead.reparentTo(toonHeadNull)
         toonHead.setScale(self.headOrigScale)
