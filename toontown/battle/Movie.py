@@ -17,12 +17,14 @@ from . import MovieSuitAttacks
 from . import MovieToonVictory
 from . import PlayByPlayText
 from . import BattleParticles
+from . import BattleScenes
 from toontown.distributed import DelayDelete
 from . import BattleExperience
 from .SuitBattleGlobals import *
 from direct.directnotify import DirectNotifyGlobal
 from . import RewardPanel
 import random
+import functools
 from . import MovieUtil
 from toontown.toon import Toon
 from toontown.toonbase import ToontownGlobals
@@ -54,6 +56,7 @@ class Movie(DirectObject.DirectObject):
         self.reset()
         self.rewardHasBeenReset = 0
         self.resetReward()
+        self.battleScenes = []
         
         # Initialize the new modular movie sequence system
         self.sequence_manager = MovieSequenceManager(self)
@@ -70,10 +73,12 @@ class Movie(DirectObject.DirectObject):
             self.rewardPanel.cleanup()
         self.rewardPanel = None
         self.rewardCallback = None
+        self.battleScenes = []
         
         # Clean up sequence manager
         if hasattr(self, 'sequence_manager'):
             self.sequence_manager = None
+            
         return
 
     def needRestoreColor(self):
@@ -444,6 +449,11 @@ class Movie(DirectObject.DirectObject):
         if config.ConfigVariableBool('want-toon-attack-anims', 1).getValue():
             track = Sequence(name='toon-attacks')
             camTrack = Sequence(name='toon-attacks-cam')
+            for scene in self.battleScenes:
+                if scene[4]:
+                    ival, camIval = BattleScenes.doScene(scene, self.battle)
+                    track.append(ival)
+                    camTrack.append(camIval)
             ival, camIval = MovieFire.doFires(self.__findToonAttack(FIRE))
             if ival:
                 track.append(ival)
@@ -543,79 +553,13 @@ class Movie(DirectObject.DirectObject):
          id3]
         self.uberList = uberList
 
-    def genAttackDicts(self, toons, suits, id0, tr0, le0, tg0, hp0, ac0, hpb0, kbb0, died0, revive0, id1, tr1, le1, tg1, hp1, ac1, hpb1, kbb1, died1, revive1, id2, tr2, le2, tg2, hp2, ac2, hpb2, kbb2, died2, revive2, id3, tr3, le3, tg3, hp3, ac3, hpb3, kbb3, died3, revive3, sid0, at0, stg0, dm0, sd0, sb0, st0, sid1, at1, stg1, dm1, sd1, sb1, st1, sid2, at2, stg2, dm2, sd2, sb2, st2, sid3, at3, stg3, dm3, sd3, sb3, st3):
+    def genAttackDicts(self, activeToons, activeSuits, toonAttacks, suitAttacks, battleScenes):
         if self.track and self.track.isPlaying():
             self.notify.warning('genAttackDicts() - track is playing!')
-        toonAttacks = ((id0,
-          tr0,
-          le0,
-          tg0,
-          hp0,
-          ac0,
-          hpb0,
-          kbb0,
-          died0,
-          revive0),
-         (id1,
-          tr1,
-          le1,
-          tg1,
-          hp1,
-          ac1,
-          hpb1,
-          kbb1,
-          died1,
-          revive1),
-         (id2,
-          tr2,
-          le2,
-          tg2,
-          hp2,
-          ac2,
-          hpb2,
-          kbb2,
-          died2,
-          revive2),
-         (id3,
-          tr3,
-          le3,
-          tg3,
-          hp3,
-          ac3,
-          hpb3,
-          kbb3,
-          died3,
-          revive3))
-        self.__genToonAttackDicts(toons, suits, toonAttacks)
-        suitAttacks = ((sid0,
-          at0,
-          stg0,
-          dm0,
-          sd0,
-          sb0,
-          st0),
-         (sid1,
-          at1,
-          stg1,
-          dm1,
-          sd1,
-          sb1,
-          st1),
-         (sid2,
-          at2,
-          stg2,
-          dm2,
-          sd2,
-          sb2,
-          st2),
-         (sid3,
-          at3,
-          stg3,
-          dm3,
-          sd3,
-          sb3,
-          st3))
-        self.__genSuitAttackDicts(toons, suits, suitAttacks)
+
+        self.battleScenes = battleScenes
+        self.__genToonAttackDicts(activeToons, activeSuits, toonAttacks)
+        self.__genSuitAttackDicts(activeToons, activeSuits, suitAttacks)
 
     def __genToonAttackDicts(self, toons, suits, toonAttacks):
         for ta in toonAttacks:
@@ -700,7 +644,7 @@ class Movie(DirectObject.DirectObject):
                     if levelAffectsGroup(HEAL, level):
                         targets = []
                         for t in toons:
-                            if t != toonId and t != -1:
+                            if t != -1:
                                 target = self.battle.findToon(t)
                                 if target == None:
                                     continue
@@ -816,10 +760,7 @@ class Movie(DirectObject.DirectObject):
                 return -1
             return 0
 
-        def sortOnLevel(lvl):
-            return lvl['level']
-
-        self.toonAttackDicts.sort(key=sortOnLevel)
+        self.toonAttackDicts.sort(key=functools.cmp_to_key(compFunc))
         return
 
     def __findToonAttack(self, track):
@@ -935,6 +876,11 @@ class Movie(DirectObject.DirectObject):
                 targetField = a.get('target')
                 if targetField == None:
                     continue
+                for scene in self.battleScenes:
+                    if not scene[4]:
+                        ival, camIval = BattleScenes.doScene(scene, self.battle)
+                        track.append(ival)
+                        camTrack.append(camIval)
                 if a['group'] == ATK_TGT_GROUP:
                     for target in targetField:
                         if target['died'] and target['toon'].doId == base.localAvatar.doId:

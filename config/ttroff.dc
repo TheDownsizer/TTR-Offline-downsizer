@@ -1427,6 +1427,65 @@ dclass DistributedCashbotBossGoon : DistributedCashbotBossObject {
   destroyGoon() broadcast clsend airecv;
 };
 
+struct SuitAttack {
+  //   index of the attacking suit
+  //   id of the suit's attack
+  //   index of the target of the attack
+  //   array of damages
+  //   bit-field indicating indices of toons that have died from this attack
+  //   flag indicating if this suit attacks before the toons this round
+  int64 index;
+  int64 attack;
+  int64 target;
+  int64[] damage;
+  int64 toonDied;
+  int64 beforeToons;
+  int64 taunt;
+};
+
+struct ToonAttack {
+  //   index of attacking toon
+  //   attack track
+  //   attack level
+  //   index of the target (or doId if it's an SOS)
+  //   array of damages
+  //   accuracy bonus for the attack
+  //   damage bonus for the attack
+  //   array of knockback bonuses
+  //   bit-field indicating indices of suits that have died from this attack
+  int64 index;
+  int64 track;
+  int64 level;
+  int64 target;
+  int64[] hp;
+  int64 accBonus;
+  int64 hpBonus;
+  int64[] kbBonus;
+  int64 suitDied;
+  int64 suitRevive;
+};
+
+struct BattleScene {
+  int64 id;
+  uint64 target;
+  int64[] hp;
+  uint64[] otherTargets;
+  int64 isToon;
+};
+
+struct BattleMovie {
+  //   flag indicating an empty movie
+  //   array of toon doIds
+  //   array of suit doIds
+  int64 active;
+  uint64[] activeToons;
+  uint64[] activeSuits;
+  
+  ToonAttack[] toonAttacks;
+  SuitAttack[] suitAttacks;
+  BattleScene[] battleScenes;
+};
+
 dclass DistributedBattleBase : DistributedObject {
   setLevelDoId(uint32 levelDoId) required broadcast ram;
   setBattleCellId(uint32 battleCellId) required broadcast ram;
@@ -1436,7 +1495,7 @@ dclass DistributedBattleBase : DistributedObject {
   setInitialSuitPos(int16/10 x, int16/10 y, int16/10 z) required broadcast ram;
   setMembers(uint32 suits[], string suitsJoining, string suitsPending, string suitsActive, string suitsLured, string suitTraps, uint32 toons[], string toonsJoining, string toonsPending, string toonsActive, string toonsRunning, int16 timestamp) required broadcast ram;
   adjust(int16 timestamp) broadcast;
-  setMovie(int8 active, uint32 toons[], uint32 suits[], int8 id0, int8 tr0, int8 le0, int32 tg0, int16 hp0[], int16 ac0, int16 hpb0, int16 kbb0[], int8 died0, int8 revive0, int8 id1, int8 tr1, int8 le1, int32 tg1, int16 hp1[], int16 ac1, int16 hpb1, int16 kbb1[], int8 died1, int8 revive1, int8 id2, int8 tr2, int8 le2, int32 tg2, int16 hp2[], int16 ac2, int16 hpb2, int16 kbb2[], int8 died2, int8 revive2, int8 id3, int8 tr3, int8 le3, int32 tg3, int16 hp3[], int16 ac3, int16 hpb3, int16 kbb3[], int8 died3, int8 revive3, int8 sid0, int8 at0, int8 stg0, int16 dm0[], int8 sd0, int8 sb0, int8 st0, int8 sid1, int8 at1, int8 stg1, int16 dm1[], int8 sd1, int8 sb1, int8 st1, int8 sid2, int8 at2, int8 stg2, int16 dm2[], int8 sd2, int8 sb2, int8 st2, int8 sid3, int8 at3, int8 stg3, int16 dm3[], int8 sd3, int8 sb3, int8 st3) required broadcast ram;
+  setMovie(BattleMovie movie) required broadcast ram;
   setChosenToonAttacks(uint32 ids[], int16 tracks[], int16 levels[], int32 targets[]) broadcast ram;
   setBattleExperience(int32 id0, int16 origExp0[], int16 earnedExp0[], uint32 origQuests0[], int16 items0[], int16 missedItems0[], int16 origMerits0[], int16 merits0[], uint32 parts0[], int32 id1, int16 origExp1[], int16 earnedExp1[], uint32 origQuests1[], int16 items1[], int16 missedItems1[], int16 origMerits1[], int16 merits1[], uint32 parts1[], int32 id2, int16 origExp2[], int16 earnedExp2[], uint32 origQuests2[], int16 items2[], int16 missedItems2[], int16 origMerits2[], int16 merits2[], uint32 parts2[], int32 id3, int16 origExp3[], int16 earnedExp3[], uint32 origQuests3[], int16 items3[], int16 missedItems3[], int16 origMerits3[], int16 merits3[], uint32 parts3[], uint8 deathList[], int16 uberList[], uint32 helpfulToonsList[]) required broadcast ram;
   denyLocalToonJoin();
