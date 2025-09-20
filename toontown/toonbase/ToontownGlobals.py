@@ -329,7 +329,7 @@ BossbotCogGolfCouseCogLevelsHard = [12, 13]
 BossbotCogGolfCouseCogLevel = lambda: random.choice(SellbotScrapFactoryCogLevels)
 BossbotCogGolfCouseSupervisorLevel = lambda: 9 # Placeholder, Final Level will be 33
 BossbotCogGolfCouseCogRevivesChance = 0.4
-BossbotCogGolfCouseCogRevive = lambda: if random.random() < BossbotCogGolfCouseCogRevivesChance: 1 else 0
+BossbotCogGolfCouseCogRevive = lambda: 1 if random.random() < BossbotCogGolfCouseCogRevivesChance else 0
 
 MintNumFloors = {CashbotMintIntA: 20,
  CashbotMintIntB: 20,

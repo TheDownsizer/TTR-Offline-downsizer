@@ -231,6 +231,7 @@ class ToonHead(Actor.Actor):
     def generateToonHead(self, copy, style, lods, forGui = 0):
         headStyle = style.head
         fix = None
+        self.setBlend(frameBlend=True, animBlend=True)
         if headStyle == 'dls':
             filePrefix = HeadDict['dls']
             headHeight = 0.75
