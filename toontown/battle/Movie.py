@@ -806,6 +806,7 @@ class Movie(DirectObject.DirectObject):
                 adict['battle'] = self.battle
                 adict['playByPlayText'] = self.playByPlayText
                 adict['taunt'] = sa[SUIT_TAUNT_COL]
+                adict['attackList'] = sa
                 hps = sa[SUIT_HP_COL]
                 if adict['group'] == ATK_TGT_GROUP:
                     targets = []

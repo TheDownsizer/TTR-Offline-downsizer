@@ -38,7 +38,8 @@ suitHeadTypes = ['f',
  'ms',
  'tf',
  'm',
- 'mh']
+ 'mh',
+ 'ofc']
 suitATypes = ['ym',
  'hh',
  'tbc',
@@ -59,6 +60,7 @@ suitBTypes = ['p',
  'ac',
  'sd',
  'bc',
+ 'ofc',
  'ls',
  'tm',
  'ms']
@@ -108,6 +110,9 @@ def getSuitBodyType(name):
     else:
         print('Unknown body type for suit name: ', name)
 
+supervisors2Dept = {
+    'ofc': 'l'
+}
 
 def getSuitDept(name):
     index = suitHeadTypes.index(name)
@@ -119,6 +124,8 @@ def getSuitDept(name):
         return suitDepts[2]
     elif index < suitsPerDept * 4:
         return suitDepts[3]
+    elif name in supervisors2Dept:
+        return supervisors2Dept[name]
     else:
         print('Unknown dept for suit name: ', name)
         return None

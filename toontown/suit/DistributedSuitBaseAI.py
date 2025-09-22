@@ -68,6 +68,14 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         self.track = track
         self.setLevel(level)
         return None
+    
+    def setupSupervisorDNA(self, level, type, track):
+        dna = SuitDNA.SuitDNA()
+        dna.newSuit(type)
+        self.dna = dna
+        self.track = track
+        self.setLevel(level)
+        return None
 
     def getDNAString(self):
         if self.dna:

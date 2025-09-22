@@ -28,5 +28,6 @@ class DNAWindows(DNANode):
             np.setScale(np.getTop(), 1, 1, 1)
             np.setX(x)
             np.setZ(0.5)
+            np.setColor(1, 1, 1, 1)
 
 registerElement(DNAWindows)

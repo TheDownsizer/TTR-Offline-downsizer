@@ -22,6 +22,7 @@ class DLHood(ToonHood.ToonHood):
     def load(self):
         ToonHood.ToonHood.load(self)
         self.parentFSM.getStateNamed('DLHood').addChild(self.fsm)
+        self.sky.setScale(1.4)
 
     def unload(self):
         self.parentFSM.getStateNamed('DLHood').removeChild(self.fsm)

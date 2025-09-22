@@ -1,0 +1,4 @@
+class OfficeClerk:
+    #JUNIOR WING, SENIOR WING
+    SHHH_SOUND_PERCENTS = [0.25, 0.5]
+    BOOK_SMART_COG_MULT = [1.15, 1.30]

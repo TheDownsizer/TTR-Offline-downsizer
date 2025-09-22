@@ -114,6 +114,13 @@ bw = (('finger-wag', 'fingerwag', 5),
   ('magic3', 'magic3', 5),
  ('throw-object', 'throw-object', 5),
  ('throw-paper', 'throw-paper', 5))
+ofc = (('speak', 'speak', 5),
+ ('magic1', 'magic1', 5),
+ ('shhh', 'shhh', 5),
+ ('roll-o-dex', 'roll-o-dex', 5),
+ ('throw-object', 'throw-object', 5),
+ ('glower', 'glower', 5),
+ ('throw-paper', 'throw-paper', 5))
 sc = (('throw-paper', 'throw-paper', 3.5), ('watercooler', 'watercooler', 5), ('pickpocket', 'pickpocket', 5))
 pp = (('throw-paper', 'throw-paper', 5),  ('magic2', 'magic2', 5), ('glower', 'glower', 5), ('finger-wag', 'fingerwag', 5))
 tw = (('throw-paper', 'throw-paper', 3.5),
@@ -171,8 +178,8 @@ else:
     TutorialModelDict = {'a': ('/models/char/tt_a_ene_cga_', 4),
      'b': ('/models/char/tt_a_ene_cgb_', 4),
      'c': ('/models/char/tt_a_ene_cgc_', 3.5)}
-HeadModelDict = {'a': ('/models/char/suitA-', 4),
- 'b': ('/models/char/suitB-', 4),
+HeadModelDict = {'a': ('/models/char/suitA-', 3.5),
+ 'b': ('/models/char/suitB-', 3.5),
  'c': ('/models/char/suitC-', 3.5)}
 
 ModelDictBody = {'a': ('/models/char/ttr_r_ene_cga_', 3.5),
@@ -369,6 +376,9 @@ class Suit(Avatar.Avatar):
         self.isWaiter = 0
         self.isRental = 0
         self.suitsStuckToFloor = []
+        self.customSuits = {
+            'ofc': ['ttr_t_ene_lawbotClerk_blazer.jpg', 'ttr_t_ene_lawbotClerk_leg.jpg', 'ttr_t_ene_lawbotClerk_sleeve.jpg']
+        }
         return
 
     def delete(self):
@@ -528,6 +538,12 @@ class Suit(Avatar.Avatar):
             self.generateBody()
             self.generateHead('bigwig')
             self.setHeight(8.69)
+        elif dna.name == 'ofc':
+            self.scale = 7 / bSize
+            self.handColor = SuitDNA.legalPolyColor
+            self.generateBody()
+            self.generateHead('officeclerk')
+            self.setHeight(9)
         elif dna.name == 'sc':
             self.scale = scale / cSize
             self.handColor = SuitDNA.moneyPolyColor
@@ -698,15 +714,37 @@ class Suit(Avatar.Avatar):
         phase = 3.5
 
         def __doItTheOldWay__():
-            torsoTex = loader.loadTexture('phase_%s/maps/%s_blazer.jpg' % (phase, dept))
-            torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
-            torsoTex.setMagfilter(Texture.FTLinear)
-            legTex = loader.loadTexture('phase_%s/maps/%s_leg.jpg' % (phase, dept))
-            legTex.setMinfilter(Texture.FTLinearMipmapLinear)
-            legTex.setMagfilter(Texture.FTLinear)
-            armTex = loader.loadTexture('phase_%s/maps/%s_sleeve.jpg' % (phase, dept))
-            armTex.setMinfilter(Texture.FTLinearMipmapLinear)
-            armTex.setMagfilter(Texture.FTLinear)
+            try:
+                if self.dna.name in self.customSuits:
+                    torsoTex = loader.loadTexture('phase_3.5/maps/' + self.customSuits[self.dna.name][0])
+                    torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                    torsoTex.setMagfilter(Texture.FTLinear)
+                    legTex = loader.loadTexture('phase_3.5/maps/' + self.customSuits[self.dna.name][1])
+                    legTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                    legTex.setMagfilter(Texture.FTLinear)
+                    armTex = loader.loadTexture('phase_3.5/maps/' + self.customSuits[self.dna.name][2])
+                    armTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                    armTex.setMagfilter(Texture.FTLinear)
+                else:
+                    torsoTex = loader.loadTexture('phase_%s/maps/%s_blazer.jpg' % (phase, dept))
+                    torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                    torsoTex.setMagfilter(Texture.FTLinear)
+                    legTex = loader.loadTexture('phase_%s/maps/%s_leg.jpg' % (phase, dept))
+                    legTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                    legTex.setMagfilter(Texture.FTLinear)
+                    armTex = loader.loadTexture('phase_%s/maps/%s_sleeve.jpg' % (phase, dept))
+                    armTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                    armTex.setMagfilter(Texture.FTLinear)
+            except:
+                torsoTex = loader.loadTexture('phase_%s/maps/%s_blazer.jpg' % (phase, dept))
+                torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                torsoTex.setMagfilter(Texture.FTLinear)
+                legTex = loader.loadTexture('phase_%s/maps/%s_leg.jpg' % (phase, dept))
+                legTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                legTex.setMagfilter(Texture.FTLinear)
+                armTex = loader.loadTexture('phase_%s/maps/%s_sleeve.jpg' % (phase, dept))
+                armTex.setMinfilter(Texture.FTLinearMipmapLinear)
+                armTex.setMagfilter(Texture.FTLinear)
             modelRoot.find('**/torso').setTexture(torsoTex, 1)
             modelRoot.find('**/arms').setTexture(armTex, 1)
             modelRoot.find('**/legs').setTexture(legTex, 1)
@@ -869,10 +907,13 @@ class Suit(Avatar.Avatar):
     def reseatHealthBarForSkele(self):
         self.healthBar.setPos(0.0, 0.1, 0.0)
 
-    def updateHealthBar(self, hp, forceUpdate = 0):
+    def updateHealthBar(self, hp, forceUpdate = 0, healing=0):
         if hp > self.currHP:
             hp = self.currHP
-        self.currHP -= hp
+        if healing == 1:
+            self.currHP += hp
+        else:
+            self.currHP -= hp
         health = float(self.currHP) / float(self.maxHP)
         if health > 0.95:
             condition = 0
@@ -999,9 +1040,13 @@ class Suit(Avatar.Avatar):
             bb.setTwoSided(1)
 
         self.setName(TTLocalizer.Skeleton)
-        nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self.name,
-         'dept': self.getStyleDept(),
-         'level': self.getActualLevel()}
+        if self.dna.name in SuitDNA.supervisors2Dept:
+            nameInfo = TTLocalizer.SuitBaseNameSupervisor % {'name': self.name,
+            'dept': self.getStyleDept()}
+        else:
+            nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self.name,
+            'dept': self.getStyleDept(),
+            'level': self.getActualLevel()}
         self.setDisplayName(nameInfo)
         self.leftHand = self.find('**/jnt_L_attachProp_01')
         self.rightHand = self.find('**/jnt_R_attachProp_01')

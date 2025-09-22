@@ -173,6 +173,10 @@ def doSuitAttack(attack):
         suitTrack = doDefault(attack)
     elif name == GLOWER_POWER:
         suitTrack = doGlowerPower(attack)
+    elif name == SHHHH:
+        suitTrack = doShhhh(attack)
+    elif name == BOOK_SMART:
+        suitTrack = doBookSmart(attack)
     elif name == GUILT_TRIP:
         suitTrack = doGuiltTrip(attack)
     elif name == HALF_WINDSOR:
@@ -274,10 +278,13 @@ def doSuitAttack(attack):
         toon = target['toon']
         toonHprTrack = Sequence(Func(toon.headsUp, battle, MovieUtil.PNT3_ZERO), Func(toon.loop, 'neutral'))
     else:
-        toonHprTrack = Parallel()
-        for t in target:
-            toon = t['toon']
-            toonHprTrack.append(Sequence(Func(toon.headsUp, battle, MovieUtil.PNT3_ZERO), Func(toon.loop, 'neutral')))
+        try:
+            toonHprTrack = Parallel()
+            for t in target:
+                toon = t['toon']
+                toonHprTrack.append(Sequence(Func(toon.headsUp, battle, MovieUtil.PNT3_ZERO), Func(toon.loop, 'neutral')))
+        except:
+            pass
 
     suit = attack['suit']
     neutralIval = Func(suit.loop, 'neutral')
@@ -1943,6 +1950,71 @@ def doGlowerPower(attack):
     soundTrack = getSoundTrack('SA_glower_power.ogg', delay=1.1, node=suit)
     return Parallel(suitTrack, toonTrack, soundTrack, leftKnifeTracks, rightKnifeTracks)
 
+def doShhhh(attack):
+    suit = attack['suit']
+    targets = attack['target']
+    battle = attack['battle']
+    leftKnives = []
+    rightKnives = []
+    for i in range(0, 3):
+        leftKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+        rightKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+
+    suitTrack = Sequence(getSuitAnimTrack(attack))
+    suitName = suit.getStyleName()
+    if suitName == 'hh':
+        leftPosPoints = [Point3(0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+    elif suitName == 'tbc':
+        leftPosPoints = [Point3(0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+    else:
+        leftPosPoints = [Point3(0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+    leftKnifeTracks = Parallel()
+    rightKnifeTracks = Parallel()
+
+    damageAnims = [['slip-backward', 0.01, 0.35]]
+    toonTrack = getToonTracks(attack, damageDelay=1.6, splicedDamageAnims=damageAnims, dodgeDelay=0.7, dodgeAnimNames=['sidestep'])
+    soundTrack = getSoundTrack('ttr_s_ene_cgb_lawbotClerk_silenceHush.ogg', delay=0, node=suit)
+    return Parallel(suitTrack, toonTrack, soundTrack)
+
+def doBookSmart(attack):
+    suit = attack['suit']
+    targets = attack['target']
+    battle = attack['battle']
+    attackList = attack['attackList']
+    extraSuitId = attackList[SUIT_EXTRAS_COL][0]
+    extraSuit = base.cr.doId2do.get(extraSuitId)
+    leftKnives = []
+    rightKnives = []
+    for i in range(0, 3):
+        leftKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+        rightKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+
+    suitTrack = Sequence(getSuitAnimTrack(attack))
+    suitName = suit.getStyleName()
+    if suitName == 'hh':
+        leftPosPoints = [Point3(0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+    elif suitName == 'tbc':
+        leftPosPoints = [Point3(0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+    else:
+        leftPosPoints = [Point3(0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+    leftKnifeTracks = Parallel()
+    rightKnifeTracks = Parallel()
+
+    result = Sequence()
+    resultHealTrack = Parallel(Func(extraSuit.showHpText, 30), Func(extraSuit.updateHealthBar, extraSuit.getHP() + 30, healing=1))
+    result.append(resultHealTrack)
+    result.append(Func(battle.unlureSuit, extraSuit))
+    result.append(MovieUtil.__createSuitResetPosTrack(extraSuit, battle))
+    
+
+    damageAnims = [['slip-backward', 0.01, 0.35]]
+    return Parallel(suitTrack, result)
 
 def doBeguile(attack):
     suit = attack['suit']

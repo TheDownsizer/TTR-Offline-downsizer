@@ -125,6 +125,8 @@ class GroupTargetAttackCalculator(BaseCogAttackCalculator):
         
         # Check if attack hits (same roll for all targets in group attack)
         attack_hits = self.calculate_hit(attack_index)
+
+        attack[SUIT_TGT_COL] = -1
         
         # Calculate damage for each target
         for target_toon_id in target_list:

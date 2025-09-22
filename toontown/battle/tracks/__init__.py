@@ -9,10 +9,11 @@ from ..BattleBase import *
 from toontown.toonbase.ToontownBattleGlobals import *
 from toontown.toon import NPCToons
 from toontown.pets import PetTricks, DistributedPetProxyAI
+from direct.showbase import DirectObject
 from direct.showbase.PythonUtil import lerp
 import random
 
-class BaseTrackCalculator:
+class BaseTrackCalculator(DirectObject.DirectObject):
     """Base class for all gag track calculators"""
     
     def __init__(self, battle_calculator):

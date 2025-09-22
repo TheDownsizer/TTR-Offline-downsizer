@@ -54,9 +54,9 @@ class SingleTargetAttackCalculator(BaseCogAttackCalculator):
                 if self.notify.getDebug():
                     self.notify.debug(f'Suit attacking back at toon {toon_id}')
                 return self.battle.activeToons.index(toon_id)
-        
+        targetToon = self._pick_random_toon(suit_id)
         # Fallback to random target
-        return self._pick_random_toon(suit_id)
+        return targetToon
     
     def calculate_hit(self, attack_index):
         """
@@ -102,6 +102,13 @@ class SingleTargetAttackCalculator(BaseCogAttackCalculator):
                 self.notify.debug('No attack, no targets')
             return target_list
         
+        randomToonIndex = None
+        for toonId in self.battle.activeToons:
+            randomToonId = random.choice(self.battle.activeToons)
+            randomToonIndex = self.battle.activeToons.index(randomToonId)
+
+        attack[SUIT_TGT_COL] = randomToonIndex
+
         # Single target - only add the targeted toon
         target_index = attack[SUIT_TGT_COL]
         if target_index >= 0 and target_index < len(self.battle.activeToons):

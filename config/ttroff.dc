@@ -1441,6 +1441,7 @@ struct SuitAttack {
   int64 toonDied;
   int64 beforeToons;
   int64 taunt;
+  uint64[] extraSuits;
 };
 
 struct ToonAttack {

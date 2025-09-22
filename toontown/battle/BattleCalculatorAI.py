@@ -10,10 +10,11 @@ from direct.showbase.PythonUtil import lerp
 from otp.ai.MagicWordGlobal import *
 from .tracks.manager import TrackCalculatorManager
 from .cog_attacks.manager import CogAttackCalculatorManager
+from direct.showbase import DirectObject
 
 battleSkip = 0
 
-class BattleCalculatorAI:
+class BattleCalculatorAI(DirectObject.DirectObject):
     AccuracyBonuses = [0, 20, 40, 60]
     DamageBonuses = [0, 20, 20, 20]
     AttackExpPerTrack = [0, 10, 20, 30, 40, 50, 60]
@@ -55,6 +56,7 @@ class BattleCalculatorAI:
         self.__skillCreditMultiplier = 1
         self.tutorialFlag = tutorialFlag
         self.trainTrapTriggered = False
+        self.officeClerkSoundDict = {}
         
         # Initialize the new track calculation system
         self.track_manager = TrackCalculatorManager(self)
@@ -71,6 +73,74 @@ class BattleCalculatorAI:
     def cleanup(self):
         self.battle = None
         return
+    
+    def clerkSoundedResponse(self, clerkList):
+        toonId = clerkList[0]
+        soundDamage = clerkList[1]
+
+        toon = self.battle.getToon(toonId)
+        
+        self.officeClerkSoundDict[toonId] = soundDamage
+    
+    def clerkSoundRetaliation(self):
+        if self.officeClerkSoundDict == {}:
+            return
+
+        clerkDict = self.officeClerkSoundDict
+
+        damageList = []
+        
+        for toonId in clerkDict:
+            damageList.append(clerkDict[toonId])
+
+            toon = simbase.air.doId2do.get(toonId)
+            toon.hp -= clerkDict[toonId]
+        
+        print(damageList)
+
+        clerk = self.findSuitIdFromName('ofc')
+        self.battle.suitAttacks.append([clerk,
+                                4,
+                                -1,
+                                damageList,
+                                0,
+                                0,
+                                0,
+                                []])
+    
+    def clerkBookSmart(self):
+        if len(self.battle.activeSuits) == 1:
+            return
+        clerk = self.findSuitIdFromName('ofc')
+        suitsToChooseFrom = self.battle.activeSuits[:]
+        for suit in suitsToChooseFrom:
+            if suit.currHP <= 0:
+                suitsToChooseFrom.remove(suit)
+            if suit.dna.name == 'ofc':
+                suitsToChooseFrom.remove(suit)
+                break
+        if suitsToChooseFrom == []:
+            return
+        randomSuit = random.choice(suitsToChooseFrom)
+        
+        
+        randomSuitId = randomSuit.doId
+        self.__removeLured(randomSuitId)
+        self.battle.suitAttacks.append([clerk,
+                                5,
+                                -1,
+                                [0, 0, 0, 0],
+                                0,
+                                0,
+                                0,
+                                [randomSuitId]])
+        randomSuit.setHP(randomSuit.currHP + 30)
+    
+    def findSuitIdFromName(self, suitName):
+        for suit in self.battle.activeSuits:
+            if suit.dna.name == suitName:
+                return suit.doId
+        return None
 
     def __calcToonAtkHit(self, attackIndex, atkTargets):
         """Calculate toon attack hit using new modular track system"""
@@ -278,15 +348,8 @@ class BattleCalculatorAI:
         if not atkHit and atkTrack != HEAL:
             return
         
-        # Use the new track calculator manager for damage calculation
-        try:
-            self.track_manager.calculate_toon_attack_damage(toonId, targetList)
-        except Exception as e:
-            self.notify.warning(f'Error in track damage calculation: {e}')
-            # Fallback to clearing the attack
-            if self.__prevAtkTrack(toonId) != atkTrack:
-                self.__clearAttack(toonId)
-        return
+        self.track_manager.calculate_toon_attack_damage(toonId, targetList)
+        
 
     def __getToonTargets(self, attack):
         track = self.__getActualTrack(attack)
@@ -1004,55 +1067,7 @@ class BattleCalculatorAI:
 
     def __calculateSuitAttacks(self):
         """Calculate suit attacks using new modular cog attack system"""
-        try:
-            self.cog_attack_manager.calculate_full_suit_attacks()
-        except Exception as e:
-            self.notify.warning(f'Error in cog attack calculation: {e}')
-            # Fallback to original logic
-            for i in range(len(self.battle.suitAttacks)):
-                if i < len(self.battle.activeSuits):
-                    suitId = self.battle.activeSuits[i].doId
-                    self.battle.suitAttacks[i][SUIT_ID_COL] = suitId
-                    if not self.__suitCanAttack(suitId):
-                        if self.notify.getDebug():
-                            self.notify.debug("Suit %d can't attack" % suitId)
-                        continue
-                    if self.battle.pendingSuits.count(self.battle.activeSuits[i]) > 0 or self.battle.joiningSuits.count(self.battle.activeSuits[i]) > 0:
-                        continue
-                    attack = self.battle.suitAttacks[i]
-                    attack[SUIT_ID_COL] = self.battle.activeSuits[i].doId
-                    attack[SUIT_ATK_COL] = self.__calcSuitAtkType(i)
-                    attack[SUIT_TGT_COL] = self.__calcSuitTarget(i)
-                    if attack[SUIT_TGT_COL] == -1:
-                        self.battle.suitAttacks[i] = getDefaultSuitAttack()
-                        attack = self.battle.suitAttacks[i]
-                        self.notify.debug('clearing suit attack, no avail targets')
-                    self.__calcSuitAtkHp(i)
-                    if attack[SUIT_ATK_COL] != NO_ATTACK:
-                        if self.__suitAtkAffectsGroup(attack):
-                            for currTgt in self.battle.activeToons:
-                                self.__updateSuitAtkStat(currTgt)
-                        else:
-                            tgtId = self.battle.activeToons[attack[SUIT_TGT_COL]]
-                            self.__updateSuitAtkStat(tgtId)
-                    targets = self.__createSuitTargetList(i)
-                    allTargetsDead = 1
-                    for currTgt in targets:
-                        if self.__getToonHp(currTgt) > 0:
-                            allTargetsDead = 0
-                            break
-                    if allTargetsDead:
-                        self.battle.suitAttacks[i] = getDefaultSuitAttack()
-                        if self.notify.getDebug():
-                            self.notify.debug('clearing suit attack, targets dead')
-                            self.notify.debug('suit attack is now ' + repr(self.battle.suitAttacks[i]))
-                            self.notify.debug('all attacks: ' + repr(self.battle.suitAttacks))
-                        attack = self.battle.suitAttacks[i]
-                    if self.__attackHasHit(attack, suit=1):
-                        self.__applySuitAttackDamages(i)
-                    if self.notify.getDebug():
-                        self.notify.debug('Suit attack: ' + str(self.battle.suitAttacks[i]))
-                    attack[SUIT_BEFORE_TOONS_COL] = 0
+        self.cog_attack_manager.calculate_full_suit_attacks()
 
     def __updateLureTimeouts(self):
         if self.notify.getDebug():
@@ -1073,6 +1088,7 @@ class BattleCalculatorAI:
     def __initRound(self):
         if self.CLEAR_SUIT_ATTACKERS:
             self.SuitAttackers = {}
+        self.officeClerkSoundDict = {}
         self.toonAtkOrder = []
         attacks = findToonAttack(self.battle.activeToons, self.battle.toonAttacks, PETSOS)
         for atk in attacks:
@@ -1163,7 +1179,12 @@ class BattleCalculatorAI:
                 return None
 
         self.__calculateToonAttacks()
+        clerk = self.findSuitIdFromName('ofc')
+        self.__removeLured(clerk)
         self.__updateLureTimeouts()
+        self.clerkBookSmart()
+        self.clerkSoundRetaliation()
+        
         self.__calculateSuitAttacks()
         if self.roundsToonsHit > 0:
             self.roundsToonsHit -= 1

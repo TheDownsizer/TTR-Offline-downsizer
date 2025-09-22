@@ -22,6 +22,7 @@ SUIT_HP_COL = 3
 TOON_DIED_COL = 4
 SUIT_BEFORE_TOONS_COL = 5
 SUIT_TAUNT_COL = 6
+SUIT_EXTRAS_COL = 7
 NO_ID = -1
 NO_ATTACK = -1
 UN_ATTACK = -2
@@ -92,28 +93,32 @@ def getDefaultSuitAttacks():
       [],
       0,
       0,
-      0],
+      0,
+      []],
      [NO_ID,
       NO_ATTACK,
       -1,
       [],
       0,
       0,
-      0],
+      0,
+      []],
      [NO_ID,
       NO_ATTACK,
       -1,
       [],
       0,
       0,
-      0],
+      0,
+      []],
      [NO_ID,
       NO_ATTACK,
       -1,
       [],
       0,
       0,
-      0]]
+      0,
+      []]]
     return suitAttacks
 
 
@@ -124,7 +129,8 @@ def getDefaultSuitAttack():
      [],
      0,
      0,
-     0]
+     0,
+     []]
 
 
 def findToonAttack(toons, attacks, track):

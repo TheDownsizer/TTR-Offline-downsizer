@@ -2429,6 +2429,9 @@ SuitBackStabberP = 'Back Stabbers'
 SuitSpinDoctorP = 'Spin Doctors'
 SuitLegalEagleP = 'Legal Eagles'
 SuitBigWigP = 'Big Wigs'
+SuitOfficeClerk = 'The Office Clerk'
+SuitOfficeClerkS = 'a The Office Clerk'
+SuitOfficeClerkP = 'Office Clerks'
 SuitFaceoffDefaultTaunts = ['Boo!']
 SuitAttackDefaultTaunts = ['Take that!', 'Take a memo on this!']
 SuitAttackNames = {'Audit': 'Audit!',
@@ -2460,6 +2463,8 @@ SuitAttackNames = {'Audit': 'Audit!',
  'FreezeAssets': 'Freeze Assets!',
  'Gavel': 'Gavel!',
  'GlowerPower': 'Glower Power!',
+ 'BookSmart': 'Book Smart!',
+ 'Shhhh': 'SHHHH!',
  'GuiltTrip': 'Guilt Trip!',
  'HalfWindsor': 'Half Windsor!',
  'HangUp': 'Hang Up!',
@@ -5155,6 +5160,7 @@ EmoteAnnoyed = 'Annoyed'
 EmoteSleep = 'Sleepy'
 TIPPageTitle = 'TIP'
 SuitBaseNameWithLevel = '%(name)s\n%(dept)s\nLevel %(level)s'
+SuitBaseNameSupervisor = '%(name)s\n%(dept)s\nSupervisor'
 HealthForceAcknowledgeMessage = 'You cannot leave the playground until your Laff meter is smiling!'
 InventoryTotalGags = 'Total gags\n%d / %d'
 InventroyPinkSlips = '%s Pink Slips'

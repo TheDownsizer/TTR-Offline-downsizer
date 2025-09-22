@@ -655,6 +655,27 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         self.cleanup()
         DistributedObjectAI.DistributedObjectAI.delete(self)
         SuitPlannerBase.SuitPlannerBase.delete(self)
+    
+    def generateWithRequired(self, zoneId):
+        DistributedObjectAI.DistributedObjectAI.generateWithRequired(self, zoneId)
+        if self.zoneId in [4100, 4200, 4300]:
+            self.spawnSupervisorCog('ofc', 32)
+            myTask=taskMgr.doMethodLater(60*30, self.checkForClerk, 'clerk_spawner_easy')
+        elif self.zoneId in [3100, 3200, 3300]:
+            self.spawnSupervisorCog('ofc', 33)
+            myTask=taskMgr.doMethodLater(60*30, self.checkForClerkHard, 'clerk_spawner_hard')
+    
+    def spawnSupervisorCog(self, name, level):
+        streetPoints = self.streetPointList[:]
+        self.createNewSuit([], streetPoints, suitName=name, suitLevel=level)
+    
+    def checkForClerk(self, task):
+        streetPoints = self.streetPointList[:]
+        self.createNewSuit([], streetPoints, suitName='ofc', suitLevel=32, customLevel=32)
+    
+    def checkForClerkHard(self, task):
+        streetPoints = self.streetPointList[:]
+        self.createNewSuit([], streetPoints, suitName='ofc', suitLevel=33, customLevel=33)
 
     def initBuildingsAndPoints(self):
         if not self.buildingMgr:
@@ -768,7 +789,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
 
         return pointList
 
-    def createNewSuit(self, blockNumbers, streetPoints, toonBlockTakeover = None, cogdoTakeover = None, minPathLen = None, maxPathLen = None, buildingHeight = None, suitLevel = None, suitType = None, suitTrack = None, suitName = None, specialSuit = 0):
+    def createNewSuit(self, blockNumbers, streetPoints, toonBlockTakeover = None, cogdoTakeover = None, minPathLen = None, maxPathLen = None, buildingHeight = None, suitLevel = None, suitType = None, suitTrack = None, suitName = None, specialSuit = 0, customLevel = None):
         startPoint = None
         blockNumber = None
         if self.notify.getDebug():
@@ -827,7 +848,13 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if suitLevel == None and buildingHeight != None:
             suitLevel = self.chooseSuitLevel(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL], buildingHeight)
         suitLevel, suitType, suitTrack = self.pickLevelTypeAndTrack(suitLevel, suitType, suitTrack)
-        newSuit.setupSuitDNA(suitLevel, suitType, suitTrack)
+        if suitName == 'ofc':
+            if self.zoneId in [4100, 4200, 4300]:
+                newSuit.setupSupervisorDNA(32, 'ofc', 'l')
+            else:
+                newSuit.setupSupervisorDNA(33, 'ofc', 'l')
+        else:
+            newSuit.setupSuitDNA(suitLevel, suitType, suitTrack)
         newSuit.buildingHeight = buildingHeight
         gotDestination = self.chooseDestination(newSuit, startTime, toonBlockTakeover=toonBlockTakeover, cogdoTakeover=cogdoTakeover, minPathLen=minPathLen, maxPathLen=maxPathLen)
         if not gotDestination:
@@ -838,7 +865,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         newSuit.initializePath()
         self.zoneChange(newSuit, None, newSuit.zoneId)
         # Determine if we are spawning a special type of suit. 1 is Skelecog, 2 is v2.0.
-        specialSuit = 2
+        #specialSuit = 2
         if specialSuit == 1:
             newSuit.setSkelecog(1)
         elif specialSuit == 2:
@@ -1384,6 +1411,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if battle:
             if config.ConfigVariableBool('suits-always-join', 0).getValue():
                 return 1
+            for suit in battle.suits:
+                if suit.dna.name == 'ofc':
+                    return 1
             jChanceList = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_JCHANCE]
             ratioIdx = len(battle.toons) - battle.numSuitsEver + 2
             if ratioIdx >= 0:

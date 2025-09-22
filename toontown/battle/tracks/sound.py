@@ -7,6 +7,8 @@ Handles all sound gag calculations including accuracy, damage, and lure interact
 from . import BaseTrackCalculator
 from ..BattleBase import *
 from toontown.toonbase.ToontownBattleGlobals import *
+from direct.showbase.MessengerGlobal import *
+from toontown.battle.cog_attacks import supervisor_rules
 import random
 
 class SoundTrackCalculator(BaseTrackCalculator):
@@ -175,6 +177,27 @@ class SoundTrackCalculator(BaseTrackCalculator):
             if target in targets:
                 target_index = targets.index(target)
                 attack[TOON_HP_COL][target_index] = attack_damage
+
+                if target.dna.name == 'ofc':
+                    clerkRules = supervisor_rules.OfficeClerk()
+                    if target.getActualLevel() == 32:
+                        self.battle.battleCalc.clerkSoundedResponse([toon.doId, int(attack_damage * clerkRules.SHHH_SOUND_PERCENTS[0])])
+                    else:
+                        self.battle.battleCalc.clerkSoundedResponse([toon.doId, int(attack_damage * clerkRules.SHHH_SOUND_PERCENTS[1])])
+                
+
+                """
+                if target.dna.name == 'ofc':
+                    clerkDamage = int(attack[TOON_HP_COL][target_index] * 0.25)
+                    self.battle.suitAttacks.append([target.doId,
+                                                    4,
+                                                    -1,
+                                                    [clerkDamage, clerkDamage, clerkDamage, clerkDamage],
+                                                    0,
+                                                    0,
+                                                    0])
+                """
+                    
                 
                 # Clear lured suits that take sound damage
                 if attack_damage > 0:

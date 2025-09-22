@@ -401,6 +401,10 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=1.3))
     elif name == GLOWER_POWER:
         camTrack.append(defaultCamera(openShotDuration=1.4))
+    elif name == SHHHH:
+        camTrack.append(defaultCamera(openShotDuration=1.4))
+    elif name == BOOK_SMART:
+        camTrack.append(allGroupHighShot(suit, attackDuration))
     elif name == GUILT_TRIP:
         camTrack.append(defaultCamera(openShotDuration=0.9))
     elif name == HANG_UP:
@@ -977,3 +981,6 @@ def avatarCloseUpFireShot(avatar, duration):
 
 def avatarCloseUpThreeQuarterLeftFireShot(avatar, duration):
     return heldRelativeShot(avatar, -8.2, 8.45, avatar.getHeight() * 0.66, -131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterLeftShot')
+
+def allGroupHighShot(avatar, duration):
+    return heldShot(0, -12.5, 8.5, 0, -25, 0, duration, 'allGroupHighShot')
