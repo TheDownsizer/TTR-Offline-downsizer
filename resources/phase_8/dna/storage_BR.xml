@@ -74,17 +74,22 @@
 		<store_node root="door_single" code="door_single_square_ul_BR" node="door_single_square_ul" />
 	</model>
 
-	<model path="phase_8/models/modules/ttr_m_ara_tbr_doorsPractical" scope="hood">
+	<model path="phase_3.5/models/modules/ttr_m_ara_gen_doors_practical">
+
 		<store_node root="door_double" code="door_double_pillars_ur_BR" node="door_double_pillars_ur" />
+		<store_node root="door_double" code="door_double_pillars_ul_BR" node="door_double_pillars_ul" />
 
 		<store_node root="door_double" code="door_double_curved_ur_BR" node="door_double_curved_ur" />
+		<store_node root="door_double" code="door_double_curved_ul_BR" node="door_double_curved_ul" />
 
 		<store_node root="door_double" code="door_double_square_ur_BR" node="door_double_square_ur" />
+		<store_node root="door_double" code="door_double_square_ul_BR" node="door_double_square_ul" />
 
 		<store_node root="door_double" code="door_double_round_ur_BR" node="door_double_round_ur" />
 
 		<store_node root="door_double" code="door_double_clothesshop_ur_BR" node="door_double_clothshop" />
 		<store_node root="door_double" code="door_double_clothesshop_ul_BR" node="door_double_clothshop" />
+
 	</model>
 
 	<model path="phase_8/models/props/ttr_m_prp_tbr_tunnelSign_blue">

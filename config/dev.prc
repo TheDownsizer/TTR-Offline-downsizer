@@ -93,3 +93,5 @@ mega-invasion-cog-type tm
 # Working (Custom) Addons!
 want-toonfest #t
 want-doomsday #f
+
+texture-anisotropic-degree 16

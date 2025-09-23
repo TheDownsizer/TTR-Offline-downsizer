@@ -553,7 +553,7 @@
 				<landmark_building id="tb7:toon_landmark_BR_gag_shop_DNARoot" code="toon_landmark_BR_gag_shop" type="gagshop">
 					<pos x="47.54" y="-89.34" z="6.17"/>
 					<nhpr h="60" p="0" r="0"/>
-					<door code="door_double_square_ur_BR">
+					<door code="door_double_square_ul_BR">
 						<color r="0.23" g="0.85" b="0.6" a="1.0"/>
 					</door>
 				</landmark_building>
