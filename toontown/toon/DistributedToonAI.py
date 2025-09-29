@@ -4831,7 +4831,7 @@ def setName(nameStr):
 @magicWord(category=CATEGORY_CHARACTERSTATS, types=[int, int])
 def setHat(hatId, hatTex=0):
     """Set hat of target toon."""
-    if not 0 <= hatId <= 56:
+    if not 0 <= hatId <= 57:
         return 'Invalid hat specified.'
     if not 0 <= hatTex <= 20:
         return 'Invalid hat texture specified.'

@@ -357,7 +357,8 @@ Shirts = [
  'phase_4/maps/tt_t_chr_avt_shirt_trolley05.jpg',
  'phase_4/maps/tt_t_chr_avt_shirt_saveBuilding4.jpg',
  'phase_4/maps/tt_t_chr_avt_shirt_saveBuilding05.jpg',
- 'phase_4/maps/tt_t_chr_avt_shirt_anniversary.jpg'
+ 'phase_4/maps/tt_t_chr_avt_shirt_anniversary.jpg',
+ 'phase_4/maps/ttr_t_chr_avt_shirt_oilSpill.jpg'
 ]
 BoyShirts = [
  (0, 0),
@@ -549,7 +550,8 @@ Sleeves = [
  'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley05.jpg',
  'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding4.jpg',
  'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding05.jpg',
- 'phase_4/maps/tt_t_chr_avt_shirtSleeve_anniversary.jpg']
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_anniversary.jpg',
+ 'phase_4/maps/ttr_t_chr_avt_shirtSleeve_oilSpill.jpg']
 BoyShorts = [
  'phase_3/maps/desat_shorts_1.jpg',
  'phase_3/maps/desat_shorts_2.jpg',
@@ -609,7 +611,9 @@ BoyShorts = [
  'phase_4/maps/tt_t_chr_avt_shorts_golf05.jpg',
  'phase_4/maps/tt_t_chr_avt_shorts_racing04.jpg',
  'phase_4/maps/tt_t_chr_avt_shorts_racing05.jpg',
- 'phase_4/maps/tt_t_chr_avt_shorts_slappy.jpg']
+ 'phase_4/maps/tt_t_chr_avt_shorts_slappy.jpg',
+ 'phase_4/maps/ttr_t_chr_avt_shorts_oilSpill.jpg'
+ ]
 SHORTS = 0
 SKIRT = 1
 GirlBottoms = [('phase_3/maps/desat_skirt_1.jpg', SKIRT),
@@ -2174,7 +2178,8 @@ HatModels = [None,
  'phase_4/models/accessories/tt_m_chr_avt_acc_hat_bandana',
  'phase_4/models/accessories/tt_m_chr_avt_acc_hat_dinosaur',
  'phase_4/models/accessories/tt_m_chr_avt_acc_hat_band',
- 'phase_4/models/accessories/tt_m_chr_avt_acc_hat_birdNest']
+ 'phase_4/models/accessories/tt_m_chr_avt_acc_hat_birdNest',
+ 'phase_4/models/accessories/ttr_m_chr_avt_acc_hat_birdHypno']
 HatTextures = [None,
  'phase_4/maps/tt_t_chr_avt_acc_hat_ribbonRed.jpg',
  'phase_4/maps/tt_t_chr_avt_acc_hat_ribbonPurple.jpg',
@@ -2615,12 +2620,6 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         headIndex = dgi.getUint8()
         torsoIndex = dgi.getUint8()
         legsIndex = dgi.getUint8()
-        if headIndex >= len(toonHeadTypes):
-            return False
-        if torsoIndex >= len(toonTorsoTypes):
-            return False
-        if legsIndex >= len(toonLegTypes):
-            return False
         gender = dgi.getUint8()
         if gender == 1:
             gender = 'm'
@@ -2636,30 +2635,10 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         gloveColor = dgi.getUint8()
         legColor = dgi.getUint8()
         headColor = dgi.getUint8()
-        if topTex >= len(Shirts):
-            return False
-        if topTexColor >= len(ClothesColors):
-            return False
-        if sleeveTex >= len(Sleeves):
-            return False
-        if sleeveTexColor >= len(ClothesColors):
-            return False
+
         # NF
         #if botTex >= choice(gender == 'm', len(BoyShorts), len(GirlBottoms)):
         #    return False
-
-        if botTexColor >= len(ClothesColors):
-            return False
-        if armColor >= len(allColorsList):
-            return False
-
-        if gloveColor != 0 and not config.ConfigVariableBool('want-glove-colors', False).getValue():
-            return False
-
-        if legColor >= len(allColorsList):
-            return False
-        if headColor >= len(allColorsList):
-            return False
         return True
 
     def makeFromNetString(self, nString):
