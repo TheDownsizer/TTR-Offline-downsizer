@@ -1,296 +1,132 @@
-"""
-Lure Track Calculator
+"""Lure track calculator."""
 
-Handles all lure gag calculations including accuracy, duration, and trap interactions.
-"""
-
-from . import BaseTrackCalculator
-from ..BattleBase import *
+from .base import TrackCalculatorBase
 from toontown.toonbase.ToontownBattleGlobals import *
-import random
+from toontown.battle.BattleBase import *
 
-class LureTrackCalculator(BaseTrackCalculator):
-    """Calculator for Lure track attacks"""
+class LureTrackCalculator(TrackCalculatorBase):
+    """Calculator for Lure gag track."""
     
-    def get_track_name(self):
-        return "Lure"
+    def calculate_attack(self, toon_id, attack):
+        """Calculate lure gag attack."""
+        self.battle_calculator._BattleCalculatorAI__calcToonAtkHp(toon_id)
+        attack_idx = self.battle_calculator.toonAtkOrder.index(toon_id)
+        self.battle_calculator._BattleCalculatorAI__handleBonus(attack_idx, hp=0)
+        self.battle_calculator._BattleCalculatorAI__handleBonus(attack_idx, hp=1)
+        return self.battle_calculator._BattleCalculatorAI__attackHasHit(attack, suit=0)
     
-    def calculate_hit(self, attack_index, attack_targets):
-        """
-        Calculate if lure attack hits
-        """
-        if self.battle_calculator.tutorialFlag:
-            return (1, 95)
-            
-        if self.battle_calculator.toonsAlways5050:
-            roll = random.randint(0, 99)
-            return (1, 95) if roll < 50 else (0, 0)
-        
-        if self.battle_calculator.toonsAlwaysHit:
-            return (1, 75)
-        elif self.battle_calculator.toonsAlwaysMiss:
-            return (0, 0)
-        
-        attack = self._get_attack_data(attack_index)
-        atkTrack, atkLevel = self._get_actual_track_level(attack)
-        
-        if attack[TOON_TRACK_COL] == NPCSOS:
-            rand_choice = 0
-        else:
-            rand_choice = random.randint(0, 99)
-        
-        # Calculate base accuracy
-        prop_acc = AvPropAccuracy[atkTrack][atkLevel]
-        
-        # Apply organic/prop bonuses for lure
-        tree_bonus = self._toon_check_gag_bonus(attack[TOON_ID_COL], atkTrack, atkLevel)
-        prop_bonus = self._check_prop_bonus(atkTrack)
-        
-        if self.battle_calculator.propAndOrganicBonusStack:
-            prop_acc = 0
-            if tree_bonus:
-                if self.notify.getDebug():
-                    self.notify.debug('using organic bonus lure accuracy')
-                prop_acc += AvLureBonusAccuracy[atkLevel]
-            if prop_bonus:
-                if self.notify.getDebug():
-                    self.notify.debug('using prop bonus lure accuracy')
-                prop_acc += AvLureBonusAccuracy[atkLevel]
-        elif tree_bonus or prop_bonus:
-            if self.notify.getDebug():
-                self.notify.debug('using organic OR prop bonus lure accuracy')
-            prop_acc = AvLureBonusAccuracy[atkLevel]
-        
-        # Add experience and defense bonuses
-        track_exp = self._toon_track_exp(attack[TOON_ID_COL], atkTrack)
-        target_def = self._calculate_target_defense(attack_targets, atkTrack)
-        
-        attack_acc = prop_acc + track_exp + target_def
-        
-        # Check for same track bonus from previous attacks
-        curr_atk = self.battle_calculator.toonAtkOrder.index(attack_index)
-        if curr_atk > 0:
-            prev_atk_id = self.battle_calculator.toonAtkOrder[curr_atk - 1]
-            prev_attack = self.battle.toonAttacks[prev_atk_id]
-            prev_atk_track = self.battle_calculator._BattleCalculatorAI__getActualTrack(prev_attack)
-            
-            # Check for lure chaining bonus
-            lure = (atkTrack == LURE and 
-                   (not attackAffectsGroup(atkTrack, atkLevel, attack[TOON_TRACK_COL]) and 
-                    attack[TOON_TGT_COL] in self.battle_calculator.successfulLures or
-                    attackAffectsGroup(atkTrack, atkLevel, attack[TOON_TRACK_COL])))
-            
-            if (atkTrack == prev_atk_track and 
-                (attack[TOON_TGT_COL] == prev_attack[TOON_TGT_COL] or lure)):
-                attack[TOON_ACCBONUS_COL] = prev_attack[TOON_ACCBONUS_COL]
-                return (not attack[TOON_ACCBONUS_COL], attack_acc)
-        
-        # Apply accuracy bonus
-        acc = attack_acc + self._calc_toon_acc_bonus(attack_index)
-        
-        if acc > MaxToonAcc:
-            acc = MaxToonAcc
-        
-        if rand_choice < acc:
-            if self.notify.getDebug():
-                self.notify.debug(f'HIT: Lure attack rolled {rand_choice} to hit with accuracy {acc}')
-            attack[TOON_ACCBONUS_COL] = 0
-        else:
-            if self.notify.getDebug():
-                self.notify.debug(f'MISS: Lure attack rolled {rand_choice} to hit with accuracy {acc}')
-            attack[TOON_ACCBONUS_COL] = 1
-        
-        return (not attack[TOON_ACCBONUS_COL], attack_acc)
-    
-    def calculate_damage(self, attack_index, attack_targets):
-        """
-        Calculate lure effects and trap interactions
-        """
-        attack = self._get_attack_data(attack_index)
-        atkTrack, atkLevel, atkHp = self._get_actual_track_level_hp(attack)
-        
-        # Check if attack hit
-        hit_success, atk_acc = self.calculate_hit(attack_index, attack_targets)
-        if not hit_success:
-            return
-        
-        if self.notify.getDebug():
-            self.notify.debug(f'Starting lure damage calculation. Hit success: {hit_success}, Accuracy: {atk_acc}')
-        
-        valid_target_available = False
-        lure_did_damage = False
+    def calculate_damage(self, toon_id, attack, target_list, atk_level, atk_acc):
+        """Calculate lure gag attack damage."""
+        valid_target_avail = 0
+        lure_did_damage = 0
         curr_lure_id = -1
         
-        for target_idx, target in enumerate(attack_targets):
-            target_id = target.getDoId()
+        # Check if this is a group attack
+        is_group_attack = attackAffectsGroup(LURE, atk_level, attack[TOON_TRACK_COL])
+        
+        for curr_target in range(len(target_list)):
+            target_id = target_list[curr_target].getDoId()
+            target_lured = 0
             attack_level = -1
             attack_track = None
             attack_damage = 0
-            target_lured = False
             
-            if self._combatant_dead(target_id, toon=False):
-                continue
-            
-            # Check for trap interaction
-            if self._get_suit_trap_type(target_id) == NO_TRAP:
-                # No trap - normal lure
+            if self.battle_calculator.getSuitTrapType(target_id) == NO_TRAP:
                 if self.notify.getDebug():
                     self.notify.debug('Suit lured, but no trap exists')
-                
-                # Apply lure if suit is not already lured
-                if not self._suit_is_lured(target_id, prev_round=True):
-                    if not self._combatant_dead(target_id, toon=False):
-                        valid_target_available = True
-                    
-                    rounds = self.battle_calculator.NumRoundsLured[atkLevel]
-                    wakeup_chance = 100 - atk_acc * 2
-                    npc_lurer = attack[TOON_TRACK_COL] == NPCSOS
-                    
-                    curr_lure_id = self._add_lured_suit_info(
-                        target_id, -1, rounds, wakeup_chance, 
-                        attack[TOON_ID_COL], atkLevel, 
-                        lure_id=curr_lure_id, npc=npc_lurer)
-                    
-                    if self.notify.getDebug():
-                        self.notify.debug(f'Suit lured for {rounds} rounds max with '
-                                        f'{wakeup_chance}% chance to wake up each round')
-                    target_lured = True
-                    
-                    # Handle delayed lure processing if needed
-                    if not self.battle_calculator.SUITS_UNLURED_IMMEDIATELY:
-                        self._add_lured_suits_delayed(attack[TOON_ID_COL], target_id)
+                if self.battle_calculator.SUITS_UNLURED_IMMEDIATELY:
+                    if not self._suit_is_lured(target_id, prev_round=1):
+                        if not self._combatant_dead(target_id, toon=0):
+                            valid_target_avail = 1
+                        rounds = self.battle_calculator.NumRoundsLured[atk_level]
+                        wakeup_chance = 100 - atk_acc * 2  # Fixed wakeup chance calculation
+                        npc_lurer = attack[TOON_TRACK_COL] == NPCSOS
+                        curr_lure_id = self.battle_calculator._BattleCalculatorAI__addLuredSuitInfo(target_id, -1, rounds, wakeup_chance, toon_id, atk_level, lureId=curr_lure_id, npc=npc_lurer)
+                        if self.notify.getDebug():
+                            self.notify.debug('Suit lured for ' + str(rounds) + ' rounds max with ' + str(wakeup_chance) + '% chance to wake up each round')
+                        target_lured = 1
             else:
-                # Trap exists - trigger it
                 attack_track = TRAP
-                trap_info = self.battle_calculator.traps.get(target_id)
-                if trap_info:
+                if target_id in self.battle_calculator.traps:
+                    trap_info = self.battle_calculator.traps[target_id]
                     attack_level = trap_info[0]
                 else:
                     attack_level = NO_TRAP
-                
-                attack_damage = self._suit_trap_damage(target_id)
-                trap_creator_id = self._trap_creator(target_id)
-                
+                attack_damage = self.battle_calculator._BattleCalculatorAI__suitTrapDamage(target_id)
+                trap_creator_id = self.battle_calculator._BattleCalculatorAI__trapCreator(target_id)
                 if trap_creator_id > 0:
+                    self.notify.debug('Giving trap EXP to toon ' + str(trap_creator_id))
+                    self._add_attack_exp(attack, track=TRAP, level=attack_level, attacker_id=trap_creator_id)
+                self.battle_calculator._BattleCalculatorAI__clearTrapCreator(trap_creator_id, target_id)
+                lure_did_damage = 1
+                if self.notify.getDebug():
+                    self.notify.debug('Suit lured right onto a trap!')
+                if not self._combatant_dead(target_id, toon=0):
+                    valid_target_avail = 1
+                target_lured = 1
+            
+            if not self.battle_calculator.SUITS_UNLURED_IMMEDIATELY:
+                if not self._suit_is_lured(target_id, prev_round=1):
+                    if not self._combatant_dead(target_id, toon=0):
+                        valid_target_avail = 1
+                    rounds = self.battle_calculator.NumRoundsLured[atk_level]
+                    wakeup_chance = 100 - atk_acc * 2  # Fixed wakeup chance calculation
+                    npc_lurer = attack[TOON_TRACK_COL] == NPCSOS
+                    curr_lure_id = self.battle_calculator._BattleCalculatorAI__addLuredSuitInfo(target_id, -1, rounds, wakeup_chance, toon_id, atk_level, lureId=curr_lure_id, npc=npc_lurer)
                     if self.notify.getDebug():
-                        self.notify.debug(f'Giving trap EXP to toon {trap_creator_id}')
-                    self._add_attack_exp(attack, track=TRAP, level=attack_level, 
-                                       attacker_id=trap_creator_id)
-                
-                self._clear_trap_creator(trap_creator_id, target_id)
-                lure_did_damage = True
-                
-                if self.notify.getDebug():
-                    self.notify.debug(f'Suit lured right onto a trap! '
-                                    f'({AvProps[attack_track][attack_level]},{attack_level})')
-                
-                if not self._combatant_dead(target_id, toon=False):
-                    valid_target_available = True
-                target_lured = True
+                        self.notify.debug('Suit lured for ' + str(rounds) + ' rounds max with ' + str(wakeup_chance) + '% chance to wake up each round')
+                    target_lured = 1
+                if attack_level != -1:
+                    self.battle_calculator._BattleCalculatorAI__addLuredSuitsDelayed(toon_id, target_id)
             
-
-            
-            # Track successful lures
-            if (target_lured and 
-                (target_id not in self.battle_calculator.successfulLures or
-                 target_id in self.battle_calculator.successfulLures and 
-                 self.battle_calculator.successfulLures[target_id][1] < atkLevel)):
+            if target_lured and (target_id not in self.battle_calculator.successfulLures or target_id in self.battle_calculator.successfulLures and self.battle_calculator.successfulLures[target_id][1] < atk_level):
+                self.notify.debug('Adding target ' + str(target_id) + ' to successfulLures list')
+                self.battle_calculator.successfulLures[target_id] = [toon_id, atk_level, atk_acc, -1]
                 
-                if self.notify.getDebug():
-                    self.notify.debug(f'Adding target {target_id} to successfulLures list')
+            # Apply lure result
+            if attack_level == -1:
+                result = LURE_SUCCEEDED
+            else:
+                result = attack_damage
                 
-                self.battle_calculator.successfulLures[target_id] = [
-                    attack[TOON_ID_COL], atkLevel, atk_acc, attack_damage]
-            
-            # Set damage in attack
-            if attack_damage != 0:
-                targets = self._get_suit_targets(attack)
-                if target in targets:
-                    target_index = targets.index(target)
-                    if target_id in self.battle_calculator.successfulLures:
-                        self.notify.debug(f'Updating lure damage to {attack_damage}')
-                        self.battle_calculator.successfulLures[target_id][3] = attack_damage
+            if result != 0:
+                targets = self._get_toon_targets(attack)
+                if target_list[curr_target] in targets:
+                    # For group attacks, set target index to -1
+                    if is_group_attack:
+                        target_index = -1
                     else:
-                        attack[TOON_HP_COL][target_index] = attack_damage
-                        
-                    # Give lure exp for trap activation
-                    if attack_damage > 0:
-                        lure_infos = self._get_lured_exp_info(target_id)
-                        for curr_info in lure_infos:
-                            if curr_info[3]:  # Check if credit should be given
-                                if self.notify.getDebug():
-                                    self.notify.debug(f'Giving lure EXP to toon {curr_info[0]}')
-                                self._add_attack_exp(attack, track=LURE, level=curr_info[1],
-                                                   attacker_id=curr_info[0])
-                            self._clear_lurer(curr_info[0], lure_id=curr_info[2])
+                        target_index = targets.index(target_list[curr_target])
+                    if target_id in self.battle_calculator.successfulLures:
+                        self.notify.debug('Updating lure damage to ' + str(result))
+                        self.battle_calculator.successfulLures[target_id][3] = result
+                    else:
+                        # Make sure we don't go out of bounds for group attacks
+                        if is_group_attack:
+                            # For group attacks, we still need to set the damage in the correct position
+                            # Find the position of this target in the active suits list
+                            if target_list[curr_target] in self.battle.activeSuits:
+                                target_pos = self.battle.activeSuits.index(target_list[curr_target])
+                                if target_pos < len(attack[TOON_HP_COL]):
+                                    attack[TOON_HP_COL][target_pos] = result
+                        else:
+                            attack[TOON_HP_COL][target_index] = result
         
-        if self.notify.getDebug():
-            self.notify.debug(f'Lure calculation complete. Valid targets: {valid_target_available}, Lure did damage: {lure_did_damage}')
-        
-        # Give lure experience 
-        if lure_did_damage or valid_target_available:
-            if self._item_is_credit(atkTrack, atkLevel):
-                if self.notify.getDebug():
-                    self.notify.debug(f'Giving lure EXP to toon {attack[TOON_ID_COL]}')
+        # Handle lure experience
+        if lure_did_damage:
+            if self.battle_calculator.itemIsCredit(LURE, atk_level):
+                self.notify.debug('Giving lure EXP to toon ' + str(toon_id))
                 self._add_attack_exp(attack)
         
-        # Clear attack if no valid targets and previous track was different
-        if not valid_target_available and self._prev_atk_track(attack[TOON_ID_COL]) != atkTrack:
-            self.battle_calculator._BattleCalculatorAI__clearAttack(attack[TOON_ID_COL])
+        # Clear attack if no valid targets
+        if not valid_target_avail and self._prev_atk_track(toon_id) != LURE:
+            self._clear_attack(toon_id)
     
-    def _calculate_target_defense(self, attack_targets, track):
-        """Calculate combined target defense"""
-        tgt_def = 0
-        for target in attack_targets:
-            this_suit_def = self._target_defense(target, track)
-            if self.notify.getDebug():
-                self.notify.debug(f'Examining suit def for lure attack: {this_suit_def}')
-            tgt_def = min(this_suit_def, tgt_def)
-        return tgt_def
+    def create_target_list(self, attack_index, attack):
+        """Create target list for lure attack."""
+        # Use the base implementation for lure attacks
+        return super().create_target_list(attack_index, attack)
     
-    def _get_suit_trap_type(self, suit_id):
-        """Helper to get suit trap type"""
-        return self.battle_calculator.getSuitTrapType(suit_id)
-    
-    def _suit_trap_damage(self, suit_id):
-        """Helper to get suit trap damage"""
-        return self.battle_calculator._BattleCalculatorAI__suitTrapDamage(suit_id)
-    
-    def _trap_creator(self, suit_id):
-        """Helper to get trap creator"""
-        return self.battle_calculator._BattleCalculatorAI__trapCreator(suit_id)
-    
-    def _clear_trap_creator(self, creator_id, suit_id=None):
-        """Helper to clear trap creator"""
-        return self.battle_calculator._BattleCalculatorAI__clearTrapCreator(creator_id, suit_id)
-    
-    def _add_lured_suit_info(self, suit_id, curr_rounds, max_rounds, wake_chance, 
-                           lurer, lure_level, lure_id=-1, npc=0):
-        """Helper to add lured suit info"""
-        return self.battle_calculator._BattleCalculatorAI__addLuredSuitInfo(
-            suit_id, curr_rounds, max_rounds, wake_chance, lurer, lure_level, lure_id, npc)
-    
-    def _add_lured_suits_delayed(self, toon_id, target_id=-1, ignore_damage_check=False):
-        """Helper to add lured suits to delayed list"""
-        return self.battle_calculator._BattleCalculatorAI__addLuredSuitsDelayed(
-            toon_id, target_id, ignore_damage_check)
-    
-    def _get_lured_exp_info(self, suit_id):
-        """Helper to get lured experience info"""
-        return self.battle_calculator._BattleCalculatorAI__getLuredExpInfo(suit_id)
-    
-    def _clear_lurer(self, lurer_id, lure_id=-1):
-        """Helper to clear lurer"""
-        return self.battle_calculator._BattleCalculatorAI__clearLurer(lurer_id, lure_id)
-    
-    def _item_is_credit(self, track, level):
-        """Helper to check if item gives credit"""
-        return self.battle_calculator.itemIsCredit(track, level)
-    
-    def _get_suit_targets(self, attack):
-        """Helper to get suit targets"""
-        return self.battle.activeSuits
-    
-    def _prev_atk_track(self, attacker_id):
-        """Helper to get previous attack track"""
-        return self.battle_calculator._BattleCalculatorAI__prevAtkTrack(attacker_id, toon=1)
+    def is_unlure_attack(self, attack_index, attack):
+        """Lure attacks don't unlure suits, they lure them."""
+        return False

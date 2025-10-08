@@ -1,103 +1,46 @@
-"""
-Heal Track Calculator
+"""Heal track calculator."""
 
-Handles all heal (Toon-Up) gag calculations including accuracy and healing amounts.
-"""
-
-from . import BaseTrackCalculator
-from ..BattleBase import *
+from .base import TrackCalculatorBase
 from toontown.toonbase.ToontownBattleGlobals import *
-import random
 
-class HealTrackCalculator(BaseTrackCalculator):
-    """Calculator for Heal/Toon-Up track attacks"""
+class HealTrackCalculator(TrackCalculatorBase):
+    """Calculator for Heal gag track."""
     
-    def get_track_name(self):
-        return "Heal"
+    def calculate_attack(self, toon_id, attack):
+        """Calculate heal gag attack."""
+        self.battle_calculator._BattleCalculatorAI__calcToonAtkHp(toon_id)
+        attack_idx = self.battle_calculator.toonAtkOrder.index(toon_id)
+        self.battle_calculator._BattleCalculatorAI__handleBonus(attack_idx, hp=0)
+        self.battle_calculator._BattleCalculatorAI__handleBonus(attack_idx, hp=1)
+        return self.battle_calculator._BattleCalculatorAI__attackHasHit(attack, suit=0)
     
-    def calculate_hit(self, attack_index, attack_targets):
-        """
-        Calculate if heal attack hits
-        Heal attacks always hit, but accuracy affects healing effectiveness
-        """
-        if self.battle_calculator.tutorialFlag:
-            return (1, 95)
+    def calculate_damage(self, toon_id, attack, target_list, atk_level):
+        """Calculate heal gag attack damage."""
+        valid_target_avail = 1  # Heal always has valid targets
+        toon = self._get_toon(toon_id)
         
-        if self.battle_calculator.toonsAlways5050:
-            roll = random.randint(0, 99)
-            return (1, 95) if roll < 50 else (0, 0)
-        
-        if self.battle_calculator.toonsAlwaysHit:
-            return (1, 75)
-        elif self.battle_calculator.toonsAlwaysMiss:
-            return (0, 0)
-        
-        attack = self._get_attack_data(attack_index)
-        atkTrack, atkLevel = self._get_actual_track_level(attack)
-        
-        # Heal attacks always hit
-        attack[TOON_ACCBONUS_COL] = 0
-        return (1, 100)
-    
-    def calculate_damage(self, attack_index, attack_targets):
-        """
-        Calculate healing amount for heal attacks
-        """
-        attack = self._get_attack_data(attack_index)
-        atkTrack, atkLevel, atkHp = self._get_actual_track_level_hp(attack)
-        
-        valid_target_available = False
-        
-        for target_idx, target_id in enumerate(attack_targets):
-            if self._combatant_dead(target_id, toon=True):
-                continue
-                
-            valid_target_available = True
+        for curr_target in range(len(target_list)):
+            target_id = target_list[curr_target]  # For heal, this is toon ID directly
             
-            # Calculate healing amount
-            toon = self.battle.getToon(attack[TOON_ID_COL])
-            if attack[TOON_TRACK_COL] == NPCSOS:
-                healing_amount = atkHp
-            else:
-                organic_bonus = self._toon_check_gag_bonus(attack[TOON_ID_COL], HEAL, atkLevel)
-                prop_bonus = self._check_prop_bonus(HEAL)
-                healing_amount = getAvPropDamage(HEAL, atkLevel, toon.experience.getExp(HEAL), 
-                                               organic_bonus, prop_bonus, 
-                                               self.battle_calculator.propAndOrganicBonusStack)
+            # Calculate heal amount
+            organic_bonus = self._check_gag_bonus(toon, HEAL, atk_level)
+            prop_bonus = self._check_prop_bonus(HEAL)
+            heal_amount = self._get_av_prop_damage(HEAL, atk_level, toon.experience.getExp(HEAL), organic_bonus, prop_bonus, self.battle_calculator.propAndOrganicBonusStack)
             
-            # Apply accuracy modifier to healing
-            if not self._attack_has_hit(attack):
-                healing_amount = healing_amount * 0.2
-            
+            # Reduce heal if attack missed
+            result = heal_amount
+            if not self._attack_has_hit(attack, suit=0):
+                result = result * 0.2
             if self.notify.getDebug():
-                self.notify.debug(f'Heal does {healing_amount} healing to toon(s)')
+                self.notify.debug('toon does ' + str(result) + ' healing to toon(s)')
             
-            # Split healing among targets
-            healing_per_target = healing_amount / len(attack_targets)
+            # Split heal among targets
+            result = result / len(target_list)
+            if self.notify.getDebug():
+                self.notify.debug('Splitting heal among ' + str(len(target_list)) + ' targets')
             
-            # Find target index in battle
+            # Apply heal
             targets = self._get_toon_targets(attack)
-            if target_id in targets:
-                target_index = targets.index(target_id)
-                attack[TOON_HP_COL][target_index] = healing_per_target
-                
-                if self.notify.getDebug():
-                    self.notify.debug(f'Splitting heal among {len(attack_targets)} targets')
-        
-        # Clear attack if no valid targets
-        if not valid_target_available:
-            prev_track = self._prev_atk_track(attack[TOON_ID_COL])
-            if prev_track != HEAL:
-                self.battle_calculator._BattleCalculatorAI__clearAttack(attack[TOON_ID_COL])
-    
-    def _attack_has_hit(self, attack):
-        """Helper to check if attack has hit"""
-        return not attack[TOON_ACCBONUS_COL] and self._get_actual_track_level(attack)[0] != NO_ATTACK
-    
-    def _get_toon_targets(self, attack):
-        """Helper to get toon targets"""
-        return self.battle.activeToons
-    
-    def _prev_atk_track(self, attacker_id):
-        """Helper to get previous attack track"""
-        return self.battle_calculator._BattleCalculatorAI__prevAtkTrack(attacker_id, toon=1)
+            if target_list[curr_target] in targets:
+                target_index = targets.index(target_list[curr_target])
+                attack[TOON_HP_COL][target_index] = result

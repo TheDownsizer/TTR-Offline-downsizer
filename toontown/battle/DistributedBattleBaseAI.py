@@ -225,6 +225,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
 
     def d_setMembers(self):
         self.notify.debug('network:setMembers()')
+        self.removeDuplicateSuits()
         self.sendUpdate('setMembers', self.getMembers())
 
     def getMembers(self):
@@ -376,16 +377,19 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         suitIds = [suit.doId for suit in self.activeSuits]
         suitAttacks = []
         for attack in self.suitAttacks:
-            id = attack[SUIT_ID_COL]
-            index = suitIds.index(id) if id != -1 else -1
-            attackCol = attack[SUIT_ATK_COL]
-            target = -1 if attackCol == NO_ATTACK else attack[SUIT_TGT_COL]
+            try:
+                id = attack[SUIT_ID_COL]
+                index = suitIds.index(id) if id != -1 else -1
+                attackCol = attack[SUIT_ATK_COL]
+                target = -1 if attackCol == NO_ATTACK else attack[SUIT_TGT_COL]
 
-            if attackCol != NO_ATTACK:
-                suit = self.findSuit(id)
-                attack[SUIT_TAUNT_COL] = getAttackTauntIndexFromIndex(suit, attackCol)
+                if attackCol != NO_ATTACK:
+                    suit = self.findSuit(id)
+                    attack[SUIT_TAUNT_COL] = getAttackTauntIndexFromIndex(suit, attackCol)
 
-            suitAttacks.append([index, attackCol, target] + attack[3:])  # Remaining 4 (3-7)
+                suitAttacks.append([index, attackCol, target] + attack[3:])  # Remaining 4 (3-7)
+            except:
+                pass
 
         return suitAttacks
 
@@ -1269,7 +1273,6 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.runableFsm.request('Runable')
         self.resetResponses()
         self.__requestAdjust()
-        self.removeDuplicateSuits()
         if not self.tutorialFlag:
             self.timer.startCallback(SERVER_INPUT_TIMEOUT, self.__serverTimedOut)
         self.npcAttacks = {}

@@ -323,9 +323,12 @@ SellbotScrapFactoryControlRoomHigherLevel = lambda: 6
 SellbotScrapFactorySupervisorLevel = lambda: 9 # Placeholder, Final Level will be 14
 
 # Bossbot Cog Golf Course Base Cog Levels
-BossbotCogGolfCouseCogLevelsEasy = [7, 8, 9]
-BossbotCogGolfCouseCogLevelsMedium = [10, 11]
-BossbotCogGolfCouseCogLevelsHard = [12, 13]
+BossbotCogGolfCouseCogLevelsEasyNum = [7, 8, 9]
+BossbotCogGolfCouseCogLevelsMediumNum = [10, 11]
+BossbotCogGolfCouseCogLevelsHardNum = [12, 13]
+BossbotCogGolfCouseCogLevelsEasy = lambda: random.choice(BossbotCogGolfCouseCogLevelsEasyNum)
+BossbotCogGolfCouseCogLevelsMedium = lambda: random.choice(BossbotCogGolfCouseCogLevelsMediumNum)
+BossbotCogGolfCouseCogLevelsHard = lambda: random.choice(BossbotCogGolfCouseCogLevelsHardNum)
 BossbotCogGolfCouseCogLevel = lambda: random.choice(SellbotScrapFactoryCogLevels)
 BossbotCogGolfCouseSupervisorLevel = lambda: 9 # Placeholder, Final Level will be 33
 BossbotCogGolfCouseCogRevivesChance = 0.4

@@ -1333,6 +1333,10 @@ class BattleCalculatorAI:
     def __removeLured(self, suitId):
         if self.__suitIsLured(suitId):
             del self.currentlyLuredSuits[suitId]
+            # Also remove from the battle's luredSuits list
+            suit = self.battle.findSuit(suitId)
+            if suit and suit in self.battle.luredSuits:
+                self.battle.luredSuits.remove(suit)
 
     def __luredMaxRoundsReached(self, suitId):
         return self.__suitIsLured(suitId) and self.currentlyLuredSuits[suitId][0] >= self.currentlyLuredSuits[suitId][1]

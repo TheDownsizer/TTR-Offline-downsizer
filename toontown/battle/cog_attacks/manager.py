@@ -186,9 +186,10 @@ class CogAttackCalculatorManager:
                 suit_id = self.battle.activeSuits[i].doId
                 self.battle.suitAttacks[i][SUIT_ID_COL] = suit_id
                 
+                # Check if suit can attack (not dead, not lured, not just revived)
                 if not self.can_suit_attack(suit_id):
                     if self.notify.getDebug():
-                        self.notify.debug(f"Suit {suit_id} can't attack")
+                        self.notify.debug(f"Suit {suit_id} can't attack (dead, lured, or just revived)")
                     continue
                 
                 # Skip pending/joining suits
