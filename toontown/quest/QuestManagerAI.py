@@ -269,7 +269,7 @@ class QuestManagerAI:
             # They have all the rewards needed for the next tier.
             if not Quests.avatarWorkingOnRequiredRewards(toon):
                 # Check to make sure they are not on the LOOPING_FINAL_TIER
-                if tier != Quests.LOOPING_FINAL_TIER:
+                if tier not in [Quests.LOOPING_FINAL_TIER, Quests.BOSSBOT_HQ_TIER]:
                     tier += 1
 
                 # Set the tier

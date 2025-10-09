@@ -2,6 +2,7 @@ from otp.otpbase import OTPGlobals
 from toontown.toonbase import ToontownBattleGlobals
 from toontown.toonbase import ToontownGlobals
 from toontown.battle import SuitBattleGlobals
+from toontown.suit import SuitDNA
 from toontown.coghq import CogDisguiseGlobals
 import random
 from toontown.toon import NPCToons
@@ -65,8 +66,8 @@ MM_TIER = 8
 BR_TIER = 11
 DL_TIER = 14
 LAWBOT_HQ_TIER = 18
-BOSSBOT_HQ_TIER = 32
-ELDER_TIER = 49
+BOSSBOT_HQ_TIER = 33
+ELDER_TIER = 34
 LOOPING_FINAL_TIER = ELDER_TIER
 VISIT_QUEST_ID = 1000
 TROLLEY_QUEST_ID = 110
@@ -1218,6 +1219,58 @@ class FactoryNewbieQuest(FactoryQuest, NewbieQuest):
         else:
             return num
 
+class CGCQuest(LocationBasedQuest):
+    def __init__(self, id, quest):
+        LocationBasedQuest.__init__(self, id, quest)
+
+    def getNumQuestItems(self):
+        return self.getNumCGCs()
+
+    def getNumCGCs(self):
+        return self.quest[1]
+
+    def getCompletionStatus(self, av, questDesc, npc = None):
+        questId, fromNpcId, toNpcId, rewardId, toonProgress = questDesc
+        questComplete = toonProgress >= self.getNumCGCs()
+        return getCompleteStatusWithNpc(questComplete, toNpcId, npc)
+
+    def getProgressString(self, avatar, questDesc):
+        if self.getCompletionStatus(avatar, questDesc) == COMPLETE:
+            return CompleteString
+        elif self.getNumCGCs() == 1:
+            return ''
+        else:
+            return TTLocalizer.QuestsCGCQuestProgressString % {'progress': questDesc[4],
+             'num': self.getNumCGCs()}
+
+    def getObjectiveStrings(self):
+        count = self.getNumCGCs()
+        if count == 1:
+            text = TTLocalizer.QuestsCGCQuestDesc
+        else:
+            text = TTLocalizer.QuestsCGCQuestDescC % {'count': count}
+        return (text,)
+
+    def getString(self):
+        return TTLocalizer.QuestsCGCQuestString % self.getObjectiveStrings()[0]
+
+    def getSCStrings(self, toNpcId, progress):
+        if progress >= self.getNumCGCs():
+            return getFinishToonTaskSCStrings(toNpcId)
+        count = self.getNumCGCs()
+        if count == 1:
+            objective = TTLocalizer.QuestsCGCQuestDesc
+        else:
+            objective = TTLocalizer.QuestsCGCQuestDescI
+        location = self.getLocationName()
+        return TTLocalizer.QuestsCGCQuestSCString % {'objective': objective,
+         'location': location}
+
+    def getHeadlineString(self):
+        return TTLocalizer.QuestsCGCQuestHeadline
+
+    def doesMintCount(self, avId, location, avList):
+        return self.isLocationMatch(location)
 
 class MintQuest(LocationBasedQuest):
     def __init__(self, id, quest):
@@ -17385,289 +17438,28 @@ QuestDict = {
          (VisitQuest,),
          Any,
          1222,
-         NA,
+         4300,
          12001,
-         TTLocalizer.QuestDialogDict[12000]),
+         DefaultDialog),
  12001: (BOSSBOT_HQ_TIER,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'f'),
-         Same,
-         Same,
-         4200,
-         NA,
-         TTLocalizer.QuestDialogDict[12001]),
- 12002: (BOSSBOT_HQ_TIER + 1,
-         Start,
-         (VisitQuest,),
-         Any,
+         Cont,
+         (CGCQuest, ToontownGlobals.BossbotCountryClubIntA, 1),
          1222,
-         NA,
-         12003,
-         TTLocalizer.QuestDialogDict[12002]),
- 12003: (BOSSBOT_HQ_TIER + 1,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'p'),
-         Same,
-         Same,
-         4201,
-         NA,
-         TTLocalizer.QuestDialogDict[12003]),
- 12004: (BOSSBOT_HQ_TIER + 2,
-         Start,
-         (VisitQuest,),
-         Any,
          1222,
-         NA,
-         12005,
-         TTLocalizer.QuestDialogDict[12004]),
- 12005: (BOSSBOT_HQ_TIER + 2,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'ym'),
-         Same,
-         Same,
-         4202,
-         NA,
-         TTLocalizer.QuestDialogDict[12005]),
- 12006: (BOSSBOT_HQ_TIER + 3,
-         Start,
-         (VisitQuest,),
-         Any,
+         4300,
+         12002,
+         DefaultDialog),
+ 12002: (BOSSBOT_HQ_TIER,
+         Cont,
+         (CogTrackQuest,
+          ToontownGlobals.BossbotHQ,
+          3,
+          'c'),
          1222,
-         NA,
-         12007,
-         TTLocalizer.QuestDialogDict[12006]),
- 12007: (BOSSBOT_HQ_TIER + 3,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'mm'),
-         Same,
-         Same,
-         4203,
-         NA,
-         TTLocalizer.QuestDialogDict[12007]),
- 12008: (BOSSBOT_HQ_TIER + 4,
-         Start,
-         (VisitQuest,),
-         Any,
          1222,
+         4300,
          NA,
-         12009,
-         TTLocalizer.QuestDialogDict[12008]),
- 12009: (BOSSBOT_HQ_TIER + 4,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'ds'),
-         Same,
-         Same,
-         4204,
-         NA,
-         TTLocalizer.QuestDialogDict[12009]),
- 12010: (BOSSBOT_HQ_TIER + 5,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12011,
-         TTLocalizer.QuestDialogDict[12010]),
- 12011: (BOSSBOT_HQ_TIER + 5,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'hh'),
-         Same,
-         Same,
-         4205,
-         NA,
-         TTLocalizer.QuestDialogDict[12011]),
- 12012: (BOSSBOT_HQ_TIER + 6,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12013,
-         TTLocalizer.QuestDialogDict[12012]),
- 12013: (BOSSBOT_HQ_TIER + 6,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'cr'),
-         Same,
-         Same,
-         4206,
-         NA,
-         TTLocalizer.QuestDialogDict[12013]),
- 12014: (BOSSBOT_HQ_TIER + 7,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12015,
-         TTLocalizer.QuestDialogDict[12014]),
- 12015: (BOSSBOT_HQ_TIER + 7,
-         Start,
-         (CogQuest,
-          Anywhere,
-          1,
-          'tbc'),
-         Same,
-         Same,
-         4207,
-         NA,
-         TTLocalizer.QuestDialogDict[12015]),
- 12016: (BOSSBOT_HQ_TIER + 8,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12017,
-         TTLocalizer.QuestDialogDict[12016]),
- 12017: (BOSSBOT_HQ_TIER + 8,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4208,
-         NA,
-         TTLocalizer.QuestDialogDict[12017]),
- 12018: (BOSSBOT_HQ_TIER + 9,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12019,
-         TTLocalizer.QuestDialogDict[12018]),
- 12019: (BOSSBOT_HQ_TIER + 9,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4209,
-         NA,
-         TTLocalizer.QuestDialogDict[12019]),
- 12020: (BOSSBOT_HQ_TIER + 10,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12021,
-         TTLocalizer.QuestDialogDict[12020]),
- 12021: (BOSSBOT_HQ_TIER + 10,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4210,
-         NA,
-         TTLocalizer.QuestDialogDict[12021]),
- 12022: (BOSSBOT_HQ_TIER + 11,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12023,
-         TTLocalizer.QuestDialogDict[12022]),
- 12023: (BOSSBOT_HQ_TIER + 11,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4211,
-         NA,
-         TTLocalizer.QuestDialogDict[12023]),
- 12024: (BOSSBOT_HQ_TIER + 12,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12025,
-         TTLocalizer.QuestDialogDict[12024]),
- 12025: (BOSSBOT_HQ_TIER + 12,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4212,
-         NA,
-         TTLocalizer.QuestDialogDict[12025]),
- 12026: (BOSSBOT_HQ_TIER + 13,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12027,
-         TTLocalizer.QuestDialogDict[12026]),
- 12027: (BOSSBOT_HQ_TIER + 13,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4213,
-         NA,
-         TTLocalizer.QuestDialogDict[12027]),
- 12028: (BOSSBOT_HQ_TIER + 14,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12029,
-         TTLocalizer.QuestDialogDict[12028]),
- 12029: (BOSSBOT_HQ_TIER + 14,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4214,
-         NA,
-         TTLocalizer.QuestDialogDict[12029]),
- 12030: (BOSSBOT_HQ_TIER + 15,
-         Start,
-         (VisitQuest,),
-         Any,
-         1222,
-         NA,
-         12031,
-         TTLocalizer.QuestDialogDict[12030]),
- 12031: (BOSSBOT_HQ_TIER + 15,
-         Start,
-         (SkeleReviveQuest, Anywhere, 1),
-         Same,
-         Same,
-         4215,
-         NA,
-         TTLocalizer.QuestDialogDict[12031]),
- 12032: (BOSSBOT_HQ_TIER + 16,
-         Start,
-         (VisitQuest,),
-         Any,
-         2001,
-         4216,
-         NA,
-         TTLocalizer.QuestDialogDict[12032])}
+         DefaultDialog)}
 
 Tier2QuestsDict = {}
 for questId, questDesc in list(QuestDict.items()):
@@ -18001,6 +17793,16 @@ def chooseBestQuests(tier, currentNpc, av):
     seedRandomGen(currentNpc.getNpcId(), av.getDoId(), tier, rewardHistory)
     numChoices = getNumChoices(tier)
     rewards = getNextRewards(numChoices, tier, av)
+
+    bestQuests = []
+    
+    if tier == BOSSBOT_HQ_TIER:
+       bestQuests.append([12000, 4300, 1222])
+
+       for quest in bestQuests:
+           quest[1] = transformReward(quest[1], av)
+       return bestQuests
+
     if not rewards:
         return []
     possibleQuests = []
@@ -18015,7 +17817,7 @@ def chooseBestQuests(tier, currentNpc, av):
         return []
     if numChoices == 0:
         numChoices = 1
-    bestQuests = []
+    
     for i in range(numChoices):
         if len(validQuestPool) == 0:
             break
@@ -18560,7 +18362,12 @@ class CogSuitPartReward(Reward):
     def sendRewardAI(self, av):
         dept = self.getCogTrack()
         part = self.getCogPart()
-        av.giveCogPart(part, dept)
+        if part == -1:
+            cogDeptIndex = ToontownGlobals.dept2deptIndex(dept)
+            numMaxParts = CogDisguiseGlobals.PartsPerSuit[cogDeptIndex]
+            toon.b_setCogParts(numMaxParts)
+        else:
+            av.giveCogPart(part, dept)
 
     def countReward(self, qrc):
         pass
@@ -18571,7 +18378,10 @@ class CogSuitPartReward(Reward):
 
     def getCogPartName(self):
         index = ToontownGlobals.cogDept2index[self.getCogTrack()]
-        return CogDisguiseGlobals.PartsQueryNames[index][self.getCogPart()]
+        if self.getCogPart() == -1:
+            return "Disguise"
+        else:
+            return CogDisguiseGlobals.PartsQueryNames[index][self.getCogPart()]
 
     def getString(self):
         return TTLocalizer.QuestsCogSuitPartReward % {'cogTrack': self.getCogTrackName(),
@@ -19230,6 +19040,7 @@ RewardDict = {100: (MaxHpReward, 1),
  4214: (CogSuitPartReward, 'c', CogDisguiseGlobals.rightArmUpper),
  4215: (CogSuitPartReward, 'c', CogDisguiseGlobals.rightArmLower),
  4216: (CogSuitPartReward, 'c', CogDisguiseGlobals.rightArmHand),
+ 4300: (CogSuitPartReward, 'c', -1),
  5000: (BetaKeyReward, None)}
 
 def getNumTiers():
@@ -19448,23 +19259,7 @@ RequiredRewardTrackDict = {TT_TIER: (100,),
  LAWBOT_HQ_TIER + 11: (4111,),
  LAWBOT_HQ_TIER + 12: (4112,),
  LAWBOT_HQ_TIER + 13: (4113,),
- BOSSBOT_HQ_TIER: (4200,),
- BOSSBOT_HQ_TIER + 1: (4201,),
- BOSSBOT_HQ_TIER + 2: (4202,),
- BOSSBOT_HQ_TIER + 3: (4203,),
- BOSSBOT_HQ_TIER + 4: (4204,),
- BOSSBOT_HQ_TIER + 5: (4205,),
- BOSSBOT_HQ_TIER + 6: (4206,),
- BOSSBOT_HQ_TIER + 7: (4207,),
- BOSSBOT_HQ_TIER + 8: (4208,),
- BOSSBOT_HQ_TIER + 9: (4209,),
- BOSSBOT_HQ_TIER + 10: (4210,),
- BOSSBOT_HQ_TIER + 11: (4211,),
- BOSSBOT_HQ_TIER + 12: (4212,),
- BOSSBOT_HQ_TIER + 13: (4213,),
- BOSSBOT_HQ_TIER + 14: (4214,),
- BOSSBOT_HQ_TIER + 15: (4215,),
- BOSSBOT_HQ_TIER + 16: (4216,),
+ BOSSBOT_HQ_TIER: (4300,),
  ELDER_TIER: (4000,
               4001,
               4002,

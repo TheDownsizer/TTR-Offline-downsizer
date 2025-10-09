@@ -538,6 +538,16 @@ class QuestPoster(DirectFrame):
                 infoText = quest.getLocationName()
                 if infoText == '':
                     infoText = TTLocalizer.QuestPosterAnywhere
+        elif quest.getType() == Quests.CGCQuest:
+            frameBgColor = 'blue'
+            bookModel = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_qst_toontask_icons')
+            lIconGeom = bookModel.find('**/ttr_t_gui_qst_bossbotCourse')
+            bookModel.removeNode()
+            lIconGeomScale = IMAGE_SCALE_SMALL
+            if not fComplete:
+                infoText = quest.getLocationName()
+                if infoText == '':
+                    infoText = TTLocalizer.QuestPosterAnywhere
         elif quest.getType() == Quests.MintNewbieQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')

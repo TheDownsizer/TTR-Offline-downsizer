@@ -290,7 +290,7 @@ class DistributedDoor(DistributedObject.DistributedObject, DelayDeletable):
         if isSuit:
             return Func(avatar.loop, animName, 0)
         else:
-            return Func(avatar.setAnimState, animName)
+            return Sequence(LerpAnimInterval(avatar, 0.2, 'neutral', animName, startWeight=0.12, endWeight=1), Func(avatar.loop, animName))
 
     def isDoorHit(self):
         vec = base.localAvatar.getRelativeVector(self.currentDoorNp, self.currentDoorVec)

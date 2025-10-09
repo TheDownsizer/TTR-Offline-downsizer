@@ -13,9 +13,10 @@ class TownBattleToonPanel(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('TownBattleToonPanel')
 
     def __init__(self, id):
-        gui = loader.loadModel('phase_3.5/models/gui/battle_gui')
-        DirectFrame.__init__(self, relief=None, image=gui.find('**/ToonBtl_Status_BG'), image_color=Vec4(0.5, 0.9, 0.5, 0.7))
-        self.setScale(0.8)
+        gui = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_bat_toonGUI')
+        gui2 = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_bat_gagGUI')
+        DirectFrame.__init__(self, relief=None, image=gui.find('**/ttr_t_gui_bat_toonGUI_base_card'), image_color=Vec4(1, 1, 1, 1))
+        self.setScale(0.06)
         self.initialiseoptions(TownBattleToonPanel)
         self.avatar = None
         self.sosText = DirectLabel(parent=self, relief=None, pos=(0.1, 0, 0.015), text=TTLocalizer.TownBattleToonSOS, text_scale=0.06)
@@ -25,10 +26,13 @@ class TownBattleToonPanel(DirectFrame):
         self.undecidedText = DirectLabel(parent=self, relief=None, pos=(0.1, 0, 0.015), text=TTLocalizer.TownBattleUndecided, text_scale=0.1)
         self.healthText = DirectLabel(parent=self, text='', pos=(-0.06, 0, -0.075), text_scale=0.055)
         self.hpChangeEvent = None
-        self.gagNode = self.attachNewNode('gag')
-        self.gagNode.setPos(0.1, 0, 0.03)
         self.hasGag = 0
-        passGui = gui.find('**/tt_t_gui_bat_pass')
+        self.gagCircle = gui2.find('**/gagCircle')
+        self.gagCircle.reparentTo(self)
+        self.gagCircle.setPos(1.09178, -0.1, -0.389566)
+        self.gagNode = self.attachNewNode('gag')
+        self.gagNode.setPos(1, -0.1, -0.6)
+        passGui = gui2.find('**/ttr_t_gui_bat_toonGUI_icon_pass_card')
         passGui.detachNode()
         self.passNode = self.attachNewNode('pass')
         self.passNode.setPos(0.1, 0, 0.05)
@@ -39,6 +43,7 @@ class TownBattleToonPanel(DirectFrame):
         self.whichText = DirectLabel(parent=self, text='', pos=(0.1, 0, -0.08), text_scale=0.05)
         self.hide()
         gui.removeNode()
+        gui2.removeNode()
         return
 
     def setLaffMeter(self, avatar):
@@ -53,8 +58,8 @@ class TownBattleToonPanel(DirectFrame):
             self.laffMeter = LaffMeter.LaffMeter(avatar.style, avatar.hp, avatar.maxHp)
             self.laffMeter.setAvatar(self.avatar)
             self.laffMeter.reparentTo(self)
-            self.laffMeter.setPos(-0.06, 0, 0.05)
-            self.laffMeter.setScale(0.045)
+            self.laffMeter.setPos(-1.72198, 0, -0.758416)
+            self.laffMeter.setScale(0.653891)
             self.laffMeter.start()
             self.setHealthText(avatar.hp, avatar.maxHp)
             self.hpChangeEvent = self.avatar.uniqueName('hpChange')
@@ -112,7 +117,7 @@ class TownBattleToonPanel(DirectFrame):
             self.gagNode.show()
             invButton = base.localAvatar.inventory.buttonLookup(track, level)
             self.gag = invButton.instanceUnderNode(self.gagNode, 'gag')
-            self.gag.setScale(0.8)
+            self.gag.setScale(12)
             self.gag.setPos(0, 0, 0.02)
             self.hasGag = 1
             if numTargets != None and targetIndex != None and localNum != None:

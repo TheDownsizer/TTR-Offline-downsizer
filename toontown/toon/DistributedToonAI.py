@@ -4764,7 +4764,7 @@ def maxToon(hasConfirmed='UNCONFIRMED'):
 
     # General end game settings
     toon.b_setQuestCarryLimit(ToontownGlobals.MaxQuestCarryLimit)
-    toon.b_setRewardHistory(Quests.ELDER_TIER, [])
+    toon.b_setRewardHistory(Quests.BOSSBOT_HQ_TIER, [])
     # ToonFest Tokens
     toon.b_setTokens(250)
     # Jellybeans

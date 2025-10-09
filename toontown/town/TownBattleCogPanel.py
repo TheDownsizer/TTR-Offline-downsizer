@@ -27,27 +27,29 @@ class TownBattleCogPanel(DirectFrame):
      Vec4(0.3, 0.3, 0.3, 0))
 
     def __init__(self, id):
-        gui = loader.loadModel('phase_3.5/models/gui/battle_gui')
-        DirectFrame.__init__(self, relief=None, image=gui.find('**/ToonBtl_Status_BG'), image_color=Vec4(0.7, 0.7, 0.7, 0.8))
-        self.hpText = DirectLabel(parent=self, text='', pos=(-0.06, 0, -0.0325), text_scale=0.045)
-        self.setScale(0.8)
+        gui = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_bat_cogGUI')
+        DirectFrame.__init__(self, relief=None, image=gui.find('**/ttr_t_gui_bat_cogGUI_base_card'), image_color=Vec4(1, 1, 1, 1))
+        self.hpText = DirectLabel(parent=self, text='', pos=(-0.06, 0, -2.6), text_scale=0.7)
+        self.setScale(0.05)
         self.initialiseoptions(TownBattleCogPanel)
         self.hidden = False
         self.cog = None
         self.isLoaded = 0
         self.notify.info("Loading Cog Battle Panel!")
-        self.healthText = DirectLabel(parent=self, text='', pos=(0, 0, -0.075), text_scale=0.05)
+        self.healthText = DirectLabel(parent=self, text='', pos=(0, 0, -1.9), text_scale=1)
         healthGui = loader.loadModel('phase_3.5/models/gui/matching_game_gui')
-        button = healthGui.find('**/minnieCircle')
-        button.setScale(0.5)
-        button.setH(180)
+        buttonBase = gui.find('**/ttr_t_gui_bat_cogGUI_health_frame_card')
+        buttonBase.reparentTo(self)
+        button = gui.find('**/ttr_t_gui_bat_cogGUI_health_light_card')
+        button.reparentTo(self)
         button.setColor(Vec4(0, 1, 0, 1))
+
+        
+
         self.accept('inventory-levels', self.__handleToggle)
         self.healthNode = self.attachNewNode('health')
         self.healthNode.setPos(-0.06, 0, 0.05)
-        button.reparentTo(self.healthNode)
         glow = BattleProps.globalPropPool.getProp('glow')
-        glow.reparentTo(button)
         glow.setScale(0.28)
         glow.setPos(-0.005, 0.01, 0.015)
         glow.setColor(Vec4(0.25, 1, 0.25, 0.5))
@@ -58,6 +60,7 @@ class TownBattleCogPanel(DirectFrame):
         self.hide()
         healthGui.removeNode()
         gui.removeNode()
+        self.setPos(0, 0, 1)
 
     def setCogInformation(self, cog):
         self.cog = cog
@@ -75,8 +78,7 @@ class TownBattleCogPanel(DirectFrame):
         self.head.calcTightBounds(p1, p2)
         d = p2 - p1
         biggest = max(d[0], d[1], d[2])
-        s = 0.1 / biggest
-        self.head.setPosHprScale(0.1, 0, 0.01, 180, 0, 0, s, s, s)
+        self.head.setPosHprScale(-1.58605, -0.1, -0.747626, 180, 0, 0, 1, 1, 1)
         self.setLevelText(cog.getActualLevel(), cog.getSkeleRevives())
 
     def setLevelText(self, hp, revives = 0):
@@ -108,11 +110,10 @@ class TownBattleCogPanel(DirectFrame):
     def show(self):
         if self.cog:
             self.updateHealthBar()
-        self['image_color'] = Vec4(0.7, 0.7, 0.7, 0.8)
+        self['image_color'] = Vec4(1, 1, 1, 1)
         self.hidden = False
         self.healthNode.show()
         self.button.show()
-        self.glow.show()
         DirectFrame.show(self)
 
     def __handleToggle(self):

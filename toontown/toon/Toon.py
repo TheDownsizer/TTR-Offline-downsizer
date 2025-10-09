@@ -1617,7 +1617,7 @@ class Toon(Avatar.Avatar, ToonHead):
             self.loop(anim)
             # self.animIntervalTrack.finish()
             self.animJumpIntervalTrack = Sequence(
-                LerpAnimInterval(self, 0.2, self.playingAnim, anim, startWeight=1, endWeight=0.1))
+                LerpAnimInterval(self, 0.001, self.playingAnim, anim, startWeight=1, endWeight=0.1))
             self.animJumpIntervalTrack.start(ts)
             self.playingAnim = anim
             self.setPlayRate(animMultiplier, anim)
@@ -1646,7 +1646,7 @@ class Toon(Avatar.Avatar, ToonHead):
             self.loop(anim)
             # self.animIntervalTrack.finish()
             self.animJumpIntervalTrack = Sequence(
-                LerpAnimInterval(self, 0.2, self.playingAnim, anim, startWeight=1, endWeight=0.1))
+                LerpAnimInterval(self, 0.05, self.playingAnim, anim, startWeight=0.1, endWeight=1), Wait(1.2), LerpAnimInterval(self, 0.001, anim, anim, startWeight=1, endWeight=0.1))
             self.animJumpIntervalTrack.start(ts)
             self.playingAnim = anim
             self.setPlayRate(animMultiplier, anim)
@@ -1776,7 +1776,10 @@ class Toon(Avatar.Avatar, ToonHead):
         for bookActor in self.getBookActors():
             bookTracks.append(ActorInterval(bookActor, 'book', startTime=1.2, endTime=1.5))
 
-        bookTracks.append(ActorInterval(self, 'book', startTime=1.2, endTime=1.5))
+        self.animIntervalTrack = Sequence(
+                    LerpAnimInterval(self, 0.05, self.playingAnim, 'book', startWeight=0.12, endWeight=1),
+                    Func(self.loop, 'book'))
+        self.animIntervalTrack.start()
         if hasattr(self, 'uniqueName'):
             trackName = self.uniqueName('openBook')
         else:
@@ -1828,7 +1831,11 @@ class Toon(Avatar.Avatar, ToonHead):
         for bookActor in self.getBookActors():
             bookTracks.append(ActorInterval(bookActor, 'book', startTime=4.96, endTime=6.5))
 
-        bookTracks.append(ActorInterval(self, 'book', startTime=4.96, endTime=6.5))
+        self.animIntervalTrack = Sequence(
+                    LerpAnimInterval(self, 0.1, 'book', 'book', startWeight=0.12, endWeight=1), LerpAnimInterval(self, 0.4, 'book', 'book', startWeight=1, endWeight=0.1),
+                    ActorInterval(self, 'book', startTime=4.96, endTime=6.5))
+
+        self.animIntervalTrack.start()
         if hasattr(self, 'uniqueName'):
             trackName = self.uniqueName('closeBook')
         else:
