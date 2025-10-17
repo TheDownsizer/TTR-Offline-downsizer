@@ -1057,6 +1057,50 @@ class Suit(Avatar.Avatar):
         self.loop(anim)
         self.setTwoSided(1)
         self.isSkeleton = 1
+    
+    def makeSkeletonRevive(self):
+        model = 'phase_5/models/char/ttr_r_ene_cg' + self.style.body + '_skelecog'
+        anims = self.generateAnimDict()
+        anim = self.getCurrentAnim()
+        # Remove all of the previous cog except for a few necessary joints
+        modelRoot = self.getGeomNode()
+        modelRoot.find('**/torso').hide()
+        modelRoot.find('**/arms').hide()
+        modelRoot.find('**/hands').hide()
+        modelRoot.find('**/legs').hide()
+        modelRoot.find('**/').hide() # These are feet
+        modelRoot.find('**/def_M_head_01').hide()
+        # Now, to load our skelecog
+        self.loadModel(model)
+        self.loadAnims(anims)
+        self.getGeomNode().setScale(self.scale * 1.0173)
+        self.generateHealthBar()
+        self.generateCorporateTie()
+        self.setHeight(self.height)
+        self.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
+        parts = self.findAllMatches('**/pPlane*')
+        for partNum in range(0, parts.getNumPaths()):
+            bb = parts.getPath(partNum)
+            bb.setTwoSided(1)
+
+        self.setName(TTLocalizer.Skeleton)
+        if self.dna.name in SuitDNA.supervisors2Dept:
+            nameInfo = TTLocalizer.SuitBaseNameSupervisor % {'name': self.name,
+            'dept': self.getStyleDept()}
+        else:
+            nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self.name,
+            'dept': self.getStyleDept(),
+            'level': self.getActualLevel()}
+        self.setDisplayName(nameInfo)
+        self.leftHand = self.find('**/jnt_L_attachProp_01')
+        self.rightHand = self.find('**/jnt_R_attachProp_01')
+        self.shadowJoint = self.find('**/jnt_M_shadow_01')
+        self.nametagNull = self.find('**/jnt_M_nameTag_01')
+        self.nametag3d.reparentTo(self.nametagNull)
+        self.nametag3d.setEffect(CompassEffect.make(render, CompassEffect.PScale))
+        self.loop(anim)
+        self.setTwoSided(1)
+        self.isSkeleton = 1
 
     def getHeadParts(self):
         return self.headParts

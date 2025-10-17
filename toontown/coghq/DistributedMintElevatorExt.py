@@ -30,9 +30,8 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
 
     def setMintId(self, mintId):
         self.mintId = mintId
-        mintId2originId = {ToontownGlobals.CashbotMintIntA: 1,
-         ToontownGlobals.CashbotMintIntB: 2,
-         ToontownGlobals.CashbotMintIntC: 0}
+        mintId2originId = {ToontownGlobals.CashbotMintIntA: 0,
+         ToontownGlobals.CashbotMintIntC: 1}
         originId = mintId2originId[self.mintId]
         geom = self.cr.playGame.hood.loader.geom
         locator = geom.find('**/elevator_origin_%s' % originId)
@@ -41,7 +40,7 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
         else:
             self.notify.error('No origin found for originId: %s' % originId)
         locator = geom.find('**/elevator_signorigin_%s' % originId)
-        backgroundGeom = geom.find('**/ElevatorFrameFront_%d' % originId)
+        backgroundGeom = geom.find('**/ElevatorFrame_%d' % originId)
         backgroundGeom.node().setEffect(DecalEffect.make())
         signText = DirectGui.OnscreenText(text=TextEncoder.upper(TTLocalizer.GlobalStreetNames[mintId][-1]), font=ToontownGlobals.getSuitFont(), scale=TTLocalizer.DMEEsignText, fg=(0.87, 0.87, 0.87, 1), mayChange=False, parent=backgroundGeom)
         signText.setPosHpr(locator, 0, 0, 0, 0, 0, 0)

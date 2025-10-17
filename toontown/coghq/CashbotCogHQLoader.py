@@ -21,8 +21,8 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
             state.addTransition('mintInterior')
 
         self.musicFile = 'phase_10/audio/bgm/CBHQ_LOBBY_bg.ogg'
-        self.cogHQExteriorModelPath = 'phase_10/models/cogHQ/CashBotShippingStation'
-        self.cogHQLobbyModelPath = 'phase_10/models/cogHQ/VaultLobby'
+        self.cogHQExteriorModelPath = 'phase_10/models/cogHQ/ttr_m_ara_chq_cashbotShippingStation'
+        self.cogHQLobbyModelPath = 'phase_10/models/cogHQ/ttr_m_ara_chq_bossVaultLobby'
         self.geom = None
         return
 
@@ -43,10 +43,10 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
         zoneId = zoneId - zoneId % 100
         if zoneId == ToontownGlobals.CashbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
-            ddLinkTunnel = self.geom.find('**/LinkTunnel1')
+            ddLinkTunnel = self.geom.find('**/TunnelEntrance1')
             ddLinkTunnel.setName('linktunnel_dl_9252_DNARoot')
             locator = self.geom.find('**/sign_origin')
-            backgroundGeom = self.geom.find('**/EntranceFrameFront')
+            backgroundGeom = self.geom.find('**/EntranceFrame')
             backgroundGeom.node().setEffect(DecalEffect.make())
             signText = DirectGui.OnscreenText(text=TTLocalizer.DonaldsDreamland[-1], font=ToontownGlobals.getSuitFont(), scale=3, fg=(0.87, 0.87, 0.87, 1), mayChange=False, parent=backgroundGeom)
             signText.setPosHpr(locator, 0, 0, 0, 0, 0, 0)

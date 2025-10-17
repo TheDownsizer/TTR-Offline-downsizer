@@ -1,6 +1,7 @@
 """Heal track calculator."""
 
 from .base import TrackCalculatorBase
+from toontown.battle.BattleBase import *
 from toontown.toonbase.ToontownBattleGlobals import *
 
 class HealTrackCalculator(TrackCalculatorBase):

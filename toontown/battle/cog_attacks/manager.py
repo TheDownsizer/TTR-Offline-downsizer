@@ -202,27 +202,6 @@ class CogAttackCalculatorManager:
                 attack[SUIT_ATK_COL] = self.calculate_suit_attack_type(i)
                 attack[SUIT_TGT_COL] = self.calculate_suit_target(i)
                 
-                # Check if attack is valid - for group attacks, -1 is valid
-                attack_invalid = False
-                if attack[SUIT_TGT_COL] == -1:
-                    # Check if this is a group attack (where -1 is valid) or truly no targets
-                    if not self.suit_attack_affects_group(attack):
-                        # Single attack with no target - invalid
-                        attack_invalid = True
-                        if self.notify.getDebug():
-                            self.notify.debug('clearing suit attack, no available targets for single attack')
-                    else:
-                        # Group attack - -1 is valid, check if there are any active toons
-                        if len(self.battle.activeToons) == 0:
-                            attack_invalid = True
-                            if self.notify.getDebug():
-                                self.notify.debug('clearing suit attack, no active toons for group attack')
-                
-                if attack_invalid:
-                    self.battle.suitAttacks[i] = getDefaultSuitAttack()
-                    attack = self.battle.suitAttacks[i]
-                    continue
-                
                 self.calculate_suit_attack_damage(i)
                 self.update_suit_attack_stats(i)
                 

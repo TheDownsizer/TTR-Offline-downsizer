@@ -12,7 +12,7 @@ class DistributedCFOElevator(DistributedBossElevator.DistributedBossElevator):
         self.countdownTime = ElevatorData[self.type]['countdown']
 
     def setupElevator(self):
-        self.elevatorModel = loader.loadModel('phase_10/models/cogHQ/CFOElevator')
+        self.elevatorModel = loader.loadModel('phase_10/models/cogHQ/ttr_m_ara_chq_elevatorMint')
         self.leftDoor = self.elevatorModel.find('**/left_door')
         self.rightDoor = self.elevatorModel.find('**/right_door')
         geom = base.cr.playGame.hood.loader.geom

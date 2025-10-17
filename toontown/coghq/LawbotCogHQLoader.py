@@ -29,7 +29,7 @@ class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
 
         self.musicFile = 'phase_11/audio/bgm/LB_courtyard.ogg'
         self.cogHQExteriorModelPath = 'phase_11/models/lawbotHQ/LawbotPlaza'
-        self.factoryExteriorModelPath = 'phase_11/models/lawbotHQ/LB_DA_Lobby'
+        self.factoryExteriorModelPath = 'phase_11/models/lawbotHQ/ttr_m_ara_lhq_daLobby'
         self.cogHQLobbyModelPath = 'phase_11/models/lawbotHQ/LB_CH_Lobby'
         self.geom = None
         return
@@ -37,6 +37,8 @@ class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
     def load(self, zoneId):
         CogHQLoader.CogHQLoader.load(self, zoneId)
         self.battleMusic = base.loader.loadMusic('phase_11/audio/bgm/ttr_s_ara_lhq_facilityBattle.ogg')
+        self.battleMusic.setVolume(1)
+        self.music.setVolume(1)
         Toon.loadSellbotHQAnims()
 
     def unloadPlaceGeom(self):

@@ -366,10 +366,10 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        5,
        85,
        5),
-      (6,
-       7,
+      (7,
        8,
-       9),
+       9,
+       10),
       []],
     [9300,
      1,
@@ -388,10 +388,10 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
       25,
       5,
       5),
-     (6,
-      7,
-      8,
-      9),
+     (8,
+      9,
+      10,
+      11),
      []],
     [10000,
       3,
@@ -448,7 +448,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        0,
        100),
-      (4, 5, 6),
+      (4, 5, 6, 7),
       []],
      [12000,
       10,
@@ -542,7 +542,10 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
      0,
      0]
     ZONE_2_CUSTOM_LEVEL_EXTENSION = {
-        10000: 5
+        13000: 6,
+        12000: 5,
+        11200: 5,
+        10000: 7
     }
     for currHoodInfo in SuitHoodInfo:
         weight = currHoodInfo[SUIT_HOOD_INFO_BWEIGHT]
@@ -866,6 +869,13 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         self.zoneChange(newSuit, None, newSuit.zoneId)
         # Determine if we are spawning a special type of suit. 1 is Skelecog, 2 is v2.0.
         #specialSuit = 2
+
+        if self.zoneId == 11200:
+            skeleChance = random.random()
+            skelePercent = 0.2
+            if skeleChance < skelePercent:
+                specialSuit = 1
+
         if specialSuit == 1:
             newSuit.setSkelecog(1)
         elif specialSuit == 2:

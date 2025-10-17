@@ -70,6 +70,7 @@ class StageInterior(BattlePlace.BattlePlace):
         self.parentFSM.getStateNamed('stageInterior').addChild(self.fsm)
         BattlePlace.BattlePlace.load(self)
         self.music = base.musicManager.getSound('phase_11/audio/bgm/LB_office.ogg')
+        self.music.setVolume(1)
 
     def unload(self):
         self.parentFSM.getStateNamed('stageInterior').removeChild(self.fsm)

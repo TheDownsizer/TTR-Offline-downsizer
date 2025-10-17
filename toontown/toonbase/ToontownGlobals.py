@@ -110,7 +110,7 @@ SPToonfestTowerSmall = 7
 SPToonfestTowerMed = 8
 SPToonfestTowerLarge = 9
 CEVirtual = 14
-MaxHpLimit = 137
+MaxHpLimit = 140
 MaxCarryLimit = 80
 MaxQuestCarryLimit = 4
 GravityValue = 32.174
@@ -333,6 +333,14 @@ BossbotCogGolfCouseCogLevel = lambda: random.choice(SellbotScrapFactoryCogLevels
 BossbotCogGolfCouseSupervisorLevel = lambda: 9 # Placeholder, Final Level will be 33
 BossbotCogGolfCouseCogRevivesChance = 0.4
 BossbotCogGolfCouseCogRevive = lambda: 1 if random.random() < BossbotCogGolfCouseCogRevivesChance else 0
+
+# Bossbot Cog Golf Course Base Cog Levels
+LawbotDAOfficeCogLevelsEasyNum = [7, 8, 9]
+LawbotDAOfficeCogLevelsMediumNum = [10, 11]
+LawbotDAOfficeCogLevelsHardNum = [11, 12]
+LawbotDAOfficeCogLevelsEasy = lambda: random.choice(LawbotDAOfficeCogLevelsEasyNum)
+LawbotDAOfficeCogLevelsMedium = lambda: random.choice(LawbotDAOfficeCogLevelsMediumNum)
+LawbotDAOfficeCogLevelsHard = lambda: random.choice(LawbotDAOfficeCogLevelsHardNum)
 
 MintNumFloors = {CashbotMintIntA: 20,
  CashbotMintIntB: 20,

@@ -66,14 +66,12 @@ class LawbotHQAI(CogHoodAI):
         # Create DA Office Elevators.
         mins = ToontownGlobals.FactoryLaffMinimums[2]
         self.officeA = self.createElevator(DistributedLawOfficeElevatorExtAI, self.air.lawOfficeMgr, ToontownGlobals.LawbotOfficeExt, ToontownGlobals.LawbotStageIntA, 0, minLaff=mins[0])
-        self.officeB = self.createElevator(DistributedLawOfficeElevatorExtAI, self.air.lawOfficeMgr, ToontownGlobals.LawbotOfficeExt, ToontownGlobals.LawbotStageIntB, 1, minLaff=mins[1])
-        self.officeC = self.createElevator(DistributedLawOfficeElevatorExtAI, self.air.lawOfficeMgr, ToontownGlobals.LawbotOfficeExt, ToontownGlobals.LawbotStageIntC, 2, minLaff=mins[2])
-        self.officeD = self.createElevator(DistributedLawOfficeElevatorExtAI, self.air.lawOfficeMgr, ToontownGlobals.LawbotOfficeExt, ToontownGlobals.LawbotStageIntD, 3, minLaff=mins[3])
+        self.officeD = self.createElevator(DistributedLawOfficeElevatorExtAI, self.air.lawOfficeMgr, ToontownGlobals.LawbotOfficeExt, ToontownGlobals.LawbotStageIntD, 1, minLaff=mins[0])
 
         # Create boarding groups
         # CJ Boarding Group
         self.createBoardingGroup(self.air, [self.cjElevator.doId], ToontownGlobals.LawbotLobby, 8)
 
         # DA Office Boarding Group's
-        self.offices = [self.officeA.doId, self.officeB.doId, self.officeC.doId, self.officeD.doId]
+        self.offices = [self.officeA.doId, self.officeD.doId]
         self.createBoardingGroup(self.air, self.offices, ToontownGlobals.LawbotOfficeExt)

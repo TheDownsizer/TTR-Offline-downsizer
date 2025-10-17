@@ -170,9 +170,6 @@ def insertDeathSuit(suit, deathSuit, battle = None, pos = None, hpr = None):
 
 def removeDeathSuit(suit, deathSuit):
     notify.debug('removeDeathSuit()')
-    if not deathSuit.isEmpty():
-        deathSuit.detachNode()
-        suit.cleanupLoseActor()
 
 
 def insertReviveSuit(suit, deathSuit, battle = None, pos = None, hpr = None):
@@ -196,9 +193,6 @@ def removeReviveSuit(suit, deathSuit):
     notify.debug('removeDeathSuit()')
     suit.setSkelecog(1)
     suit.show()
-    if not deathSuit.isEmpty():
-        deathSuit.detachNode()
-        suit.cleanupLoseActor()
     suit.healthBar.show()
     suit.reseatHealthBarForSkele()
 
@@ -253,21 +247,20 @@ def createSuitReviveTrack(suit, toon, battle, npcs = []):
     suitPos, suitHpr = battle.getActorPosHpr(suit)
     if hasattr(suit, 'battleTrapProp') and suit.battleTrapProp and suit.battleTrapProp.getName() == 'traintrack' and not suit.battleTrapProp.isHidden():
         suitTrack.append(createTrainTrackAppearTrack(suit, toon, battle, npcs))
-    deathSuit = suit.getLoseActor()
-    suit.nametag3d.reparentTo(suit.nametagNull)
-    suit.nametag3d.setEffect(CompassEffect.make(suit, CompassEffect.PScale))
-    deathSuit.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
+    deathSuit = suit
     suitTrack.append(Func(notify.debug, 'before insertDeathSuit'))
-    suitTrack.append(Func(insertReviveSuit, suit, deathSuit, battle, suitPos, suitHpr))
+    suitTrack.append(Func(suit.nametag3d.hide))
+    suitTrack.append(Func(suit.healthBar.hide))
     suitTrack.append(Func(notify.debug, 'before actorInterval lose'))
-    suitTrack.append(ActorInterval(deathSuit, 'lose', duration=SUIT_LOSE_DURATION))
     suitTrack.append(Func(notify.debug, 'before removeDeathSuit'))
-    suitTrack.append(Func(removeReviveSuit, suit, deathSuit, name='remove-death-suit'))
+    suitHideTrack = Sequence(Func(suit.loop, 'neutral'), Func(suit.makeSkeletonRevive))
+    suitTrack.append(Func(suit.nametag3d.show))
+    suitTrack.append(Func(suit.healthBar.show))
+    suitTrack.append(suitHideTrack)
     suitTrack.append(Func(notify.debug, 'after removeDeathSuit'))
-    suitTrack.append(Func(suit.loop, 'neutral'))
     spinningSound = base.loader.loadSfx('phase_3.5/audio/sfx/Cog_Death.ogg')
     deathSound = base.loader.loadSfx('phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
-    deathSoundTrack = Sequence(Wait(0.8), SoundInterval(spinningSound, duration=1.2, startTime=1.5, volume=0.2, node=suit), SoundInterval(spinningSound, duration=3.0, startTime=0.6, volume=0.8, node=suit), SoundInterval(deathSound, volume=0.32, node=suit))
+    deathSoundTrack = Sequence(Wait(0.8), SoundInterval(spinningSound, duration=1.2, startTime=1.5, volume=0.2, node=deathSuit), SoundInterval(spinningSound, duration=3.0, startTime=0.6, volume=0.8, node=deathSuit), SoundInterval(deathSound, volume=0.32, node=deathSuit))
     BattleParticles.loadParticles()
     smallGears = BattleParticles.createParticleEffect(file='gearExplosionSmall')
     singleGear = BattleParticles.createParticleEffect('GearExplosion', numParticles=1)
@@ -303,7 +296,6 @@ def createSuitDeathTrack(suit, toon, battle, npcs = []):
     if hasattr(suit, 'battleTrapProp') and suit.battleTrapProp and suit.battleTrapProp.getName() == 'traintrack' and not suit.battleTrapProp.isHidden():
         suitTrack.append(createTrainTrackAppearTrack(suit, toon, battle, npcs))
     deathSuit = suit
-    deathSuit.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
     suitTrack.append(Func(notify.debug, 'before insertDeathSuit'))
     suitTrack.append(Func(suit.nametag3d.hide))
     suitTrack.append(Func(suit.healthBar.hide))
@@ -311,7 +303,7 @@ def createSuitDeathTrack(suit, toon, battle, npcs = []):
     suitTrack.append(ActorInterval(suit, 'lose', duration=SUIT_LOSE_DURATION))
     suitTrack.append(Func(suit.hide))
     suitTrack.append(Func(notify.debug, 'before removeDeathSuit'))
-    suitHideTrack = Sequence(Wait(SUIT_LOSE_DURATION), Func(removeDeathSuit, suit, deathSuit, name='remove-death-suit'))
+    suitHideTrack = Sequence(Wait(SUIT_LOSE_DURATION))
     suitTrack.append(Func(notify.debug, 'after removeDeathSuit'))
     spinningSound = base.loader.loadSfx('phase_3.5/audio/sfx/Cog_Death.ogg')
     deathSound = base.loader.loadSfx('phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')

@@ -47,7 +47,6 @@ class CashbotHQAI(CogHoodAI):
         # Create mint elevators.
         mins = ToontownGlobals.FactoryLaffMinimums[1]
         self.cointMint = self.createElevator(DistributedMintElevatorExtAI, self.air.mintMgr, self.HOOD, ToontownGlobals.CashbotMintIntA, 0, minLaff=mins[0])
-        self.dollarMint = self.createElevator(DistributedMintElevatorExtAI, self.air.mintMgr, self.HOOD, ToontownGlobals.CashbotMintIntB, 1, minLaff=mins[1])
         self.bullionMint = self.createElevator(DistributedMintElevatorExtAI, self.air.mintMgr, self.HOOD, ToontownGlobals.CashbotMintIntC, 2, minLaff=mins[2])
 
         # Create boarding groups
@@ -55,5 +54,5 @@ class CashbotHQAI(CogHoodAI):
         self.createBoardingGroup(self.air, [self.cfoElevator.doId], ToontownGlobals.CashbotLobby, 8)
 
         # Mint Boarding Group's
-        self.mints = [self.cointMint.doId, self.dollarMint.doId, self.bullionMint.doId]
+        self.mints = [self.cointMint.doId, self.bullionMint.doId]
         self.createBoardingGroup(self.air, self.mints, ToontownGlobals.CashbotHQ)

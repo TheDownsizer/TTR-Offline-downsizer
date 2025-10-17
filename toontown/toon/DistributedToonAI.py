@@ -230,6 +230,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.magicWordTeleportRequests = []
         self.webAccountId = 0
         self.hasQuests = False
+        self.sleeveTex = 0
+        self.shirtTex = 0
+        self.bottomTex = 0
 
         # KeepAlive
         self.keepAliveTask = None
@@ -505,6 +508,18 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
 
     def getHat(self):
         return self.hat
+
+    def setBodyTextures(self, sleeve, shirt, bottom):
+        self.sleeveTex = sleeve
+        self.shirtTex = shirt
+        self.bottomTex = bottom
+
+    def d_setBodyTextures(self, sleeve, shirt, bottom):
+        self.sendUpdate('setBodyTextures', [sleeve, shirt, bottom])
+
+    def b_setBodyTextures(self, sleeve, shirt, bottom):
+        self.d_setBodyTextures(sleeve, shirt, bottom)
+        self.setBodyTextures(sleeve, shirt, bottom)
 
     def b_setGlasses(self, idx, textureIdx, colorIdx):
         self.d_setGlasses(idx, textureIdx, colorIdx)
@@ -5077,7 +5092,8 @@ def dna(part, value):
         value = int(value)
         #if not isValidColor(value):
         #    return "DNA: Invalid shirt if specified."
-        dna.topTex = value
+
+        av.b_setBodyTextures(av.sleeveTex, value, av.bottomTex)
         av.b_setDNAString(dna.makeNetString())
     elif part=='toptexcolor':
         value = int(value)
@@ -5089,7 +5105,7 @@ def dna(part, value):
         value = int(value)
         #if not isValidColor(value):
         #    return "DNA: Invalid shirt if specified."
-        dna.sleeveTex = value
+        av.b_setBodyTextures(value, av.shirtTex, av.bottomTex)
         av.b_setDNAString(dna.makeNetString())
     elif part=='sleevetexcolor':
         value = int(value)
@@ -5101,7 +5117,7 @@ def dna(part, value):
         value = int(value)
         #if not isValidColor(value):
         #    return "DNA: Invalid shirt if specified."
-        dna.botTex = value
+        av.b_setBodyTextures(av.shirtTex, av.shirtTex, value)
         av.b_setDNAString(dna.makeNetString())
     elif part=='bottexcolor':
         value = int(value)

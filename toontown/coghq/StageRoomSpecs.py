@@ -3,19 +3,19 @@ from toontown.toonbase import ToontownGlobals
 from toontown.coghq import NullCogs
 from toontown.coghq import LawbotOfficeOilRoom_Battle00_Cogs
 from toontown.coghq import LawbotOfficeOilRoom_Battle01_Cogs
-from toontown.coghq import LawbotOfficeBoilerRoom_Battle00_Cogs
+from toontown.coghq import LawbotOfficeBoilerRoom_Battle00_Cogs, LawbotOfficeBoilerRoom_Battle01_Cogs
 from toontown.coghq import LawbotOfficeBoilerRoom_Trap00_Cogs
 from toontown.coghq import LawbotOfficeLobby_Trap00_Cogs
 from toontown.coghq import LawbotOfficeDiamondRoom_Trap00_Cogs
 from toontown.coghq import LawbotOfficeDiamondRoom_Battle00_Cogs
-from toontown.coghq import LawbotOfficeGearRoom_Battle00_Cogs
+from toontown.coghq import LawbotOfficeGearRoom_Battle00_Cogs, LawbotOfficeGearRoom_Battle01_Cogs
 
 # Explicit room imports...
 from toontown.coghq import LawbotOfficeEntrance_Action00
 from toontown.coghq import LawbotOfficeOilRoom_Battle00
 from toontown.coghq import LawbotOfficeOilRoom_Battle01
 from toontown.coghq import LawbotOfficeBoilerRoom_Security00
-from toontown.coghq import LawbotOfficeBoilerRoom_Battle00
+from toontown.coghq import LawbotOfficeBoilerRoom_Battle00, LawbotOfficeBoilerRoom_Battle01
 from toontown.coghq import LawbotOfficeGearRoom_Action00
 from toontown.coghq import LawbotOfficeLobby_Action00
 from toontown.coghq import LawbotOfficeGearRoom_Security00
@@ -29,7 +29,7 @@ from toontown.coghq import LawbotOfficeDiamondRoom_Action00
 from toontown.coghq import LawbotOfficeDiamondRoom_Action01
 from toontown.coghq import LawbotOfficeLobby_Action01
 from toontown.coghq import LawbotOfficeDiamondRoom_Battle00
-from toontown.coghq import LawbotOfficeGearRoom_Battle00
+from toontown.coghq import LawbotOfficeGearRoom_Battle00, LawbotOfficeGearRoom_Battle01
 
 def getStageRoomSpecModule(roomId):
     return CashbotStageSpecModules[roomId]
@@ -62,12 +62,14 @@ CashbotStageRoomId2RoomName = {0: 'LawbotOfficeEntrance_Action00',
  102: 'LawbotOfficeDiamondRoom_Action01',
  103: 'LawbotOfficeLobby_Action01',
  104: 'LawbotOfficeDiamondRoom_Battle00',
- 105: 'LawbotOfficeGearRoom_Battle00'}
+ 105: 'LawbotOfficeGearRoom_Battle00',
+ 106: 'LawbotOfficeGearRoom_Battle01',
+ 107: 'LawbotOfficeBoilerRoom_Battle01'}
 CashbotStageRoomName2RoomId = invertDict(CashbotStageRoomId2RoomName)
 CashbotStageEntranceIDs = (0,)
 CashbotStageMiddleRoomIDs = (1,)
 CashbotStageFinalRoomIDs = (2,)
-CashbotStageConnectorRooms = ('phase_11/models/lawbotHQ/LB_connector_7cubeL2', 'phase_11/models/lawbotHQ/LB_connector_7cubeLR')
+CashbotStageConnectorRooms = ('phase_11/models/lawbotHQ/ttr_m_ara_lhq_officesConnector_7cubeL2', 'phase_11/models/lawbotHQ/ttr_m_ara_lhq_officesConnector_7cubeLR')
 CashbotStageSpecModules = {}
 for roomName, roomId in list(CashbotStageRoomName2RoomId.items()):
     CashbotStageSpecModules[roomId] = locals()[roomName]
@@ -79,7 +81,9 @@ CogSpecModules = {'LawbotOfficeOilRoom_Battle00': LawbotOfficeOilRoom_Battle00_C
  'LawbotOfficeLobby_Trap00': LawbotOfficeLobby_Trap00_Cogs,
  'LawbotOfficeDiamondRoom_Trap00': LawbotOfficeDiamondRoom_Trap00_Cogs,
  'LawbotOfficeDiamondRoom_Battle00': LawbotOfficeDiamondRoom_Battle00_Cogs,
- 'LawbotOfficeGearRoom_Battle00': LawbotOfficeGearRoom_Battle00_Cogs}
+ 'LawbotOfficeGearRoom_Battle00': LawbotOfficeGearRoom_Battle00_Cogs,
+ 'LawbotOfficeGearRoom_Battle01': LawbotOfficeGearRoom_Battle01_Cogs,
+ 'LawbotOfficeBoilerRoom_Battle01': LawbotOfficeBoilerRoom_Battle01_Cogs}
 roomId2numBattles = {}
 for roomName, roomId in list(CashbotStageRoomName2RoomId.items()):
     if roomName not in CogSpecModules:

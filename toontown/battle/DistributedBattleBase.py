@@ -139,6 +139,10 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
             return
         for toon in self.activeToons:
             toon.enableBlend()
+            toon.animIntervalTrack = Sequence(
+                    LerpAnimInterval(toon, 0.01, 'walk', 'neutral', startWeight=0.12, endWeight=1))
+            toon.animIntervalTrack.start()
+            toon.loop('neutral')
         self.notify.debug('cleanupBattle(%s)' % self.doId)
         self.__battleCleanedUp = 1
         self.__cleanupIntervals()
@@ -1339,7 +1343,10 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         adjustTrack.append(Func(av.headsUp, self, destPos))
         adjustTrack.append(LerpPosInterval(av, adjustTime, destPos, other=self))
         adjustTrack.append(Func(av.setHpr, self, destHpr))
-        adjustTrack.append(Func(av.loop, 'neutral'))
+        if av in self.luredSuits:
+            adjustTrack.append(Func(av.loop, 'lured'))
+        else:
+            adjustTrack.append(Func(av.loop, 'neutral'))
         return adjustTrack
 
     def __adjust(self, ts, callback):

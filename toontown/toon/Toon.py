@@ -532,6 +532,9 @@ class Toon(Avatar.Avatar, ToonHead):
         self.shoes = (0, 0, 0)
         self.isStunned = 0
         self.isDisguised = 0
+        self.sleeveTex = 0
+        self.shirtTex = 0
+        self.bottomTex = 0
         self.defaultColorScale = None
         self.jar = None
         self.setBlend(frameBlend=config.ConfigVariableBool('want-smooth-animations', False).getValue(), animBlend=True)
@@ -986,7 +989,7 @@ class Toon(Avatar.Avatar, ToonHead):
         if self.hasLOD():
             if self.style.getGender() == 'f' and fromNet == 0:
                 try:
-                    bottomPair = ToonDNA.GirlBottoms[self.style.botTex]
+                    bottomPair = ToonDNA.GirlBottoms[self.bottomTex]
                 except:
                     bottomPair = ToonDNA.GirlBottoms[0]
 
@@ -1000,7 +1003,7 @@ class Toon(Avatar.Avatar, ToonHead):
                     self.swapToonTorso(self.style.torso[0] + 's', genClothes=0)
                     swappedTorso = 1
             try:
-                texName = ToonDNA.Shirts[self.style.topTex]
+                texName = ToonDNA.Shirts[self.shirtTex]
             except:
                 texName = ToonDNA.Shirts[0]
 
@@ -1016,7 +1019,7 @@ class Toon(Avatar.Avatar, ToonHead):
                 shirtColor = ToonDNA.ClothesColors[0]
 
             try:
-                texName = ToonDNA.Sleeves[self.style.sleeveTex]
+                texName = ToonDNA.Sleeves[self.sleeveTex]
             except:
                 texName = ToonDNA.Sleeves[0]
 
@@ -1033,13 +1036,13 @@ class Toon(Avatar.Avatar, ToonHead):
 
             if self.style.getGender() == 'm':
                 try:
-                    texName = ToonDNA.BoyShorts[self.style.botTex]
+                    texName = ToonDNA.BoyShorts[self.bottomTex]
                 except:
                     texName = ToonDNA.BoyShorts[0]
 
             else:
                 try:
-                    texName = ToonDNA.GirlBottoms[self.style.botTex][0]
+                    texName = ToonDNA.GirlBottoms[self.bottomTex][0]
                 except:
                     texName = ToonDNA.GirlBottoms[0][0]
 
@@ -3394,6 +3397,12 @@ class Toon(Avatar.Avatar, ToonHead):
 
     def exitScientistPlay(self):
         self.stop()
+
+    def setBodyTextures(self, sleeve, shirt, bottom):
+        self.sleeveTex = sleeve
+        self.shirtTex = shirt
+        self.bottomTex = bottom
+        self.generateToonClothes()
 
 
 loadModels()

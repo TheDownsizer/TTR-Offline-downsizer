@@ -77,7 +77,7 @@ class LevelSuitPlannerAI(DirectObject.DirectObject):
         dna.newSuitRandom(level=SuitDNA.getRandomSuitTypeExtended(suitDict['level']), dept=suitDict['track'])
         suit.dna = dna
         suit.setLevel(suitDict['level'])
-        suit.setSkeleRevives(suitDict.get('revives'))
+        suit.setSkeleRevives(0)
         suit.setLevelDoId(self.level.doId)
         suit.setCogId(suitDict['cogId'])
         suit.setReserve(reserve)
