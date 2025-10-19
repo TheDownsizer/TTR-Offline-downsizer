@@ -374,7 +374,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     [9300,
      1,
      5,
-     0,
+     1,
      99,
      100,
      4,
@@ -542,10 +542,11 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
      0,
      0]
     ZONE_2_CUSTOM_LEVEL_EXTENSION = {
-        13000: 6,
-        12000: 5,
-        11200: 5,
-        10000: 7
+        13000: 7,
+        12000: 7,
+        11200: 7,
+        10000: 7,
+        9300: 5
     }
     for currHoodInfo in SuitHoodInfo:
         weight = currHoodInfo[SUIT_HOOD_INFO_BWEIGHT]

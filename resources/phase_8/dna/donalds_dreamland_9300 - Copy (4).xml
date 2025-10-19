@@ -146,8 +146,6 @@
 	<store_suit_point id="141" type="STREET_POINT" x="27.434600830078125" y="-39.88399887084961" z="-6.294249760685489e-05"/>
 	<store_suit_point id="142" type="STREET_POINT" x="25.63949966430664" y="-18.524999618530273" z="-6.294249760685489e-05"/>
 	<store_suit_point id="143" type="STREET_POINT" x="25.601200103759766" y="-1.8116099834442139" z="-6.294249760685489e-05"/>
-	<store_suit_point id="145" type="FRONT_DOOR_POINT" x="598.98" y="219.00" z="-30.00" building="51"/>
-	<store_suit_point id="146" type="FRONT_DOOR_POINT" x="598.98" y="182.00" z="-30.00" building="79"/>
 	<group name="donaldsDreamland">
 		<visgroup vis="9301 9303 9302" zone="9301">
 			<suit_edge a="0" b="1"/>
@@ -4588,8 +4586,6 @@
 		<visgroup vis="9302 9301 9303 9304 9305 9306 9307 9308 9309 9310 9311 9312 9313 9314 9315 9316 9317 9318 9319 9320 9321 9322 9323 9324 9325 9326 9327 9328 9329 9330 9331 9332 9333 9334 9335 9336 9337 9338 9339 9340 9341 9342 9343 9344 9345 9346 9347 9348 9349 9350 9351 9352 9353 9354 9355" zone="9336">
 			<suit_edge a="81" b="82"/>
 			<suit_edge a="82" b="83"/>
-			<suit_edge a="80" b="145"/>
-			<suit_edge a="145" b="80"/>
 			<battle_cell height="20.0" width="20.0" x="576.3350219726562" y="216.5449981689453" z="-30.0"/>
 			<group name="streets">
 				<street code="street_t_intersection" name="str.t_intersection_DNARoot">
@@ -4646,7 +4642,7 @@
 					</wall>
 				</flat_building>
 				<flat_building id="tb0:flat_DNARoot" width="20.0">
-					<pos x="597.9819946289062" y="234.0030059814453" z="-30.0"/>
+					<pos x="597.9819946289062" y="239.0030059814453" z="-30.0"/>
 					<nhpr h="-90.0" p="0.0" r="-0.0"/>
 					<wall code="wall_md_bricks_ur" height="20.0">
 						<color a="1.0" b="0.28999999165534973" g="0.1599999964237213" r="0.3100000023841858"/>
@@ -4718,19 +4714,6 @@
 				<prop code="prop_safe_zone_entrance_tunnel" name="prop_safe_zone_entrance_tunnel_DNARoot">
 					<pos x="557.9819946289062" y="239.0030059814453" z="-30.0"/>
 					<nhpr h="-0.0" p="0.0" r="-0.0"/>
-					<sign code="sign_cogHQ">
-						<color r="0.533333" g="0.533333" b="0.533333" a="1.0"/>
-						<pos x="0" y="0" z="0.17"/>
-						<scale x="1.55" y="1.0" z="1.2"/>
-						<hpr h="0" p="0" r="0"/>
-						<baseline flags="" wiggle="0.0" stumble="0.0" indent="0.0" stomp="0.0" kern="0.0" width="0.0" height="0.0">
-							<color r="0.75" g="0.75" b="0.75" a="1.0"/>
-							<pos x="-0.10" y="0" z="0"/>
-							<scale x="0.77" y="1.0" z="0.833"/>
-							<graphic code="prop_construction_sign_text"/>
-							<hpr h="0" p="0" r="1"/>
-						</baseline>
-					</sign>
 				</prop>
 				<prop code="prop_construction_sign" name="prop_construction_sign_DNARoot">
 					<pos x="577.9819946289062" y="239.0030059814453" z="-30.0"/>
@@ -4749,8 +4732,6 @@
 		<visgroup vis="9302 9301 9303 9304 9305 9306 9307 9308 9309 9310 9311 9312 9313 9314 9315 9316 9317 9318 9319 9320 9321 9322 9323 9324 9325 9326 9327 9328 9329 9330 9331 9332 9333 9334 9335 9336 9337 9338 9339 9340 9341 9342 9343 9344 9345 9346 9347 9348 9349 9350 9351 9352 9353 9354 9355" zone="9337">
 			<suit_edge a="79" b="80"/>
 			<suit_edge a="80" b="81"/>
-			<suit_edge a="81" b="146"/>
-			<suit_edge a="146" b="81"/>
 			<battle_cell height="20.0" width="20.0" x="577.926025390625" y="176.85299682617188" z="-30.0"/>
 			<group name="streets">
 				<street code="street_40x40" name="str.40x40_DNARoot">
@@ -4763,7 +4744,7 @@
 			</group>
 			<group name="buildings">
 				<flat_building id="tb0:flat_DNARoot" width="15.0">
-					<pos x="598.9819946289062" y="210.0030059814453" z="-30.0"/>
+					<pos x="598.9819946289062" y="205.0030059814453" z="-30.0"/>
 					<nhpr h="-90.0" p="0.0" r="-0.0"/>
 					<wall code="wall_md_blank_ur" height="13.0">
 						<color a="1.0" b="0.12999999523162842" g="0.1899999976158142" r="0.25999999046325684"/>
@@ -4785,7 +4766,7 @@
 					</wall>
 				</flat_building>
 				<flat_building id="tb0:flat_DNARoot" width="15.0">
-					<pos x="598.9819946289062" y="195.0030059814453" z="-30.0"/>
+					<pos x="598.9819946289062" y="190.0030059814453" z="-30.0"/>
 					<nhpr h="-90.0" p="0.0" r="-0.0"/>
 					<wall code="wall_md_blank_ur" height="20.0">
 						<color a="1.0" b="0.15000000596046448" g="0.20000000298023224" r="0.25"/>
@@ -4829,7 +4810,7 @@
 					</wall>
 				</flat_building>
 				<flat_building id="tb0:flat_DNARoot" width="25.0">
-					<pos x="597.9819946289062" y="259.00299072265625" z="-30.0"/>
+					<pos x="597.9819946289062" y="264.00299072265625" z="-30.0"/>
 					<nhpr h="-90.0" p="0.0" r="-0.0"/>
 					<wall code="wall_md_bricks_ur" height="20.0">
 						<color a="1.0" b="0.28999999165534973" g="0.1599999964237213" r="0.3100000023841858"/>

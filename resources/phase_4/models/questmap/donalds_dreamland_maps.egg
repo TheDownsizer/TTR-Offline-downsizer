@@ -1,0 +1,259 @@
+<CoordinateSystem> { Z-up } 
+<Material> donalds_dreamland_9300_english {
+  <Scalar> baser { 0.800000 }
+  <Scalar> baseg { 0.800000 }
+  <Scalar> baseb { 0.800000 }
+  <Scalar> basea { 1.000000 }
+  <Scalar> roughness { 1.000000 }
+  <Scalar> metallic { 0.000000 }
+  <Scalar> local { 0.000000 }
+  <Scalar> diffr { 1.0 }
+  <Scalar> diffg { 1.0 }
+  <Scalar> diffb { 1.0 }
+}
+
+<Material> donalds_dreamland_9200_english {
+  <Scalar> baser { 0.800000 }
+  <Scalar> baseg { 0.800000 }
+  <Scalar> baseb { 0.800000 }
+  <Scalar> basea { 1.000000 }
+  <Scalar> roughness { 1.000000 }
+  <Scalar> metallic { 0.000000 }
+  <Scalar> local { 0.000000 }
+  <Scalar> diffr { 1.0 }
+  <Scalar> diffg { 1.0 }
+  <Scalar> diffb { 1.0 }
+}
+
+<Material> donalds_dreamland_9100_english {
+  <Scalar> baser { 0.800000 }
+  <Scalar> baseg { 0.800000 }
+  <Scalar> baseb { 0.800000 }
+  <Scalar> basea { 1.000000 }
+  <Scalar> roughness { 1.000000 }
+  <Scalar> metallic { 0.000000 }
+  <Scalar> local { 0.000000 }
+  <Scalar> diffr { 1.0 }
+  <Scalar> diffg { 1.0 }
+  <Scalar> diffb { 1.0 }
+}
+
+<Texture> donalds_dreamland_9100_english.png {
+  "../../maps/retooned/donalds_dreamland_9100_english.png"
+  <Scalar> envtype { MODULATE }
+  <Scalar> uv-name { UVMap }
+  <Scalar> minfilter { LINEAR_MIPMAP_LINEAR }
+  <Scalar> magfilter { LINEAR_MIPMAP_LINEAR }
+  <Scalar> wrap { REPEAT }
+}
+
+<Texture> donalds_dreamland_9200_english.png {
+  "../../maps/retooned/donalds_dreamland_9200_english.png"
+  <Scalar> envtype { MODULATE }
+  <Scalar> uv-name { UVMap }
+  <Scalar> minfilter { LINEAR_MIPMAP_LINEAR }
+  <Scalar> magfilter { LINEAR_MIPMAP_LINEAR }
+  <Scalar> wrap { REPEAT }
+}
+
+<Texture> donalds_dreamland_9300_english.png {
+  "../../maps/retooned/donalds_dreamland_9300_english.png"
+  <Scalar> envtype { MODULATE }
+  <Scalar> uv-name { UVMap }
+  <Scalar> minfilter { LINEAR_MIPMAP_LINEAR }
+  <Scalar> magfilter { LINEAR_MIPMAP_LINEAR }
+  <Scalar> wrap { REPEAT }
+}
+<Group> {
+  <Switch> { 1 }
+  <Scalar> fps { 2 }
+  <Group> donalds_dreamland_9100_english {
+    <Transform> {
+      <Matrix4> {
+        1.0 0.0 0.0 0.0 
+        0.0 1.0 0.0 0.0 
+        0.0 0.0 1.0 0.0 
+        0.0 0.0 0.0 1.0 
+      }
+    }
+    
+    <VertexPool> donalds_dreamland_9100_english {
+    
+      <Vertex> 0 {-0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 1.000000 
+        }
+      }
+      <Vertex> 1 {-0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 0.000000 
+        }
+      }
+      <Vertex> 2 {0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 1.000000 
+        }
+      }
+      <Vertex> 3 {0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 1.000000 
+        }
+      }
+      <Vertex> 4 {-0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 0.000000 
+        }
+      }
+      <Vertex> 5 {0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 0.000000 
+        }
+      }}
+    
+    
+    <Polygon> {
+      <TRef> { donalds_dreamland_9100_english.png }
+      <MRef> { donalds_dreamland_9100_english }
+      <Normal> {0.000000 -1.000000 0.000000}
+      <VertexRef> { 0 1 2 <Ref> { donalds_dreamland_9100_english }} 
+    }
+    <Polygon> {
+      <TRef> { donalds_dreamland_9100_english.png }
+      <MRef> { donalds_dreamland_9100_english }
+      <Normal> {0.000000 -1.000000 0.000000}
+      <VertexRef> { 3 4 5 <Ref> { donalds_dreamland_9100_english }} 
+    }
+  }
+  <Group> donalds_dreamland_9200_english {
+    <Transform> {
+      <Matrix4> {
+        1.0 0.0 0.0 0.0 
+        0.0 1.0 0.0 0.0 
+        0.0 0.0 1.0 0.0 
+        0.0 0.0 0.0 1.0 
+      }
+    }
+    
+    <VertexPool> donalds_dreamland_9200_english {
+    
+      <Vertex> 0 {-0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 1.000000 
+        }
+      }
+      <Vertex> 1 {-0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 0.000000 
+        }
+      }
+      <Vertex> 2 {0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 1.000000 
+        }
+      }
+      <Vertex> 3 {0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 1.000000 
+        }
+      }
+      <Vertex> 4 {-0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 0.000000 
+        }
+      }
+      <Vertex> 5 {0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 0.000000 
+        }
+      }}
+    
+    
+    <Polygon> {
+      <TRef> { donalds_dreamland_9200_english.png }
+      <MRef> { donalds_dreamland_9200_english }
+      <Normal> {0.000000 -1.000000 0.000000}
+      <VertexRef> { 0 1 2 <Ref> { donalds_dreamland_9200_english }} 
+    }
+    <Polygon> {
+      <TRef> { donalds_dreamland_9200_english.png }
+      <MRef> { donalds_dreamland_9200_english }
+      <Normal> {0.000000 -1.000000 0.000000}
+      <VertexRef> { 3 4 5 <Ref> { donalds_dreamland_9200_english }} 
+    }
+  }
+  <Group> donalds_dreamland_9300_english {
+    <Transform> {
+      <Matrix4> {
+        1.0 0.0 0.0 0.0 
+        0.0 1.0 0.0 0.0 
+        0.0 0.0 1.0 0.0 
+        0.0 0.0 0.0 1.0 
+      }
+    }
+    
+    <VertexPool> donalds_dreamland_9300_english {
+    
+      <Vertex> 0 {-0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 1.000000 
+        }
+      }
+      <Vertex> 1 {-0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 0.000000 
+        }
+      }
+      <Vertex> 2 {0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 1.000000 
+        }
+      }
+      <Vertex> 3 {0.500000 0.000000 0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 1.000000 
+        }
+      }
+      <Vertex> 4 {-0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          0.000000 0.000000 
+        }
+      }
+      <Vertex> 5 {0.500000 0.000000 -0.500000
+        <RGBA> { 1.000000 1.000000 1.000000 1.000000 }
+        <UV> UVMap {
+          1.000000 0.000000 
+        }
+      }}
+    
+    
+    <Polygon> {
+      <TRef> { donalds_dreamland_9300_english.png }
+      <MRef> { donalds_dreamland_9300_english }
+      <Normal> {0.000000 -1.000000 0.000000}
+      <VertexRef> { 0 1 2 <Ref> { donalds_dreamland_9300_english }} 
+    }
+    <Polygon> {
+      <TRef> { donalds_dreamland_9300_english.png }
+      <MRef> { donalds_dreamland_9300_english }
+      <Normal> {0.000000 -1.000000 0.000000}
+      <VertexRef> { 3 4 5 <Ref> { donalds_dreamland_9300_english }} 
+    }
+  }
+}

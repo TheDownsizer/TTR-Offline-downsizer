@@ -971,7 +971,7 @@ dclass DistributedToon : DistributedPlayer {
   setTokens(int16 tokens = 0) required broadcast ownrecv db;
   setMaxHp(int16 hitPoints = 15) required broadcast ownrecv db;
   setHp(int16 hp = 15) required broadcast ownrecv db;
-  toonUp(uint16 hpGained) broadcast ownrecv;
+  toonUp(int64 hpGained) broadcast ownrecv;
   takeDamage(uint16 hpLost) broadcast ownrecv;
   setBattleId(uint32 battleId = 0) required broadcast ram;
   setExperience(blob experience = [0*14]) required broadcast db;

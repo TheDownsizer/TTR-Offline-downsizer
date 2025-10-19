@@ -352,6 +352,16 @@ QuestsCogPartQuestAux = 'Retrieve:'
 QuestsCogPartQuestDesc = 'a Cog Suit Part'
 QuestsCogPartQuestDescC = '%(count)s Cog Suit Parts'
 QuestsCogPartQuestDescI = 'some Cog Suit Parts'
+
+QuestsTreasureQuestProgressString = '%(progress)s of %(num)s retrieved'
+QuestsTreasureQuestString = 'Retrieve %s'
+QuestsTreasureQuestSCString = 'I need to retrieve %(objective)s%(location)s.'
+QuestsTreasureQuestAux = 'Retrieve:'
+QuestsTreasureQuestDesc = 'a Package'
+QuestsTreasureQuestDescC = '%(count)s Packages'
+QuestsTreasureQuestDescI = 'some Packages'
+QuestsTreasureQuestHeadline = 'COLLECT'
+
 QuestsCogPartNewNewbieQuestObjective = 'Help a new Toon retrieve %s'
 QuestsCogPartOldNewbieQuestObjective = 'Help a Toon with %(laffPoints)d Laff or less retrieve %(objective)s'
 QuestsDeliverGagQuestProgress = '%(progress)s of %(numGags)s delivered'
@@ -2440,9 +2450,18 @@ SuitBackStabberP = 'Back Stabbers'
 SuitSpinDoctorP = 'Spin Doctors'
 SuitLegalEagleP = 'Legal Eagles'
 SuitBigWigP = 'Big Wigs'
+SuitForeman = 'Factory Foreman'
+SuitForemanS = 'a Factory Foreman'
+SuitForemanP = 'Factory Foremen'
+SuitMintAuditor = 'Mint Auditor'
+SuitMintAuditorS = 'a Mint Auditor'
+SuitMintAuditorP = 'Mint Auditors'
 SuitOfficeClerk = 'The Office Clerk'
 SuitOfficeClerkS = 'a The Office Clerk'
 SuitOfficeClerkP = 'Office Clerks'
+SuitClubPresident = 'Club President'
+SuitClubPresidentS = 'a Club President'
+SuitClubPresidentP = 'Club Presidents'
 SuitFaceoffDefaultTaunts = ['Boo!']
 SuitAttackDefaultTaunts = ['Take that!', 'Take a memo on this!']
 SuitAttackNames = {'Audit': 'Audit!',
@@ -7921,6 +7940,7 @@ NPCToonNames = {20000: 'Tutorial Tom',
  9310: 'Des Traction',
  9311: 'Dee Version',
  9312: 'Bo Nanapeel',
+ 9313: 'Dreamation',
  7001: 'N. Prisoned',
  7002: 'R.E. Leaseme',
  7003: 'Lemmy Owte',
@@ -8470,7 +8490,8 @@ zone2TitleDict = {2513: ('Toon Hall', ''),
  3827: ('Choral Wreaths', ''),
  3828: ("Snowman's Land", ''),
  3829: ('Pinecone Zone', ''),
- 3830: ('Wait and See Goggle Defogging', '')}
+ 3830: ('Wait and See Goggle Defogging', ''),
+ 9804: ('Dreaming Co, Building Dreams', '')}
 ClosetTimeoutMessage = 'Sorry, you ran out\n of time.'
 ClosetNotOwnerMessage = "This isn't your closet, but you may try on the clothes."
 ClosetPopupOK = lOK

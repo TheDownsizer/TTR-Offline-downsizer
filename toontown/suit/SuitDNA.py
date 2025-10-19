@@ -39,7 +39,10 @@ suitHeadTypes = ['f',
  'tf',
  'm',
  'mh',
- 'ofc']
+ 'frm',
+ 'aud',
+ 'ofc',
+ 'cbp']
 suitATypes = ['ym',
  'hh',
  'tbc',
@@ -53,17 +56,19 @@ suitATypes = ['ym',
  'nd',
  'tf',
  'm',
- 'mh']
+ 'mh',
+ 'cbp']
 suitBTypes = ['p',
  'ds',
  'b',
  'ac',
  'sd',
  'bc',
- 'ofc',
  'ls',
  'tm',
- 'ms']
+ 'ms',
+ 'ofc',
+ 'frm']
 suitCTypes = ['f',
  'mm',
  'cr',
@@ -72,7 +77,8 @@ suitCTypes = ['f',
  'tw',
  'mb',
  'cc',
- 'gh']
+ 'gh',
+ 'aud']
 suitDepts = ['c',
  'l',
  'm',
@@ -111,7 +117,10 @@ def getSuitBodyType(name):
         print('Unknown body type for suit name: ', name)
 
 supervisors2Dept = {
-    'ofc': 'l'
+    'frm': 's',
+    'aud': 'm',
+    'ofc': 'l',
+    'cbp': 'c'
 }
 
 def getSuitDept(name):
@@ -156,7 +165,7 @@ def getRandomSuitTypeExtended(level, rng = random):
     return random.randint(max(level - 7, 1), min(level, 8))
 
 def getRandomSuitTypeJointVenture(level, rng = random):
-    return random.randint(max(level - 6, 1), min(level, 8))
+    return random.randint(max(level - 7, 1), min(level, 8))
 
 def getRandomSuitTypeCustom(level, rng = random, customRange=None):
     if customRange:

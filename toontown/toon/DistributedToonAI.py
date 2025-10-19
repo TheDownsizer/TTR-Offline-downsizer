@@ -4757,7 +4757,7 @@ def maxToon(hasConfirmed='UNCONFIRMED'):
     toon.b_setInventory(toon.inventory.makeNetString())
 
     # Max out laff
-    toon.b_setMaxHp(ToontownGlobals.MaxHpLimit)
+    toon.b_setMaxHp(90)
     toon.toonUp(toon.getMaxHp() - toon.getHp())
 
     # Max out cog suits (ORDER: Bossbot, Lawbot, Cashbot, Sellbot)
@@ -4779,7 +4779,7 @@ def maxToon(hasConfirmed='UNCONFIRMED'):
 
     # General end game settings
     toon.b_setQuestCarryLimit(ToontownGlobals.MaxQuestCarryLimit)
-    toon.b_setRewardHistory(Quests.BOSSBOT_HQ_TIER, [])
+    toon.b_setRewardHistory(Quests.DL_TIER + 4, [])
     # ToonFest Tokens
     toon.b_setTokens(250)
     # Jellybeans

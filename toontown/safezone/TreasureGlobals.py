@@ -11,6 +11,7 @@ TreasureOZ = 6
 TreasureE = 7
 TreasureEF = 9
 TreasureTF = 10
+TreasureQuest = 11
 TreasureModels = {TreasureTT: ('phase_4/models/props/icecream', 'phase_4/audio/sfx/SZ_DD_treasure.ogg'),
  TreasureDD: ('phase_6/models/props/starfish_treasure', 'phase_4/audio/sfx/SZ_DD_treasure.ogg'),
  TreasureDG: ('phase_8/models/props/flower_treasure', 'phase_4/audio/sfx/SZ_DD_treasure.ogg'),
@@ -20,7 +21,8 @@ TreasureModels = {TreasureTT: ('phase_4/models/props/icecream', 'phase_4/audio/s
  TreasureOZ: ('phase_6/models/props/acorn_treasure', 'phase_4/audio/sfx/SZ_DD_treasure.ogg'),
  TreasureE: ('phase_5.5/models/props/popsicle_treasure', 'phase_4/audio/sfx/SZ_DD_treasure.ogg'),
  TreasureEF: ('phase_5.5/models/props/popsicle_treasure', 'phase_4/audio/sfx/SZ_DD_treasure.ogg'),
- TreasureTF: ('phase_6/models/events/ttr_m_ww_beanBag', 'phase_4/audio/sfx/SZ_DD_treasure.ogg')}
+ TreasureTF: ('phase_6/models/events/ttr_m_ww_beanBag', 'phase_4/audio/sfx/SZ_DD_treasure.ogg'),
+ TreasureQuest: ('phase_4/models/props/ttr_r_prp_qst_package', 'phase_4/audio/sfx/SZ_DD_treasure.ogg')}
 SafeZoneTreasureSpawns = {ToontownGlobals.ToontownCentral: (TreasureTT,
                                    3,
                                    [(-61.3, -9.1, 1.2),
@@ -191,6 +193,11 @@ SafeZoneTreasureSpawns = {ToontownGlobals.ToontownCentral: (TreasureTT,
                                      (-34, -88, 0.0)],
                                     10,
                                     3),
+                                9323: (TreasureQuest,
+                                    12,
+                                    [(365.215,  4.047,  -19.975),],
+                                    10,
+                                    1),
  ToontownGlobals.OutdoorZone: (TreasureOZ,
                                3,
                                [(-156.9, -118.9, 0.025),

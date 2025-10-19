@@ -66,14 +66,17 @@ class DistributedTreasure(DistributedObject.DistributedObject):
             self.makeNodePath()
         else:
             self.treasure.getChildren().detach()
-        if modelPath == 'phase_6/models/events/ttr_m_ww_beanBag':
+        if modelPath in ['phase_6/models/events/ttr_m_ww_beanBag', 'phase_4/models/props/ttr_r_prp_qst_package']:
             model = loader.loadModel(modelPath)
-            tokenbag = loader.loadTexture('phase_6/maps/ttr_t_ww_beanBag_token.jpg')
-            tokendecal = loader.loadTexture('phase_6/maps/ttr_t_ww_beanBag_decal_token.jpg', alphaPath='phase_6/maps/ttr_t_ww_beanBag_decal_token_a.rgb')
-            model.find('**/beanBag').setTexture(tokenbag, 1)
-            model.find('**/beanBag_decal').setTexture(tokendecal, 1)
+            if modelPath == 'phase_6/models/events/ttr_m_ww_beanBag':
+                tokenbag = loader.loadTexture('phase_6/maps/ttr_t_ww_beanBag_token.jpg')
+                tokendecal = loader.loadTexture('phase_6/maps/ttr_t_ww_beanBag_decal_token.jpg', alphaPath='phase_6/maps/ttr_t_ww_beanBag_decal_token_a.rgb')
+                model.find('**/beanBag').setTexture(tokenbag, 1)
+                model.find('**/beanBag_decal').setTexture(tokendecal, 1)
             model.setScale(2.5)
             model.hprInterval(5.0, Vec3(360, 0, 0)).loop()
+            model.setZ(model.getZ() + 1)
+            Sequence(model.posInterval(2.5, Point3(model.getX(), model.getY(), model.getZ() + 2), blendType='easeInOut'), model.posInterval(2.5, Point3(model.getX(), model.getY(), model.getZ()), blendType='easeInOut')).loop()
         else:
             model = loader.loadModel(modelPath)
         model.instanceTo(self.treasure)

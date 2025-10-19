@@ -114,13 +114,6 @@ bw = (('finger-wag', 'fingerwag', 5),
   ('magic3', 'magic3', 5),
  ('throw-object', 'throw-object', 5),
  ('throw-paper', 'throw-paper', 5))
-ofc = (('speak', 'speak', 5),
- ('magic1', 'magic1', 5),
- ('shhh', 'shhh', 5),
- ('roll-o-dex', 'roll-o-dex', 5),
- ('throw-object', 'throw-object', 5),
- ('glower', 'glower', 5),
- ('throw-paper', 'throw-paper', 5))
 sc = (('throw-paper', 'throw-paper', 3.5), ('watercooler', 'watercooler', 5), ('pickpocket', 'pickpocket', 5))
 pp = (('throw-paper', 'throw-paper', 5),  ('magic2', 'magic2', 5), ('glower', 'glower', 5), ('finger-wag', 'fingerwag', 5))
 tw = (('throw-paper', 'throw-paper', 3.5),
@@ -164,6 +157,25 @@ mh = (('finger-wag', 'fingerwag', 5),
  ('magic1', 'magic1', 5),
  ('smile', 'smile', 5),
 ('glower', 'glower', 5))
+frm = (('finger-wag', 'fingerwag', 5),
+ ('speak', 'speak', 5),
+ ('throw-object', 'throw-object', 5),
+ ('stomp', 'stomp', 5))
+aud = (('throw-paper', 'throw-paper', 3.5),
+ ('magic3', 'magic3', 5),
+ ('phone', 'phone', 3.5))
+ofc = (('speak', 'speak', 5),
+ ('magic1', 'magic1', 5),
+ ('shhh', 'shhh', 5),
+ ('roll-o-dex', 'roll-o-dex', 5),
+ ('throw-object', 'throw-object', 5),
+ ('glower', 'glower', 5),
+ ('throw-paper', 'throw-paper', 5))
+cbp = (('magic2', 'magic2', 5),
+ ('glower', 'glower', 5),
+ ('magic1', 'magic1', 5),
+ ('golf-club-swing', 'golf-club-swing', 5),
+ ('quick-jump', 'jump', 5))
 if not config.ConfigVariableBool('want-new-cogs', 0).getValue():
     ModelDict = {'a': ('/models/char/suitA-', 4),
      'b': ('/models/char/suitB-', 4),
@@ -538,12 +550,6 @@ class Suit(Avatar.Avatar):
             self.generateBody()
             self.generateHead('bigwig')
             self.setHeight(8.69)
-        elif dna.name == 'ofc':
-            self.scale = 7 / bSize
-            self.handColor = SuitDNA.legalPolyColor
-            self.generateBody()
-            self.generateHead('officeclerk')
-            self.setHeight(9)
         elif dna.name == 'sc':
             self.scale = scale / cSize
             self.handColor = SuitDNA.moneyPolyColor
@@ -644,6 +650,30 @@ class Suit(Avatar.Avatar):
             self.generateBody()
             self.generateHead('yesman')
             self.setHeight(8.95)
+        elif dna.name == 'frm':
+            self.scale = scale / bSize
+            self.handColor = Vec4(0.886, 0.737, 0.784, 1.0)
+            self.generateBody()
+            self.generateHead('factoryforeman')
+            self.setHeight(9)
+        elif dna.name == 'aud':
+            self.scale = scale / cSize
+            self.handColor = Vec4(0.686, 0.882, 0.831, 1.0)
+            self.generateBody()
+            self.generateHead('mintauditor')
+            self.setHeight(6.97)
+        elif dna.name == 'ofc':
+            self.scale = scale / bSize
+            self.handColor = Vec4(0.722, 0.769, 0.816, 1.0)
+            self.generateBody()
+            self.generateHead('officeclerk')
+            self.setHeight(9)
+        elif dna.name == 'cbp':
+            self.scale = scale / aSize
+            self.handColor = Vec4(0.950, 0.750, 0.750, 1.0)
+            self.generateBody()
+            self.generateHead('clubpresident')
+            self.setHeight(5.28)
         self.setName(SuitBattleGlobals.SuitAttributes[dna.name]['name'])
         self.getGeomNode().setScale(self.scale)
         self.generateHealthBar()

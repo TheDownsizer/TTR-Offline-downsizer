@@ -54,6 +54,11 @@ class SZHoodAI(HoodAI):
         self.treasurePlanner = SZTreasurePlannerAI(self.safezone, treasureType, healAmount, spawnPoints, spawnRate, maxTreasures)
         self.treasurePlanner.start()
 
+        if self.HOOD == ToontownGlobals.DonaldsDreamland:
+            treasureType, healAmount, spawnPoints, spawnRate, maxTreasures = TreasureGlobals.SafeZoneTreasureSpawns[9323]
+            self.treasurePlannerSnoozeSquare = SZTreasurePlannerAI(9323, treasureType, healAmount, spawnPoints, spawnRate, maxTreasures)
+            self.treasurePlannerSnoozeSquare.start()
+
     def spawnObjects(self):
         filename = self.air.genDNAFileName(self.safezone)
         self.air.dnaSpawner.spawnObjects(filename, self.safezone)

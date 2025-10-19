@@ -82,9 +82,9 @@ class QuestPoster(DirectFrame):
         self.questInfo = DirectLabel(parent=self.questFrame, relief=None, text='', text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=TEXT_WORDWRAP, textMayChange=1, pos=(0, 0, -0.0625))
         self.rewardText = DirectLabel(parent=self.questFrame, relief=None, text='', text_fg=self.colors['rewardRed'], text_scale=0.0425, text_align=TextNode.ALeft, text_wordwrap=17.0, textMayChange=1, pos=(-0.36, 0, -0.23))
         self.rewardText.hide()
-        self.lPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/ttr_t_gui_qst_toontask_scroll_iconFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=11.0, textMayChange=1)
+        self.lPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/ttr_t_gui_qst_toontask_scroll_iconFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=30.0, textMayChange=1)
         self.lPictureFrame.hide()
-        self.rPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/ttr_t_gui_qst_toontask_scroll_iconFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=11.0, textMayChange=1, pos=(0.18, 0, 0.13))
+        self.rPictureFrame = DirectFrame(parent=self.questFrame, relief=None, image=bookModel.find('**/ttr_t_gui_qst_toontask_scroll_iconFrame'), image_scale=IMAGE_SCALE_SMALL, text='', text_pos=(0, -0.11), text_fg=self.normalTextColor, text_scale=TEXT_SCALE, text_align=TextNode.ACenter, text_wordwrap=30.0, textMayChange=1, pos=(0.18, 0, 0.13))
         self.rPictureFrame.hide()
         self.lQuestIcon = DirectFrame(parent=self.lPictureFrame, relief=None, text=' ', text_font=ToontownGlobals.getSuitFont(), text_pos=(0, -0.03), text_fg=self.normalTextColor, text_scale=0.13, text_align=TextNode.ACenter, text_wordwrap=13.0, textMayChange=1)
         self.lQuestIcon.setColorOff(-1)
@@ -571,6 +571,15 @@ class QuestPoster(DirectFrame):
                 rIconGeom = None
                 lIconGeomScale = rIconGeomScale
                 rIconGeomScale = 1
+        #FindPackageQuest
+        elif quest.getType() == Quests.FindPackageQuest:
+            frameBgColor = 'green'
+            bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+            lIconGeom = bookModel.find('**/package')
+            lIconGeomScale = 0.12
+            bookModel.removeNode()
+            infoText = quest.getLocationName()
+                
         elif quest.getType() == Quests.CogPartQuest:
             frameBgColor = 'green'
             bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
@@ -814,10 +823,14 @@ class QuestPoster(DirectFrame):
                     lIconGeomScale = IMAGE_SCALE_SMALL
                     cogIcons.removeNode()
             elif quest.getType() == Quests.CogLevelQuest:
-                cogIcons = loader.loadModel('phase_3/models/gui/cog_icons')
-                lIconGeom = cogIcons.find('**/cog')
-                lIconGeomScale = IMAGE_SCALE_SMALL
-                cogIcons.removeNode()
+                if quest.getCogType() != Quests.Any:
+                    lIconGeom = self.createSuitHead(quest.getCogType())
+                    lIconGeomScale = IMAGE_SCALE_SMALL
+                else:
+                    cogIcons = loader.loadModel('phase_3/models/gui/cog_icons')
+                    lIconGeom = cogIcons.find('**/cog')
+                    lIconGeomScale = IMAGE_SCALE_SMALL
+                    cogIcons.removeNode()
             elif quest.getType() == Quests.CogNewbieQuest:
                 if quest.getCogType() != Quests.Any:
                     rIconGeom = self.createSuitHead(quest.getCogType())
