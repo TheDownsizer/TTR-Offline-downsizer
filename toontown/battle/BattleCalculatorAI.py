@@ -321,10 +321,7 @@ class BattleCalculatorAI(DirectObject.DirectObject):
         return result
 
     def __targetDefense(self, suit, atkTrack):
-        if atkTrack == HEAL:
-            return 0
-        suitDef = SuitBattleGlobals.SuitAttributes[suit.dna.name]['def'][suit.getLevel()]
-        return -suitDef
+        return -1
 
     def __createToonTargetList(self, attackIndex):
         """Create target list using new modular track system"""

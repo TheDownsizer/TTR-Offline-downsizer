@@ -8,9 +8,9 @@ class DNAColor(DNAPropertyElement):
     def __init__(self, r="1", g="1", b="1", a="1"):
         DNAPropertyElement.__init__(self)
 
-        self.color = (float(r), float(g), float(b), float(a))
+        self.color = (float(r) * 1.3, float(g) * 1.3, float(b) * 1.3, float(a))
 
     def _apply(self, parent):
-        parent.setColor(self.color)
+        parent.setColorScale(self.color)
 
 registerElement(DNAColor)

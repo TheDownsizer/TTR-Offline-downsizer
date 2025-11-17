@@ -8,7 +8,7 @@ server-version ttroff-beta-v2.12.2
 sync-video #f
 want-dev #f
 preload-avatars #t
-texture-anisotropic-degree 16
+#texture-anisotropic-degree 16
 want-speedhack-fix #t
 load-display pandagl
 default-directnotify-level info
@@ -94,4 +94,4 @@ mega-invasion-cog-type tm
 want-toonfest #t
 want-doomsday #f
 
-texture-anisotropic-degree 16
+#texture-anisotropic-degree 16
