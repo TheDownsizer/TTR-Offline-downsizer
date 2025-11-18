@@ -8,7 +8,7 @@ server-version ttroff-beta-v2.12.2
 sync-video #f
 want-dev #f
 preload-avatars #t
-texture-anisotropic-degree 2
+texture-anisotropic-degree 16
 want-speedhack-fix #t
 load-display pandagl
 default-directnotify-level info

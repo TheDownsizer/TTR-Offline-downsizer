@@ -41,10 +41,12 @@ class DNAFlatBuilding(DNANode):
 
         # Finally, flatten down:
         np.flattenStrong()
+        np.setColorScale(np.getColorScale()[0] * 0.9, np.getColorScale()[1] * 0.9, np.getColorScale()[2] * 0.9, 1)
 
     def generateSuitGeometry(self, storage, np, height, barrier):
         node = np.getParent().attachNewNode('sb' + self.id[2:])
         node.setTransform(np.getTransform())
+        np.setColorScale(np.getColorScale()[0] * 0.8, np.getColorScale()[1] * 0.8, np.getColorScale()[2] * 0.8, 1)
 
         barrier.copyTo(node)
 

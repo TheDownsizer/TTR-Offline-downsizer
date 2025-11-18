@@ -15,7 +15,7 @@ class DNADoor(DNANode):
     @staticmethod
     def setupDoor(doorNodePath, parentNode, doorOrigin, dnaStore, block, color):
         doorNodePath.setPosHprScale(doorOrigin, (0,0,0), (0,0,0), (1,1,1))
-        doorNodePath.setColor(color[0] * 1.7, color[1] * 1.7, color[2] * 1.7, 1)
+        doorNodePath.setColorScale(color[0] * 2.5, color[1] * 2.5, color[2] * 2.5, 1)
         doorFlat = doorNodePath.find('door_*_flat')
         doorFlat.flattenStrong()
         #doorFlat.setDepthOffset(1) # Can cause building shadows to not properly show up on the doors...
