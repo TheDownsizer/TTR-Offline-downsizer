@@ -575,8 +575,16 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.FindPackageQuest:
             frameBgColor = 'green'
             bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+            rIconGeomScale = IMAGE_SCALE_SMALL
+            auxText = TTLocalizer.QuestPosterAuxIn
+            captions = [list(map(string.capwords, quest.getObjectiveStrings()))]
+            captions.append(["A Hidden Location"])
+            t_icons = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_qst_toontask_icons')
+            rIconGeom = t_icons.find('**/ttr_t_gui_qst_search')
             lIconGeom = bookModel.find('**/package')
             lIconGeomScale = 0.12
+            lPos.setX(-0.18)
+            t_icons.removeNode()
             bookModel.removeNode()
             infoText = quest.getLocationName()
                 

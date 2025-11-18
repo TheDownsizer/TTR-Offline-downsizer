@@ -1366,6 +1366,9 @@ class FindPackageQuest(LocationBasedQuest):
     def getPackageZoneId(self):
         return self.quest[2]
 
+    def getPackageName(self):
+        return self.quest[3]
+
     def getCompletionStatus(self, av, questDesc, npc = None):
         questId, fromNpcId, toNpcId, rewardId, toonProgress = questDesc
         questComplete = toonProgress >= self.getNumParts()
@@ -1383,9 +1386,9 @@ class FindPackageQuest(LocationBasedQuest):
     def getObjectiveStrings(self):
         count = self.getNumParts()
         if count == 1:
-            text = TTLocalizer.QuestsTreasureQuestDesc
+            text = TTLocalizer.QuestsTreasureQuestDesc + self.getPackageName()
         else:
-            text = TTLocalizer.QuestsTreasureQuestDescC
+            text = TTLocalizer.QuestsTreasureQuestDescC + self.getPackageName()
         return (text % {'count': count},)
 
     def getString(self):
@@ -16809,7 +16812,7 @@ QuestDict = {
         DefaultDialog),
  9604: (DL_TIER + 4,
         Cont,
-        (FindPackageQuest, ToontownGlobals.SnoozeSquare, 1, 9323),
+        (FindPackageQuest, ToontownGlobals.SnoozeSquare, 1, 9323, "Dream Tools"),
         9313,
         9313,
         NA,
