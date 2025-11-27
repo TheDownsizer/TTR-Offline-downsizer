@@ -2050,6 +2050,7 @@ def doPromotion(attack):
     auditorCoins.setPos(extraSuit.getPos())
     auditorCoins.reparentTo(render)
     auditorCoins.setZ(-4)
+    destPos, destHpr = battle.getActorPosHpr(extraSuit, battle.activeSuits)
     auditorOtherSuitTrack = Sequence(
         Wait(3.0),
         Func(extraSuit.unstickSuit),
@@ -2057,8 +2058,10 @@ def doPromotion(attack):
         Parallel(Func(extraSuit.setZ, 3), auditorCoins.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), 0), blendType='easeInOut'), ActorInterval(extraSuit, 'slip-forward', startTime=2.43)))
 
     auditorCoinsLowerTrack = Parallel(
-        extraSuit.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), 0), blendType='easeInOut'),
+        extraSuit.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), destPos[2]), blendType='easeInOut'),
         Sequence(auditorCoins.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), -4), blendType='easeInOut'),
+        Func(extraSuit.loop, 'neutral'),
+        Func(extraSuit.stickSuit),
         Func(auditorCoins.hide))
     )
 

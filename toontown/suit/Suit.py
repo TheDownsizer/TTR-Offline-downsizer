@@ -390,7 +390,8 @@ class Suit(Avatar.Avatar):
         self.isRental = 0
         self.suitsStuckToFloor = []
         self.customSuits = {
-            'ofc': ['ttr_t_ene_lawbotClerk_blazer.jpg', 'ttr_t_ene_lawbotClerk_leg.jpg', 'ttr_t_ene_lawbotClerk_sleeve.jpg']
+            'ofc': ['ttr_t_ene_lawbotClerk_blazer.jpg', 'ttr_t_ene_lawbotClerk_leg.jpg', 'ttr_t_ene_lawbotClerk_sleeve.jpg'],
+            'aud': ['ttr_t_ene_cashbotAuditor_blazer.jpg', 'ttr_t_ene_cashbotAuditor_leg.jpg', 'ttr_t_ene_cashbotAuditor_sleeve.jpg']
         }
         return
 

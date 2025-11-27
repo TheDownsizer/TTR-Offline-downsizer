@@ -74,15 +74,22 @@ class LevelSuitPlannerAI(DirectObject.DirectObject):
     def __genSuitObject(self, suitDict, reserve):
         suit = self.cogCtor(simbase.air, self)
         dna = SuitDNA.SuitDNA()
-        dna.newSuitRandom(level=SuitDNA.getRandomSuitTypeExtended(suitDict['level']), dept=suitDict['track'])
+        if 'name' in suitDict:
+            dna.newSuit(suitDict['name'])
+        else:
+            dna.newSuitRandom(level=SuitDNA.getRandomSuitTypeExtended(suitDict['level']), dept=suitDict['track'])
         suit.dna = dna
-        suit.setLevel(suitDict['level'])
+        if suit.dna.name == 'aud':
+            suit.setLevel(32)
+        else:
+            suit.setLevel(suitDict['level'])
         suit.setSkeleRevives(0)
         suit.setLevelDoId(self.level.doId)
         suit.setCogId(suitDict['cogId'])
         suit.setReserve(reserve)
         if suitDict['skeleton']:
-            suit.setSkelecog(1)
+            if suit.dna.name != 'aud':
+                suit.setSkelecog(1)
         suit.generateWithRequired(suitDict['zoneId'])
         suit.boss = suitDict['boss']
         return suit

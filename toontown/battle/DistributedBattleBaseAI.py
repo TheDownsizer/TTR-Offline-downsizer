@@ -1472,7 +1472,10 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                                     else:
                                         trapDict[targetId] = [attack]
                                     needUpdate = 1
-                                died = attack[SUIT_DIED_COL] & 1 << targetIndex
+                                try:
+                                    died = attack[SUIT_DIED_COL] & 1 << targetIndex
+                                except:
+                                    died = attack[SUIT_DIED_COL] & 1 << 0
                                 if died != 0:
                                     if deadSuits.count(suit) == 0:
                                         deadSuits.append(suit)
@@ -1512,7 +1515,10 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                                                 if otherSuit.doId in trapDict:
                                                     del trapDict[otherSuit.doId]
 
-                                died = attack[SUIT_DIED_COL] & 1 << targetIndex
+                                try:
+                                    died = attack[SUIT_DIED_COL] & 1 << targetIndex
+                                except:
+                                    died = attack[SUIT_DIED_COL] & 1 << 0
                                 if died != 0:
                                     if deadSuits.count(target) == 0:
                                         deadSuits.append(target)
@@ -1612,7 +1618,10 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                         toon = self.getToon(activeToon)
                         if toon != None:
                             targetIndex = self.activeToons.index(activeToon)
-                            toonDied = self.suitAttacks[i][TOON_DIED_COL] & 1 << targetIndex
+                            try:
+                                toonDied = self.suitAttacks[i][TOON_DIED_COL] & 1 << targetIndex
+                            except:
+                                toonDied = self.suitAttacks[i][TOON_DIED_COL] & 1 << 0
                             if targetIndex >= len(hps):
                                 self.notify.warning('DAMAGE: toon %s is no longer in battle!' % activeToon)
                             else:

@@ -371,7 +371,7 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=4.7))
     elif name == PROMOTION:
         camTrack.append(defaultCamera(openShotDuration=3))
-        camTrack.append(randomAttackCam(attack['suit'], extraSuit, attack['battle'], attackDuration, 4))
+        camTrack.append(avatarCloseUpThreeQuarterRightShotWide(extraSuit, 4))
     elif name == CALCULATE:
         camTrack.append(defaultCamera())
     elif name == CANNED:

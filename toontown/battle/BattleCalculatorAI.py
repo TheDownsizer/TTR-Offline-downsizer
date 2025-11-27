@@ -154,7 +154,10 @@ class BattleCalculatorAI(DirectObject.DirectObject):
         if suitsToChooseFrom == []:
             return
         randomSuit = random.choice(suitsToChooseFrom)
-        
+        if randomSuit.died:
+            return
+        if randomSuit.currHP <= 0:
+            return
         
         randomSuitId = randomSuit.doId
         self.__removeLured(randomSuitId)
