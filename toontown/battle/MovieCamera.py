@@ -347,6 +347,10 @@ def chooseSuitShot(attack, attackDuration):
     suit = attack['suit']
     name = attack['id']
     battle = attack['battle']
+    if name == PROMOTION:
+        attackList = attack['attackList']
+        extraSuitId = attackList[SUIT_EXTRAS_COL][0]
+        extraSuit = base.cr.doId2do.get(extraSuitId)
     camTrack = Sequence()
 
     def defaultCamera(attack = attack, attackDuration = attackDuration, openShotDuration = 3.5, target = target):
@@ -365,6 +369,9 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.4))
     elif name == BUZZ_WORD:
         camTrack.append(defaultCamera(openShotDuration=4.7))
+    elif name == PROMOTION:
+        camTrack.append(defaultCamera(openShotDuration=3))
+        camTrack.append(randomAttackCam(attack['suit'], extraSuit, attack['battle'], attackDuration, 4))
     elif name == CALCULATE:
         camTrack.append(defaultCamera())
     elif name == CANNED:

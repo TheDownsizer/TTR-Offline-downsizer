@@ -820,7 +820,10 @@ class Movie(DirectObject.DirectObject):
                             tdict['toon'] = target
                             tdict['hp'] = hps[targetIndex]
                             self.notify.debug('DAMAGE: toon: %d hit for hp: %d' % (target.doId, hps[targetIndex]))
-                            toonDied = sa[TOON_DIED_COL] & 1 << targetIndex
+                            if targetIndex == -1:
+                                toonDied = sa[TOON_DIED_COL] & 1 << 0
+                            else:
+                                toonDied = sa[TOON_DIED_COL] & 1 << targetIndex
                             tdict['died'] = toonDied
                             targets.append(tdict)
 
@@ -839,7 +842,10 @@ class Movie(DirectObject.DirectObject):
                     tdict['toon'] = target
                     tdict['hp'] = hps[targetIndex]
                     self.notify.debug('DAMAGE: toon: %d hit for hp: %d' % (target.doId, hps[targetIndex]))
-                    toonDied = sa[TOON_DIED_COL] & 1 << targetIndex
+                    try:
+                        toonDied = sa[TOON_DIED_COL] & 1 << targetIndex
+                    except:
+                        toonDied = sa[TOON_DIED_COL] & 1 << 0
                     tdict['died'] = toonDied
                     toonIndex = self.battle.activeToons.index(target)
                     rightToons = []

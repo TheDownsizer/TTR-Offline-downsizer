@@ -20,7 +20,6 @@ class DNAFlatBuilding(DNANode):
     def _postGenerate(self, storage, np):
         height = np.getPythonTag('wall_height') or 0.0
         np.clearPythonTag('wall_height')
-        np.setColor(np.getColorScale()[0], np.getColorScale()[1], np.getColorScale()[2], 1)
 
         # First, set up collisions. We need a (self.width, height)-sized square.
         barrierNode = storage.findNode('wall_camera_barrier')
@@ -41,12 +40,11 @@ class DNAFlatBuilding(DNANode):
                 collisionNP.setName('KnockKnockDoorSphere_%d' % block)
 
         # Finally, flatten down:
-        #np.flattenStrong()
+        np.flattenStrong()
 
     def generateSuitGeometry(self, storage, np, height, barrier):
         node = np.getParent().attachNewNode('sb' + self.id[2:])
         node.setTransform(np.getTransform())
-        np.setColor(np.getColorScale()[0], np.getColorScale()[1], np.getColorScale()[2], 1)
 
         barrier.copyTo(node)
 
@@ -69,7 +67,7 @@ class DNAFlatBuilding(DNANode):
             for door in DNAUtil.getChildrenOfType(self, DNAFlatDoor):
                 door.generateSuitGeometry(storage, wallNode)
 
-        #node.flattenStrong()
+        node.flattenStrong()
         node.stash()
 
 registerElement(DNAFlatBuilding)

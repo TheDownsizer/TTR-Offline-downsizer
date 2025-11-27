@@ -26,7 +26,7 @@ from toontown.launcher import ToontownDownloadWatcher
 from toontown.toontowngui import TTDialog
 from sys import platform
 from .DisplayOptions import DisplayOptions
-import otp.ai.DiagnosticMagicWords
+#import otp.ai.DiagnosticMagicWords
 import time
 from panda3d.core import TrueClock
 

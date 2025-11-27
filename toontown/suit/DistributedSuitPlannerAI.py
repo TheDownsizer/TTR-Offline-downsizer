@@ -663,11 +663,11 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     def generateWithRequired(self, zoneId):
         DistributedObjectAI.DistributedObjectAI.generateWithRequired(self, zoneId)
         if self.zoneId in [4100, 4200, 4300]:
-            self.spawnSupervisorCog('ofc', 32)
-            myTask=taskMgr.doMethodLater(60*30, self.checkForClerk, 'clerk_spawner_easy')
+            self.spawnSupervisorCog('aud', 32)
+            myTask=taskMgr.doMethodLater(60*30, self.checkForClerk, 'auditor_spawner_easy')
         elif self.zoneId in [3100, 3200, 3300]:
-            self.spawnSupervisorCog('ofc', 33)
-            myTask=taskMgr.doMethodLater(60*30, self.checkForClerkHard, 'clerk_spawner_hard')
+            self.spawnSupervisorCog('aud', 33)
+            myTask=taskMgr.doMethodLater(60*30, self.checkForClerkHard, 'auditor_spawner_hard')
     
     def spawnSupervisorCog(self, name, level):
         streetPoints = self.streetPointList[:]
@@ -852,11 +852,11 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if suitLevel == None and buildingHeight != None:
             suitLevel = self.chooseSuitLevel(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL], buildingHeight)
         suitLevel, suitType, suitTrack = self.pickLevelTypeAndTrack(suitLevel, suitType, suitTrack)
-        if suitName == 'ofc':
+        if suitName in ['ofc', 'aud', 'frm', 'cbp']:
             if self.zoneId in [4100, 4200, 4300]:
-                newSuit.setupSupervisorDNA(32, 'ofc', 'l')
+                newSuit.setupSupervisorDNA(32, suitName, SuitDNA.supervisors2Dept[suitName])
             else:
-                newSuit.setupSupervisorDNA(33, 'ofc', 'l')
+                newSuit.setupSupervisorDNA(33, suitName, SuitDNA.supervisors2Dept[suitName])
         else:
             newSuit.setupSuitDNA(suitLevel, suitType, suitTrack)
         newSuit.buildingHeight = buildingHeight
@@ -1423,7 +1423,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             if config.ConfigVariableBool('suits-always-join', 0).getValue():
                 return 1
             for suit in battle.suits:
-                if suit.dna.name == 'ofc':
+                if suit.dna.name in ['ofc', 'aud', 'frm', 'cbp']:
                     return 1
             jChanceList = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_JCHANCE]
             ratioIdx = len(battle.toons) - battle.numSuitsEver + 2

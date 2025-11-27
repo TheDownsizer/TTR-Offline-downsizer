@@ -15,35 +15,35 @@ class DNADoor(DNANode):
     @staticmethod
     def setupDoor(doorNodePath, parentNode, doorOrigin, dnaStore, block, color):
         doorNodePath.setPosHprScale(doorOrigin, (0,0,0), (0,0,0), (1,1,1))
-        doorNodePath.setColorScale(color[0] * 2.5, color[1] * 2.5, color[2] * 2.5, 1)
+        doorNodePath.setColor(color, 0)
         doorFlat = doorNodePath.find('door_*_flat')
-        #doorFlat.flattenMedium()
+        doorFlat.flattenStrong()
         #doorFlat.setDepthOffset(1) # Can cause building shadows to not properly show up on the doors...
         doorFlat.setEffect(DecalEffect.make())
 
         leftHole = doorNodePath.find('door_*_hole_left')
-        #leftHole.flattenMedium()
+        leftHole.flattenStrong()
         leftHole.setName('doorFrameHoleLeft')
         leftHole.wrtReparentTo(doorFlat, 0)
         leftHole.hide()
         leftHole.setColor((0, 0, 0, 1), 0)
 
         rightHole = doorNodePath.find('door_*_hole_right')
-        #rightHole.flattenMedium()
+        rightHole.flattenStrong()
         rightHole.setName('doorFrameHoleRight')
         rightHole.wrtReparentTo(doorFlat, 0)
         rightHole.hide()
         rightHole.setColor((0, 0, 0, 1), 0)
 
         leftDoor = doorNodePath.find('door_*_left')
-        #leftDoor.flattenMedium()
+        leftDoor.flattenStrong()
         leftDoor.setName('leftDoor')
         leftDoor.hide()
         leftDoor.wrtReparentTo(parentNode, 0)
         leftDoor.setColor(color, 0)
 
         rightDoor = doorNodePath.find('door_*_right')
-        #rightDoor.flattenMedium()
+        rightDoor.flattenStrong()
         rightDoor.setName('rightDoor')
         rightDoor.hide()
         rightDoor.wrtReparentTo(parentNode, 0)
@@ -54,7 +54,7 @@ class DNADoor(DNANode):
         doorTrigger.wrtReparentTo(parentNode, 0)
         doorTrigger.setName('door_trigger_%s' % block)
 
-        #doorNodePath.flattenMedium()
+        doorNodePath.flattenMedium()
 
     def _makeNode(self, storage, parent):
         frontNode = parent.find('**/*building*_front')

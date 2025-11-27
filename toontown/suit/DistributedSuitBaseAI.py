@@ -22,6 +22,7 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         self.maxSkeleRevives = 0
         self.reviveFlag = 0
         self.buildingHeight = None
+        self.died = 0
         return
 
     def generate(self):
@@ -41,7 +42,7 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
             self.requestDelete()
         return
 
-    def setLevel(self, lvl = None):
+    def setLevel(self, lvl = None, wantClient=True):
         attributes = SuitBattleGlobals.SuitAttributes[self.dna.name]
         if lvl != None:
             self.level = lvl - attributes['level'] - 1
@@ -49,7 +50,8 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
             self.level = SuitBattleGlobals.pickFromFreqList(attributes['freq'])
         self.notify.debug('Assigning level ' + str(lvl))
         if hasattr(self, 'doId'):
-            self.d_setLevelDist(self.level)
+            if wantClient:
+                self.d_setLevelDist(self.level)
         hp = attributes['hp'][self.level]
         self.maxHP = hp
         self.currHP = hp
@@ -142,6 +144,8 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
             self.currHP = self.maxHP
         else:
             self.currHP = hp
+        if self.currHP <= 0:
+            self.died = 1
 
     def b_setHP(self, hp):
         self.setHP(hp)

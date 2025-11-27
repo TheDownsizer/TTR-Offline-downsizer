@@ -27,10 +27,7 @@ class DNATypesetter:
         for i,text in enumerate(texts):
             tn = TextNode('text')
             tn.setText(text)
-            try:
-                font = loader.loadFont('phase_3/fonts/' + self.baseline.code + '.ttf')
-            except:
-                font = loader.loadFont('phase_3/fonts/' + self.baseline.code + '.bam')
+            font = self.dnaStorage.findFont(self.baseline.code)
             if font == None:
                 font = TextProperties.getDefaultFont()
             tn.setFont(font)

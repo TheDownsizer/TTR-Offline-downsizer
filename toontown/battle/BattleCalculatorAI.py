@@ -138,6 +138,36 @@ class BattleCalculatorAI(DirectObject.DirectObject):
                                 [randomSuitId]])
         randomSuit.setHP(randomSuit.currHP + 30)
     
+    def auditorPromotion(self):
+        if len(self.battle.activeSuits) == 1:
+            return
+        clerk = self.findSuitIdFromName('aud')
+        if clerk is None:
+            return
+        suitsToChooseFrom = self.battle.activeSuits[:]
+        for suit in suitsToChooseFrom:
+            if suit.died:
+                suitsToChooseFrom.remove(suit)
+            if suit.dna.name == 'aud':
+                suitsToChooseFrom.remove(suit)
+                break
+        if suitsToChooseFrom == []:
+            return
+        randomSuit = random.choice(suitsToChooseFrom)
+        
+        
+        randomSuitId = randomSuit.doId
+        self.__removeLured(randomSuitId)
+        self.battle.suitAttacks.append([clerk,
+                                4,
+                                -1,
+                                [0, 0, 0, 0],
+                                0,
+                                0,
+                                0,
+                                [randomSuitId]])
+        randomSuit.setLevel(randomSuit.getActualLevel() + 1, wantClient=False)
+    
     def findSuitIdFromName(self, suitName):
         for suit in self.battle.activeSuits:
             if suit.dna.name == suitName:
@@ -1316,10 +1346,10 @@ class BattleCalculatorAI(DirectObject.DirectObject):
                 return None
 
         self.__calculateToonAttacks()
-        clerk = self.findSuitIdFromName('ofc')
         #self.__removeLured(clerk)
         self.__updateLureTimeouts()
         #self.clerkBookSmart()
+        self.auditorPromotion()
         self.clerkSoundRetaliation()
         
         self.__calculateSuitAttacks()

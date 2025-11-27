@@ -1094,7 +1094,11 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,  # full cog name used in
                     ('PowerTie',
                         (5,9),
                         (70,75),
-                        (25,25)))},
+                        (25,25)),
+                    ('Promotion',
+                        (5,9),
+                        (70,75),
+                        (0,0)))},
       'cbp': {'name': TTLocalizer.SuitClubPresident,
            'singularname': TTLocalizer.SuitClubPresidentS,
            'pluralname': TTLocalizer.SuitClubPresidentP,
@@ -1155,6 +1159,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'GlowerPower': ('glower', ATK_TGT_SINGLE),
  'Shhhh': ('shhh', ATK_TGT_GROUP),
  'BookSmart': ('speak', ATK_TGT_GROUP),
+ 'Promotion': ('promoting', ATK_TGT_SINGLE),
  'GuiltTrip': ('magic1', ATK_TGT_GROUP),
  'HalfWindsor': ('throw-paper', ATK_TGT_SINGLE),
  'HangUp': ('phone', ATK_TGT_SINGLE),
@@ -1231,6 +1236,7 @@ FREEZE_ASSETS = list(SuitAttacks.keys()).index('FreezeAssets')
 GAVEL = list(SuitAttacks.keys()).index('Gavel')
 SHHHH = list(SuitAttacks.keys()).index('Shhhh')
 BOOK_SMART = list(SuitAttacks.keys()).index('BookSmart')
+PROMOTION = list(SuitAttacks.keys()).index('Promotion')
 GLOWER_POWER = list(SuitAttacks.keys()).index('GlowerPower')
 GUILT_TRIP = list(SuitAttacks.keys()).index('GuiltTrip')
 HALF_WINDSOR = list(SuitAttacks.keys()).index('HalfWindsor')

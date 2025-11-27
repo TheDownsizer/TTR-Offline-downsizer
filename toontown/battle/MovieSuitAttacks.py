@@ -177,6 +177,8 @@ def doSuitAttack(attack):
         suitTrack = doShhhh(attack)
     elif name == BOOK_SMART:
         suitTrack = doBookSmart(attack)
+    elif name == PROMOTION:
+        suitTrack = doPromotion(attack)
     elif name == GUILT_TRIP:
         suitTrack = doGuiltTrip(attack)
     elif name == HALF_WINDSOR:
@@ -2015,6 +2017,64 @@ def doBookSmart(attack):
 
     damageAnims = [['slip-backward', 0.01, 0.35]]
     return Parallel(suitTrack, result)
+
+def doPromotion(attack):
+    suit = attack['suit']
+    targets = attack['target']
+    battle = attack['battle']
+    attackList = attack['attackList']
+    extraSuitId = attackList[SUIT_EXTRAS_COL][0]
+    extraSuit = base.cr.doId2do.get(extraSuitId)
+    leftKnives = []
+    rightKnives = []
+    for i in range(0, 3):
+        leftKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+        rightKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+
+    suitTrack = Sequence(getSuitAnimTrack(attack))
+    suitName = suit.getStyleName()
+    if suitName == 'hh':
+        leftPosPoints = [Point3(0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+    elif suitName == 'tbc':
+        leftPosPoints = [Point3(0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+    else:
+        leftPosPoints = [Point3(0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+    leftKnifeTracks = Parallel()
+    rightKnifeTracks = Parallel()
+
+    auditorSfx = loader.loadSfx('phase_4/audio/sfx/ttr_s_ene_cgc_cashbotAuditor_promoting.ogg')
+    auditorCoins = loader.loadModel('phase_5/models/props/ttr_m_ara_cbg_payRaise.bam')
+    auditorCoins.setPos(extraSuit.getPos())
+    auditorCoins.reparentTo(render)
+    auditorCoins.setZ(-4)
+    auditorOtherSuitTrack = Sequence(
+        Wait(3.0),
+        Func(extraSuit.unstickSuit),
+        ActorInterval(extraSuit, 'pie-small-react', duration=0.2), Func(extraSuit.setLevel, extraSuit.getLevel() + 1), Func(extraSuit.showHpText, extraSuit.getMaxHP() - extraSuit.getHP()), Func(extraSuit.setHP, extraSuit.getMaxHP()),
+        Parallel(Func(extraSuit.setZ, 3), auditorCoins.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), 0), blendType='easeInOut'), ActorInterval(extraSuit, 'slip-forward', startTime=2.43)))
+
+    auditorCoinsLowerTrack = Parallel(
+        extraSuit.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), 0), blendType='easeInOut'),
+        Sequence(auditorCoins.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), -4), blendType='easeInOut'),
+        Func(auditorCoins.hide))
+    )
+
+    auditorPromoteTrack = Sequence(
+        Parallel(auditorOtherSuitTrack,
+        Sequence(Wait(0.3), ActorInterval(suit, 'promoting')),
+        SoundInterval(auditorSfx, node=suit)),
+        auditorCoinsLowerTrack,
+        Func(auditorCoins.removeNode)
+    )
+
+    result = Sequence(auditorPromoteTrack)
+    
+
+    damageAnims = [['slip-backward', 0.01, 0.35]]
+    return Parallel(result)
 
 def doBeguile(attack):
     suit = attack['suit']
