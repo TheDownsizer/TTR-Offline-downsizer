@@ -4757,7 +4757,7 @@ def maxToon(hasConfirmed='UNCONFIRMED'):
     toon.b_setInventory(toon.inventory.makeNetString())
 
     # Max out laff
-    toon.b_setMaxHp(90)
+    toon.b_setMaxHp(ToontownGlobals.MaxHpLimit)
     toon.toonUp(toon.getMaxHp() - toon.getHp())
 
     # Max out cog suits (ORDER: Bossbot, Lawbot, Cashbot, Sellbot)

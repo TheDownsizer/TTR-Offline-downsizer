@@ -53,8 +53,8 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
             if wantClient:
                 self.d_setLevelDist(self.level)
         hp = attributes['hp'][self.level]
-        self.maxHP = hp
-        self.currHP = hp
+        self.maxHP = hp * (3 + attributes['level'])
+        self.currHP = hp * (3 + attributes['level'])
 
     def getLevelDist(self):
         return self.getLevel()

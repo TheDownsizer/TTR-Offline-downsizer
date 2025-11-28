@@ -144,6 +144,7 @@ class GroupTargetAttackCalculator(BaseCogAttackCalculator):
                 the_suit = self.battle.findSuit(attack[SUIT_ID_COL])
                 attack_info = getSuitAttack(the_suit.dna.name, the_suit.getLevel(), attack_type)
                 result = attack_info['hp']
+                result *= 6
                 
                 if self.notify.getDebug():
                     self.notify.debug(f'Group attack hits toon {target_toon_id} for {result} damage')

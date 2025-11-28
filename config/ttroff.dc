@@ -966,11 +966,11 @@ dclass DistributedToon : DistributedPlayer {
   setMaxBankMoney(int16 maxMoney = 15000) required broadcast ownrecv db;
   setBankMoney(int16 money = 0) required broadcast ownrecv db;
   setMaxMoney(int16 maxMoney = 40) required broadcast ownrecv db;
-  setMoney(int16 money = 0) required broadcast ownrecv db;
+  setMoney(int16 money = 40) required broadcast ownrecv db;
   setMaxTokens(int16 maxTokens = 32000) required broadcast ownrecv db;
   setTokens(int16 tokens = 0) required broadcast ownrecv db;
-  setMaxHp(int16 hitPoints = 15) required broadcast ownrecv db;
-  setHp(int16 hp = 15) required broadcast ownrecv db;
+  setMaxHp(int16 hitPoints = 50) required broadcast ownrecv db;
+  setHp(int64 hp = 50) required broadcast ownrecv db;
   toonUp(int64 hpGained) broadcast ownrecv;
   takeDamage(uint16 hpLost) broadcast ownrecv;
   setBattleId(uint32 battleId = 0) required broadcast ram;
@@ -1260,7 +1260,7 @@ dclass DistributedSuitBase : DistributedObject {
   setBrushOff(int16 index) broadcast;
   setSkelecog(uint32 flag) required broadcast ram;
   setSkeleRevives(uint32 num) required broadcast ram;
-  setHP(int16 hp) required broadcast ram;
+  setHP(uint32 hp) required broadcast ram;
 };
 
 dclass DistributedSuit : DistributedSuitBase {
