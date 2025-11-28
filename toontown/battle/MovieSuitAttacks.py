@@ -2051,10 +2051,11 @@ def doPromotion(attack):
     auditorCoins.reparentTo(render)
     auditorCoins.setZ(-4)
     destPos, destHpr = battle.getActorPosHpr(extraSuit, battle.activeSuits)
+    healing = (extraSuit.getActualLevel() + 1) * (extraSuit.getActualLevel() + 2)
     auditorOtherSuitTrack = Sequence(
         Wait(3.0),
         Func(extraSuit.unstickSuit),
-        ActorInterval(extraSuit, 'pie-small-react', duration=0.2), Func(extraSuit.setLevel, extraSuit.getLevel() + 1), Func(extraSuit.showHpText, extraSuit.getMaxHP() - extraSuit.getHP()), Func(extraSuit.setHP, extraSuit.getMaxHP()),
+        ActorInterval(extraSuit, 'pie-small-react', duration=0.2), Func(extraSuit.setLevel, extraSuit.getLevel() + 1), Func(extraSuit.showHpText, healing),
         Parallel(Func(extraSuit.setZ, 3), auditorCoins.posInterval(0.2, Point3(extraSuit.getX(), extraSuit.getY(), 0), blendType='easeInOut'), ActorInterval(extraSuit, 'slip-forward', startTime=2.43)))
 
     auditorCoinsLowerTrack = Parallel(

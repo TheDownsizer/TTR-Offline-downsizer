@@ -156,6 +156,7 @@ class BattleCalculatorAI(DirectObject.DirectObject):
         randomSuit = random.choice(suitsToChooseFrom)
         if randomSuit.died:
             return
+        
         if randomSuit.currHP <= 0:
             return
         
@@ -170,6 +171,7 @@ class BattleCalculatorAI(DirectObject.DirectObject):
                                 0,
                                 [randomSuitId]])
         randomSuit.setLevel(randomSuit.getActualLevel() + 1, wantClient=False)
+        randomSuit.setHP(randomSuit.maxHP)
     
     def findSuitIdFromName(self, suitName):
         for suit in self.battle.activeSuits:

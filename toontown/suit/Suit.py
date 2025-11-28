@@ -940,8 +940,8 @@ class Suit(Avatar.Avatar):
         self.healthBar.setPos(0.0, 0.1, 0.0)
 
     def updateHealthBar(self, hp, forceUpdate = 0, healing=0):
-        if hp > self.currHP:
-            hp = self.currHP
+        if hp > self.maxHP:
+            hp = self.maxHP
         if healing == 1:
             self.currHP += hp
         else:

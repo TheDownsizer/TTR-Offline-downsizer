@@ -478,11 +478,8 @@ class TownBattle(StateData.StateData):
             self.cogFireCosts[cogFireCostIndex] = 1
             cogFireCostIndex += 1
 
-        creditLevel = maxSuitLevel
-        if numCogs == self.numCogs and creditLevel == self.creditLevel and luredIndices == self.luredIndices and trappedIndices == self.trappedIndices and toonIds == self.toons:
-            resetActivateMode = 0
-        else:
-            resetActivateMode = 1
+        creditLevel = maxSuitLevel    
+        resetActivateMode = 1
         self.notify.debug('adjustCogsAndToons() resetActivateMode: %s' % resetActivateMode)
         self.numCogs = numCogs
         self.creditLevel = creditLevel

@@ -54,6 +54,8 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.timerCountdownTaskName = self.uniqueBattleName('timer-countdown')
         self.movie = Movie.Movie(self)
         self.timer = Timer()
+        self.trappedSuits = []
+        self.luredSuits = []
         self.needAdjustTownBattle = 0
         self.streetBattle = 1
         self.levelBattle = 0
@@ -1098,6 +1100,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         if self.localToonActive():
             self.__enterLocalToonWaitForInput()
             self.startTimer(ts)
+            self.townBattle.adjustCogsAndToons(self.activeSuits, self.luredSuits, self.trappedSuits, self.activeToons)
         if self.needAdjustTownBattle == 1:
             self.__adjustTownBattle()
         for toon in self.activeToons:

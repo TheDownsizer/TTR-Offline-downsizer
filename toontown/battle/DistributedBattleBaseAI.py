@@ -1276,6 +1276,11 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.__requestAdjust()
         if not self.tutorialFlag:
             self.timer.startCallback(SERVER_INPUT_TIMEOUT, self.__serverTimedOut)
+        
+        for s in self.suits:
+            # Make sure this cogs hp is synced
+            s.d_setHP(s.getHP())
+
         self.npcAttacks = {}
         for toonId in self.toons:
             if bboard.get('autoRestock-%s' % toonId, False):
@@ -1639,7 +1644,10 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                         break
                     toonId = self.activeToons[targetIndex]
                     toon = self.getToon(toonId)
-                    toonDied = self.suitAttacks[i][TOON_DIED_COL] & 1 << targetIndex
+                    try:
+                        toonDied = self.suitAttacks[i][TOON_DIED_COL] & 1 << targetIndex
+                    except:
+                        toonDied = self.suitAttacks[i][TOON_DIED_COL] & 1 << 0
                     if targetIndex >= len(hps):
                         self.notify.warning('DAMAGE: toon %s is no longer in battle!' % toonId)
                     else:
