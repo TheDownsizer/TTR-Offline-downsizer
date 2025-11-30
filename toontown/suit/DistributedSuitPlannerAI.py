@@ -41,7 +41,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        25,
        25,
        25),
-      (1, 2, 3),
+      (1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
       []],
      [2200,
       3,
@@ -60,7 +60,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        70,
        10,
        10),
-      (1, 2, 3),
+      (1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
       []],
      [2300,
       3,
@@ -79,7 +79,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        10,
        40,
        40),
-      (1, 2, 3),
+      (1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
       []],
      [1100,
       1,
@@ -98,7 +98,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        10,
        0,
        0),
-      (2, 3, 4),
+      (8, 9, 10, 11, 12, 13, 14, 15),
       []],
      [1200,
       1,
@@ -117,10 +117,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        90,
        10),
-      (3,
-       4,
-       5,
-       6),
+      (8, 9, 10, 11, 12, 13, 14, 15),
       []],
      [1300,
       1,
@@ -139,10 +136,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        40,
        10,
        10),
-      (3,
-       4,
-       5,
-       6),
+      (8, 9, 10, 11, 12, 13, 14, 15),
       []],
      [3100,
       1,
@@ -161,7 +155,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        10,
        0,
        0),
-      (5, 6, 7),
+      (24, 25, 26, 27, 28, 29, 30, 31, 32),
       []],
      [3200,
       1,
@@ -180,7 +174,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        20,
        30,
        40),
-      (5, 6, 7),
+      (24, 25, 26, 27, 28, 29, 30, 31, 32),
       []],
      [3300,
       1,
@@ -199,7 +193,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        85,
        5,
        5),
-      (7, 8, 9),
+      (24, 25, 26, 27, 28, 29, 30, 31, 32),
       []],
      [4100,
       1,
@@ -218,7 +212,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        50,
        50),
-      (2, 3, 4),
+      (18, 19, 20, 21, 22, 23, 24, 25, 26),
       []],
      [4200,
       1,
@@ -237,10 +231,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        90,
        10),
-      (3,
-       4,
-       5,
-       6),
+      (18, 19, 20, 21, 22, 23, 24, 25, 26),
       []],
      [4300,
       1,
@@ -259,10 +250,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        50,
        0,
        0),
-      (3,
-       4,
-       5,
-       6),
+      (18, 19, 20, 21, 22, 23, 24, 25, 26),
       []],
      [5100,
       1,
@@ -281,7 +269,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        20,
        10,
        70),
-      (2, 3, 4),
+      (14, 15, 16, 17, 18, 19, 20, 21, 22),
       []],
      [5200,
       1,
@@ -300,10 +288,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        70,
        0,
        20),
-      (3,
-       4,
-       5,
-       6),
+      (14, 15, 16, 17, 18, 19, 20, 21, 22),
       []],
      [5300,
       1,
@@ -322,10 +307,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        5,
        5,
        85),
-      (3,
-       4,
-       5,
-       6),
+      (14, 15, 16, 17, 18, 19, 20, 21, 22),
       []],
      [9100,
       1,
@@ -344,10 +326,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        25,
        25,
        25),
-      (6,
-       7,
-       8,
-       9),
+      (32, 33, 34, 35, 36, 37, 38, 39, 40),
       []],
      [9200,
       1,
@@ -366,10 +345,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        5,
        85,
        5),
-      (7,
-       8,
-       9,
-       10),
+      (34, 35, 36, 37, 38, 39, 40, 41, 42),
       []],
     [9300,
      1,
@@ -388,10 +364,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
       25,
       5,
       5),
-     (8,
-      9,
-      10,
-      11),
+     (36, 37, 38, 39, 40, 41, 42, 43, 44),
      []],
     [10000,
       3,
@@ -410,7 +383,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        0,
        0),
-      (8, 9, 10, 11),
+      (42, 43, 44, 45, 46),
       []],
      [11000,
       3,
@@ -429,7 +402,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        0,
        100),
-      (4, 5, 6),
+      (18, 19, 20, 21, 22),
       []],
      [11200,
       10,
@@ -448,7 +421,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        0,
        100),
-      (4, 5, 6, 7),
+      (19, 20, 21, 22, 23),
       []],
      [12000,
       10,
@@ -467,7 +440,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        100,
        0),
-      (7, 8, 9),
+      (29, 30, 31, 32, 33),
       []],
      [13000,
       10,
@@ -486,7 +459,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        100,
        0,
        0),
-      (8, 9, 10),
+      (39, 40, 41, 42),
       []]]
     SUIT_HOOD_INFO_ZONE = 0
     SUIT_HOOD_INFO_MIN = 1
@@ -548,6 +521,31 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         10000: 7,
         9300: 5
     }
+    MAX_SUIT_TYPES_PER_ZONE = {
+        2100: 2,
+        2200: 2,
+        2300: 2,
+        1100: 3,
+        1200: 3,
+        1300: 3,
+        5100: 4,
+        5200: 4,
+        5300: 4,
+        11000: 5,
+        11200: 5,
+        4100: 5,
+        4200: 5,
+        4300: 5,
+        3100: 6,
+        3200: 6,
+        3300: 6,
+        9100: 7,
+        9200: 7,
+        9300: 7,
+        12000: 8,
+        13000: 8,
+        10000: 8,
+    }
     for currHoodInfo in SuitHoodInfo:
         weight = currHoodInfo[SUIT_HOOD_INFO_BWEIGHT]
         tracks = currHoodInfo[SUIT_HOOD_INFO_TRACK]
@@ -558,7 +556,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
          0,
          0]
         for level in levels:
-            minFloors, maxFloors = SuitBuildingGlobals.SuitBuildingInfo[level - 1][0]
+            minFloors, maxFloors = SuitBuildingGlobals.SuitBuildingInfo[3][0]
             for i in range(minFloors - 1, maxFloors):
                 heights[i] += 1
 
@@ -1119,13 +1117,13 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if self.pendingBuildingHeights.count(buildingHeight) > 0:
             self.pendingBuildingHeights.remove(buildingHeight)
         building = self.buildingMgr.getBuilding(blockNumber)
-        building.suitTakeOver(suitTrack, difficulty, buildingHeight)
+        building.suitTakeOver(suitTrack, 3, 2)
 
     def cogdoTakeOver(self, blockNumber, difficulty, buildingHeight):
         if self.pendingBuildingHeights.count(buildingHeight) > 0:
             self.pendingBuildingHeights.remove(buildingHeight)
         building = self.buildingMgr.getBuilding(blockNumber)
-        building.cogdoTakeOver(difficulty, buildingHeight)
+        building.cogdoTakeOver(3, 2)
 
     def recycleBuilding(self):
         bmin = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_BMIN]
@@ -1349,7 +1347,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     def chooseSuitLevel(self, possibleLevels, buildingHeight):
         choices = []
         for level in possibleLevels:
-            minFloors, maxFloors = SuitBuildingGlobals.SuitBuildingInfo[level - 1][0]
+            minFloors, maxFloors = SuitBuildingGlobals.SuitBuildingInfo[3][0]
             if buildingHeight >= minFloors - 1 and buildingHeight <= maxFloors - 1:
                 choices.append(level)
         if len(choices) == 0:
@@ -1513,11 +1511,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     def pickLevelTypeAndTrack(self, level = None, type = None, track = None):
         if level == None:
             level = random.choice(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL])
-        level_extension = 4
-        if self.zoneId in self.ZONE_2_CUSTOM_LEVEL_EXTENSION:
-            level_extension = self.ZONE_2_CUSTOM_LEVEL_EXTENSION[self.zoneId]
+        level_extension = 300
         if type == None:
-            typeChoices = list(range(max(level - level_extension, 1), min(level, self.MAX_SUIT_TYPES) + 1))
+            typeChoices = list(range(max(level - level_extension, 1), min(level, self.MAX_SUIT_TYPES_PER_ZONE[self.zoneId]) + 1))
             type = random.choice(typeChoices)
         else:
             level = min(max(level, type), type + level_extension)

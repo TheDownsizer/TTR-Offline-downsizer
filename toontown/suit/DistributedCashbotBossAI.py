@@ -41,7 +41,7 @@ class DistributedCashbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         self.waitingForHelmet = 0
         self.avatarHelmets = {}
         self.bossMaxDamage = ToontownGlobals.CashbotBossMaxDamage
-        self.bossCogLvlMax = 5
+        self.bossCogLvlMax = 300
         return
 
     def generate(self):

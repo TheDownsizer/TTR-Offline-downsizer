@@ -137,7 +137,6 @@ class SingleTargetAttackCalculator(BaseCogAttackCalculator):
                 the_suit = self.battle.findSuit(attack[SUIT_ID_COL])
                 attack_info = getSuitAttack(the_suit.dna.name, the_suit.getLevel(), attack_type)
                 result = attack_info['hp']
-                result *= 6
                 
                 if self.notify.getDebug():
                     self.notify.debug(f'Single-target attack hits for {result} damage')

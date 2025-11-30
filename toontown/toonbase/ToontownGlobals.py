@@ -314,18 +314,18 @@ def dept2cogHQ(dept):
 MockupFactoryId = 0
 
 # Sellbot Scrap Factory Cog Levels
-SellbotScrapFactoryCogLevels = [3, 4, 5, 6]
+SellbotScrapFactoryCogLevels = [16, 17, 18, 19]
 SellbotScrapFactoryCogLevel = lambda: random.choice(SellbotScrapFactoryCogLevels)
-SellbotScrapFactorySiloMediumLevel = lambda: 6
-SellbotScrapFactorySiloHigherLevel = lambda: 7
-SellbotScrapFactoryControlRoomMediumLevel = lambda: 5
-SellbotScrapFactoryControlRoomHigherLevel = lambda: 6
-SellbotScrapFactorySupervisorLevel = lambda: 9 # Placeholder, Final Level will be 14
+SellbotScrapFactorySiloMediumLevel = lambda: 19
+SellbotScrapFactorySiloHigherLevel = lambda: 23
+SellbotScrapFactoryControlRoomMediumLevel = lambda: 19
+SellbotScrapFactoryControlRoomHigherLevel = lambda: 23
+SellbotScrapFactorySupervisorLevel = lambda: 34 # Placeholder, Final Level will be 14
 
 # Bossbot Cog Golf Course Base Cog Levels
-BossbotCogGolfCouseCogLevelsEasyNum = [7, 8, 9]
-BossbotCogGolfCouseCogLevelsMediumNum = [10, 11]
-BossbotCogGolfCouseCogLevelsHardNum = [12, 13]
+BossbotCogGolfCouseCogLevelsEasyNum = [28, 29, 30, 31]
+BossbotCogGolfCouseCogLevelsMediumNum = [34, 35, 36, 37]
+BossbotCogGolfCouseCogLevelsHardNum = [43, 44, 45, 46]
 BossbotCogGolfCouseCogLevelsEasy = lambda: random.choice(BossbotCogGolfCouseCogLevelsEasyNum)
 BossbotCogGolfCouseCogLevelsMedium = lambda: random.choice(BossbotCogGolfCouseCogLevelsMediumNum)
 BossbotCogGolfCouseCogLevelsHard = lambda: random.choice(BossbotCogGolfCouseCogLevelsHardNum)
@@ -335,9 +335,9 @@ BossbotCogGolfCouseCogRevivesChance = 0.4
 BossbotCogGolfCouseCogRevive = lambda: 1 if random.random() < BossbotCogGolfCouseCogRevivesChance else 0
 
 # Bossbot Cog Golf Course Base Cog Levels
-LawbotDAOfficeCogLevelsEasyNum = [7, 8, 9]
-LawbotDAOfficeCogLevelsMediumNum = [10, 11]
-LawbotDAOfficeCogLevelsHardNum = [11, 12]
+LawbotDAOfficeCogLevelsEasyNum = [24, 25, 26, 27]
+LawbotDAOfficeCogLevelsMediumNum = [30, 31, 32]
+LawbotDAOfficeCogLevelsHardNum = [38, 39, 40]
 LawbotDAOfficeCogLevelsEasy = lambda: random.choice(LawbotDAOfficeCogLevelsEasyNum)
 LawbotDAOfficeCogLevelsMedium = lambda: random.choice(LawbotDAOfficeCogLevelsMediumNum)
 LawbotDAOfficeCogLevelsHard = lambda: random.choice(LawbotDAOfficeCogLevelsHardNum)

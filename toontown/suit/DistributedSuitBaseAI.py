@@ -5,6 +5,7 @@ from . import SuitBase
 from . import SuitDNA
 from direct.directnotify import DirectNotifyGlobal
 from toontown.battle import SuitBattleGlobals
+import math
 
 class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.SuitBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedSuitBaseAI')
@@ -53,8 +54,9 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
             if wantClient:
                 self.d_setLevelDist(self.level)
         hp = attributes['hp'][self.level]
-        self.maxHP = hp * (3 + attributes['level'])
-        self.currHP = hp * (3 + attributes['level'])
+        actual_level = SuitBattleGlobals.getActualFromRelativeLevel(self.getStyleName(), self.level) + 1
+        self.maxHP = math.ceil((attributes['hp'][self.level]) + (actual_level * 3))
+        self.currHP = math.ceil((attributes['hp'][self.level]) + (actual_level * 3))
 
     def getLevelDist(self):
         return self.getLevel()

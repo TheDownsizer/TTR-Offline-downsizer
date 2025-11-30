@@ -1354,7 +1354,7 @@ class BattleCalculatorAI(DirectObject.DirectObject):
         #self.__removeLured(clerk)
         self.__updateLureTimeouts()
         #self.clerkBookSmart()
-        self.auditorPromotion()
+        #self.auditorPromotion()
         self.clerkSoundRetaliation()
         
         self.__calculateSuitAttacks()

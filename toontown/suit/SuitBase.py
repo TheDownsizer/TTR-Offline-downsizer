@@ -9,6 +9,7 @@ from . import SuitTimings
 from . import SuitDNA
 from toontown.toonbase import TTLocalizer
 from .SuitLegList import *
+import math
 TIME_BUFFER_PER_WPT = 0.25
 TIME_DIVISOR = 100
 DISTRIBUTE_TASK_CREATION = 0
@@ -65,8 +66,8 @@ class SuitBase:
             'level': self.getActualLevel()}
         self.setDisplayName(nameWLevel)
         attributes = SuitBattleGlobals.SuitAttributes[self.dna.name]
-        self.maxHP = attributes['hp'][self.level]
-        self.maxHP = self.maxHP * (3 + attributes['level'])
+        actual_level = SuitBattleGlobals.getActualFromRelativeLevel(self.getStyleName(), self.level) + 1
+        self.maxHP = math.ceil((attributes['hp'][self.level] + (actual_level * 3)))
         self.currHP = self.maxHP
 
     def getSkelecog(self):
