@@ -517,7 +517,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
         frontNP.node().setEffect(DecalEffect.make())
         suitBuildingNP.setName('sb' + str(self.block) + ':_landmark__DNARoot')
         suitBuildingNP.setPosHprScale(nodePath, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0)
-        suitBuildingNP.flattenMedium()
+
         self.loadElevator(suitBuildingNP)
         return suitBuildingNP
 
@@ -618,7 +618,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
         frontNP.node().setEffect(DecalEffect.make())
         suitBuildingNP.setName('cb' + str(self.block) + ':_landmark__DNARoot')
         suitBuildingNP.setPosHprScale(nodePath, 15.463, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0)
-        suitBuildingNP.flattenMedium()
+
         suitBuildingNP.setColorScale(0.6, 0.6, 0.6, 1.0)
         self.loadElevator(suitBuildingNP, cogdo=True)
         return suitBuildingNP

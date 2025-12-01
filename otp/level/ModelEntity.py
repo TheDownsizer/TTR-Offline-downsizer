@@ -59,12 +59,6 @@ class ModelEntity(BasicEntities.NodePathEntity):
                     self.hat.find('**/hard_hat').hide()
                 del self.hat
                 del self.goonType
-            if self.flattenType == 'light':
-                self.model.flattenLight()
-            elif self.flattenType == 'medium':
-                self.model.flattenMedium()
-            elif self.flattenType == 'strong':
-                self.model.flattenStrong()
         return
 
     def setModelPath(self, path):

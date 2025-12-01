@@ -94,7 +94,7 @@ class DistributedCatchGame(DistributedMinigame):
                 model.setZ(-1.7)
             if objType == Name2DropObjectType['anvil']:
                 model.setZ(-self.ObjRadius)
-            model.flattenMedium()
+
 
         self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_toontag.ogg')
         self.sndGoodCatch = base.loader.loadSfx('phase_4/audio/sfx/SZ_DD_treasure.ogg')
@@ -945,11 +945,11 @@ class DistributedCatchGame(DistributedMinigame):
         fruit = self.getObjModel(self.fruitName)
         if self.fruitName == 'pineapple':
             fruit.setZ(0.42)
-            fruit.flattenMedium()
+
         anvil = self.getObjModel('anvil')
         anvil.setH(100)
         anvil.setZ(0.42)
-        anvil.flattenMedium()
+
         leftToonIval = getThrowIval(leftToon, leftToon.getRightHands()[0], fruit, leftToon=1)
         rightToonIval = getThrowIval(rightToon, rightToon.getLeftHands()[0], anvil, leftToon=0, isAnvil=1)
         animDur = leftToon.getNumFrames('catch-intro-throw') / leftToon.getFrameRate('catch-intro-throw')

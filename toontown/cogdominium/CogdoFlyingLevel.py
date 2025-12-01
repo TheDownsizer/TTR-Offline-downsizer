@@ -49,7 +49,7 @@ class CogdoFlyingLevel(DirectObject):
         self.rightLimit = self._frameModel.find('**/limit_right').getX(render) + 30.0
         self.backLimit = -self.quadLengthUnits
         self.forwardLimit = self.quadLengthUnits * 20
-        self._frameModel.flattenStrong()
+
         self.gatherableFactory = CogdoFlyingGatherableFactory()
         self.obstacleFactory = CogdoFlyingObtacleFactory()
         return
@@ -202,7 +202,7 @@ class CogdoFlyingLevelFactory:
         startPlatformModel = CogdoUtil.loadFlyingModel('levelStart')
         endPlatformModel = CogdoUtil.loadFlyingModel('levelEnd')
         for fan in frameModel.findAllMatches('**/*wallFan'):
-            fan.flattenStrong()
+
 
         frameModel.find('**/fogOpaque').setBin('background', 1)
         frameModel.find('**/ceiling').setBin('background', 2)

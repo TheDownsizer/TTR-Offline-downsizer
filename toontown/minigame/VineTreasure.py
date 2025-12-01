@@ -23,7 +23,7 @@ class VineTreasure(DirectObject):
         self.collNodePath.setPos(pos[0] - center[0], 0 - center[1], pos[2] - center[2])
         self.collNodePath.hide()
         self.accept('enter' + self.sphereName, self.__handleEnterSphere)
-        self.nodePath.flattenLight()
+
 
     def destroy(self):
         self.ignoreAll()

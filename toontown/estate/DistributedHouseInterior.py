@@ -69,7 +69,7 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
         DNADoor.setupDoor(doorNP, door_origin, door_origin, dnaStore, str(self.houseId), color)
         doorFrame = doorNP.find('door_*_flat')
         doorFrame.setColor(color)
-        self.interior.flattenMedium()
+
         self.windowSlots = []
         for name in WindowPlugNames:
             plugNodes = self.interior.findAllMatches(name)
@@ -80,7 +80,7 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
                 viewBase.setTransform(plugNodes[0].getTransform())
                 plug = plugNodes[0].getParent().attachNewNode('plug')
                 plugNodes.reparentTo(plug)
-                plug.flattenLight()
+
                 self.windowSlots.append((plug, viewBase))
 
         self.windowSlots[2][1].setPosHpr(16.0, -12.0, 5.51, -90, 0, 0)

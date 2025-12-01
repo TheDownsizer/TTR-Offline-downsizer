@@ -17,33 +17,33 @@ class DNADoor(DNANode):
         doorNodePath.setPosHprScale(doorOrigin, (0,0,0), (0,0,0), (1,1,1))
         doorNodePath.setColor(color, 0)
         doorFlat = doorNodePath.find('door_*_flat')
-        doorFlat.flattenStrong()
+
         #doorFlat.setDepthOffset(1) # Can cause building shadows to not properly show up on the doors...
         doorFlat.setEffect(DecalEffect.make())
 
         leftHole = doorNodePath.find('door_*_hole_left')
-        leftHole.flattenStrong()
+
         leftHole.setName('doorFrameHoleLeft')
         leftHole.wrtReparentTo(doorFlat, 0)
         leftHole.hide()
         leftHole.setColor((0, 0, 0, 1), 0)
 
         rightHole = doorNodePath.find('door_*_hole_right')
-        rightHole.flattenStrong()
+
         rightHole.setName('doorFrameHoleRight')
         rightHole.wrtReparentTo(doorFlat, 0)
         rightHole.hide()
         rightHole.setColor((0, 0, 0, 1), 0)
 
         leftDoor = doorNodePath.find('door_*_left')
-        leftDoor.flattenStrong()
+
         leftDoor.setName('leftDoor')
         leftDoor.hide()
         leftDoor.wrtReparentTo(parentNode, 0)
         leftDoor.setColor(color, 0)
 
         rightDoor = doorNodePath.find('door_*_right')
-        rightDoor.flattenStrong()
+
         rightDoor.setName('rightDoor')
         rightDoor.hide()
         rightDoor.wrtReparentTo(parentNode, 0)
@@ -54,7 +54,7 @@ class DNADoor(DNANode):
         doorTrigger.wrtReparentTo(parentNode, 0)
         doorTrigger.setName('door_trigger_%s' % block)
 
-        doorNodePath.flattenMedium()
+
 
     def _makeNode(self, storage, parent):
         frontNode = parent.find('**/*building*_front')

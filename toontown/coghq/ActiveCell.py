@@ -22,7 +22,7 @@ class ActiveCell(BasicEntities.DistributedNodePathEntity):
                 model = loader.loadModel('phase_5/models/modules/suit_walls')
                 model.setScale(grid.cellSize, 1, grid.cellSize)
                 model.setP(-90)
-                model.flattenMedium()
+
                 model.setZ(0.05)
                 model.setColorScale(1, 0, 0, 0.5)
                 model.copyTo(self)

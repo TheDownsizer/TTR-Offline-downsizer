@@ -300,7 +300,7 @@ class DistributedGolfHole(DistributedPhysicsWorld.DistributedPhysicsWorld, FSM, 
             else:
                 self.locDict[locatorNum].removeNode()
 
-        self.hardSurfaceNodePath.flattenStrong()
+
 
     def loadSounds(self):
         self.hitBallSfx = loader.loadSfx('phase_6/audio/sfx/Golf_Hit_Ball.ogg')
@@ -390,7 +390,7 @@ class DistributedGolfHole(DistributedPhysicsWorld.DistributedPhysicsWorld, FSM, 
         base.transitions.irisOut(t=0)
         self.dropShadowModel = loader.loadModel('phase_3/models/props/drop_shadow')
         self.dropShadowModel.setColor(0, 0, 0, 0.5)
-        self.dropShadowModel.flattenMedium()
+
         self.dropShadowModel.hide()
         return
 

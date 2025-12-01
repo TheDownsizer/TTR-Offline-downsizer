@@ -46,7 +46,7 @@ class CogdoFlyingProgressGui(DirectFrame):
         else:
             marker.setScale(Globals.Gui.MarkerScale)
             marker.setBin('fixed', 5)
-        marker.flattenStrong()
+
         self._toonMarkers[toon] = marker
 
     def removeToon(self, toon):

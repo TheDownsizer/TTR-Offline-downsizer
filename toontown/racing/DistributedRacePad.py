@@ -172,7 +172,7 @@ class DistributedRacePad(DistributedKartPad, FSM):
         self.clockNode, self.clockNodepath = self.getSignTextNodes('racePadClock')
         self.clockNodepath.setPos(0, 0.125, -3.0)
         self.clockNodepath.setScale(2.5)
-        self.clockNodepath.flattenLight()
+
         return
 
     def getTunnelSign(self):
@@ -246,21 +246,21 @@ class DistributedRacePad(DistributedKartPad, FSM):
         self.trackNameNode, trackNameNodePath = self.getSignTextNodes('trackNameNode')
         trackNameNodePath.setZ(0.7)
         trackNameNodePath.setScale(0.875)
-        trackNameNodePath.flattenLight()
+
         self.trackTypeNode, trackTypeNodePath = self.getSignTextNodes('trackTypeNode')
         trackTypeNodePath.setZ(-0.35)
         trackTypeNodePath.setScale(0.875)
-        trackTypeNodePath.flattenLight()
+
         self.depositNode, depositNodePath = self.getSignTextNodes('depositNode', ToontownGlobals.getToonFont())
         self.depositNode.setTextColor(0, 0, 0, 1)
         depositNodePath.setPos(4.0, -1.0, -2.0)
         depositNodePath.setScale(0.75)
-        depositNodePath.flattenLight()
+
         self.qualifyNode, qualifyNodePath = self.getSignTextNodes('qualifyNode', ToontownGlobals.getToonFont())
         self.qualifyNode.setTextColor(0, 0, 0, 1)
         qualifyNodePath.setPos(-4.0, 1.2, -2.0)
         qualifyNodePath.setScale(0.75)
-        qualifyNodePath.flattenLight()
+
 
     def cleanupTunnelText(self):
         self.notify.debugStateCall(self)

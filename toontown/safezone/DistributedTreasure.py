@@ -94,7 +94,7 @@ class DistributedTreasure(DistributedObject.DistributedObject):
                 self.dropShadow.setColor(0, 0, 0, 0.5)
                 self.dropShadow.setPos(0, 0, 0.025)
                 self.dropShadow.setScale(0.4 * self.scale)
-                self.dropShadow.flattenLight()
+
             self.dropShadow.reparentTo(self.nodePath)
         collSphere = CollisionSphere(0, 0, 0, self.getSphereRadius())
         collSphere.setTangible(0)

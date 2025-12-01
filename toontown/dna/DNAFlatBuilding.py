@@ -40,7 +40,7 @@ class DNAFlatBuilding(DNANode):
                 collisionNP.setName('KnockKnockDoorSphere_%d' % block)
 
         # Finally, flatten down:
-        np.flattenStrong()
+
 
     def generateSuitGeometry(self, storage, np, height, barrier):
         node = np.getParent().attachNewNode('sb' + self.id[2:])
@@ -67,7 +67,7 @@ class DNAFlatBuilding(DNANode):
             for door in DNAUtil.getChildrenOfType(self, DNAFlatDoor):
                 door.generateSuitGeometry(storage, wallNode)
 
-        node.flattenStrong()
+
         node.stash()
 
 registerElement(DNAFlatBuilding)

@@ -1093,7 +1093,7 @@ class CatalogFurnitureItem(CatalogAtticItem.CatalogAtticItem):
             scale = type[FTScale]
             if not scale == None:
                 model.setScale(scale)
-                model.flattenLight()
+
         return model
 
     def decodeDatagram(self, di, versionNumber, store):

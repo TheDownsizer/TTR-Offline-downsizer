@@ -110,7 +110,7 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
         self.setScale(1.0)
         self.crate.setScale(self.scale)
         self.crate.reparentTo(self)
-        self.crate.flattenLight()
+
 
     def setScale(self, scale):
         if self.crate:

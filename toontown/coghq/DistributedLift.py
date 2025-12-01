@@ -87,7 +87,7 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
             if not np.isEmpty():
                 np.setScale(1.0, 1.0, 2.0)
                 np.setZ(-10)
-                np.flattenLight()
+
 
         self.startBoardColl = NodePathCollection()
         self.endBoardColl = NodePathCollection()

@@ -102,7 +102,7 @@ class DistributedStomper(DistributedCrusherEntity.DistributedCrusherEntity):
                 shadow = loader.loadModel('phase_3/models/props/square_drop_shadow').getChild(0)
                 shadow.setScale(0.3 * self.headScale[0], 0.3 * self.headScale[2], 1)
                 shadow.setAlphaScale(0.8)
-                shadow.flattenMedium()
+
                 shadow.reparentTo(self)
                 shadow.setPos(0, 0, 0.025)
                 shadow.setTransparency(1)
@@ -129,7 +129,7 @@ class DistributedStomper(DistributedCrusherEntity.DistributedCrusherEntity):
             for child in head.findAllMatches('+ModelNode'):
                 child.node().setPreserveTransform(ModelNode.PTNet)
 
-            model.flattenLight()
+
             upList = model.findAllMatches('**/collUp')
             for up in upList:
                 up.stash()
@@ -153,7 +153,7 @@ class DistributedStomper(DistributedCrusherEntity.DistributedCrusherEntity):
         shaft.setScale(self.shaftScale)
         head.setScale(self.headScale)
         model.find('**/shaft').node().setPreserveTransform(0)
-        model.flattenLight()
+
         self.model = model
         if self.motion == MotionSwitched:
             self.model.setPos(0, -self.range, 0)

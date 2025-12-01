@@ -205,7 +205,7 @@ class DistributedPartyCatchActivity(DistributedPartyActivity, DistributedPartyCa
                 model.setZ(-1.7)
             if objType == PartyGlobals.Name2DropObjectType['anvil']:
                 model.setZ(-self.ObjRadius)
-            model.flattenStrong()
+
 
     def unload(self):
         DistributedPartyCatchActivity.notify.debug('unload')

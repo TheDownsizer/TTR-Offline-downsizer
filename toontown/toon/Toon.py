@@ -1642,7 +1642,7 @@ class Toon(Avatar.Avatar, ToonHead):
     def enterJumpAirborne(self, animMultiplier=1, ts=0, callback=None, extraArgs=[]):
         if not self.isDisguised:
             if self.playingAnim == 'neutral' or self.forceJumpIdle:
-                anim = 'jump-idle'
+                anim = 'running-jump-idle'
             else:
                 anim = 'running-jump-idle'
             self.stop()

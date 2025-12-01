@@ -86,7 +86,7 @@ class DistributedLeaderBoard(DistributedObject.DistributedObject):
             row.setY(1.6)
             z -= dz
 
-        self.surface.flattenLight()
+
 
     def display(self, pTrackTitle = 'Track Title', pPeriodTitle = 'Period Title', pLeaderList = []):
         self.titleTextNode.setText(pPeriodTitle)

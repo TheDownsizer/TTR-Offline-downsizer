@@ -116,7 +116,7 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
             inv = Mat4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             #inv.invertFrom(mat)
             newSignNP.setMat(inv)
-            newSignNP.flattenLight()
+
             ll = Point3()
             ur = Point3()
             newSignNP.calcTightBounds(ll, ur)
@@ -136,7 +136,7 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
         del self.colors
         del self.dnaStore
         del self.randomGenerator
-        self.interior.flattenMedium()
+
 
         '''snowmanHeadInteriors = [
             2740, # TTC, Loopy Lane, Used Firecrackers

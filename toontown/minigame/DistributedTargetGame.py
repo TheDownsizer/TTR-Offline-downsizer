@@ -322,11 +322,11 @@ class DistributedTargetGame(DistributedMinigame):
         self.skyListLow.append(skyModel3)
         self.lowSky = skyModel3
         self.environModel.setPos(0, -5.0, 0)
-        self.environModel.flattenMedium()
+
         self.environModel.setScale(15.0, 15.0, 2.0)
         self.dropShadowModel = loader.loadModel('phase_3/models/props/drop_shadow')
         self.dropShadowModel.setColor(0, 0, 0, 0.5)
-        self.dropShadowModel.flattenMedium()
+
         self.toonDropShadows = []
         self.__textGen = TextNode('targetGame')
         self.__textGen.setFont(ToontownGlobals.getSignFont())

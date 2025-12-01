@@ -39,12 +39,12 @@ class GearEntity(BasicEntities.NodePathEntity):
                 node.stash()
 
             model.setZ(0.15)
-            model.flattenLight()
+
         model.setScale(self.gearScale)
-        model.flattenLight()
+
         model.setScale(self.getScale())
         self.setScale(1)
-        model.flattenLight()
+
         if self.orientation == 'vertical':
             self.gearParent.setP(-90)
         self.model = model

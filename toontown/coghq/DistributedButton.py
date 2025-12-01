@@ -76,8 +76,8 @@ class DistributedButton(DistributedSwitch.DistributedSwitch):
                     collisionFloor.reparentTo(change)
                 collisionFloor.node().setFromCollideMask(BitMask32.allOff())
                 collisionFloor.node().setIntoCollideMask(ToontownGlobals.FloorBitmask)
-            self.buttonFrameNode.flattenMedium()
-            self.buttonNode.flattenMedium()
+
+
 
     def delete(self):
         DistributedSwitch.DistributedSwitch.delete(self)

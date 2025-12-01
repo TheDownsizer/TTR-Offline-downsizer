@@ -98,7 +98,7 @@ class DistributedPetshopInterior(DistributedObject.DistributedObject):
         del self.colors
         del self.dnaStore
         del self.randomGenerator
-        self.interior.flattenMedium()
+
 
     def disable(self):
         self.fish.stop()

@@ -145,7 +145,7 @@ class Decoration(NodePath):
             self.animSeq.loop(st)
             collisions = self.hydra.find('**/*collision*')
             collisions.setPos(0, 0, -5)
-            self.hydra.flattenStrong()
+
             self.hydra.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
             self.hydra.reparentTo(self)
             if self.name == 'StageWinter':
@@ -164,7 +164,7 @@ class Decoration(NodePath):
             self.animSeq.loop()
             self.animSeq.setT(st)
             self.tubeCog.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
-            self.tubeCog.flattenStrong()
+
             self.tubeCog.reparentTo(self)
         elif self.name == 'BannerVictory':
             self.bannerVictory = Actor.Actor('phase_13/models/parties/tt_m_ara_pty_bannerVictory_model', {'idle': 'phase_13/models/parties/tt_m_ara_pty_bannerVictory'})
@@ -186,7 +186,7 @@ class Decoration(NodePath):
             confettiLocator = self.cannonVictory.findAllMatches('**/uvj_confetties')[1]
             confettiMesh = self.cannonVictory.find('**/confettis')
             confettiMesh.setTexProjector(confettiMesh.findTextureStage('default'), self.cannonVictory, confettiLocator)
-            self.cannonVictory.flattenStrong()
+
             self.cannonVictory.setBlend(frameBlend = config.ConfigVariableBool('want-smooth-animations', False).getValue())
             self.cannonVictory.loop('idle')
             self.cannonVictory.reparentTo(self)

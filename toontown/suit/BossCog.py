@@ -169,7 +169,7 @@ class BossCog(Avatar.Avatar):
         glow.setScale(0.28)
         glow.setPos(-0.005, 0.01, 0.015)
         glow.setColor(self.healthGlowColors[0])
-        button.flattenLight()
+
         self.healthBarGlow = glow
         self.healthCondition = 0
 

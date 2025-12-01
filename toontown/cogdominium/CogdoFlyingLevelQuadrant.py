@@ -39,14 +39,14 @@ class CogdoFlyingLevelQuadrant:
         lightCones.reparentTo(self._model)
         node = self._model.find('**/ducts')
         if not node.isEmpty():
-            node.flattenStrong()
+
             for np in node.getChildren():
                 np.wrtReparentTo(self._model)
 
         node = self._model.find('**/nests')
         if not node.isEmpty():
             for np in node.getChildren():
-                np.flattenStrong()
+
                 np.wrtReparentTo(self._model)
 
         for np in self._model.findAllMatches('**/*LayerStack*'):
@@ -55,7 +55,7 @@ class CogdoFlyingLevelQuadrant:
         for np in self._model.find('**/static').getChildren():
             np.wrtReparentTo(self._model)
 
-        self._model.flattenMedium()
+
 
     def _initPlatforms(self, parent):
         platformModels = self._model.findAllMatches('**/%s' % Globals.Level.PlatformName)

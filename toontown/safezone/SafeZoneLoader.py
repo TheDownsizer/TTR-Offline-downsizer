@@ -95,7 +95,7 @@ class SafeZoneLoader(StateData.StateData):
             np.setTag('transformIndex', repr(i))
             self.holidayPropTransforms[i] = np.getNetTransform()
 
-        self.geom.flattenMedium()
+
         gsg = base.win.getGsg()
         if gsg:
             self.geom.prepareScene(gsg)

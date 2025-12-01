@@ -10,4 +10,4 @@ class PaintMixer(PlatformEntity.PlatformEntity):
         shaft.node().setPreserveTransform(0)
         shaftChild = shaft.find('**/PaintMixerBase')
         shaftChild.node().setPreserveTransform(0)
-        model.flattenMedium()
+

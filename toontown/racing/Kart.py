@@ -73,7 +73,7 @@ class Kart(NodePath, ShadowCaster.ShadowCaster):
             self.LODnode.addSwitch(levelIn[level], levelOut[level])
 
         self.setScale(self.baseScale)
-        self.flattenMedium()
+
         for level in range(lodRequired):
             self.toonSeat = self.toonSeat.instanceTo(self.toonNode[level])
 

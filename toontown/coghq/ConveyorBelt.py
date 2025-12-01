@@ -17,7 +17,7 @@ class ConveyorBelt(BasicEntities.NodePathEntity):
     def initBelt(self):
         treadModel = loader.loadModel(self.treadModelPath)
         treadModel.setSx(self.widthScale)
-        treadModel.flattenLight()
+
         self.numTreads = int(self.length / self.treadLength) + 3
         self.beltNode = self.attachNewNode('belt')
         self.treads = []

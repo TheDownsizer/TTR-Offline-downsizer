@@ -196,7 +196,7 @@ class MazeMapGui(DirectFrame):
             marker.setScale(0.07)
         else:
             marker.setScale(0.05)
-        marker.flattenStrong()
+
         marker.setPos(*self.gui2pos(*self.tile2gui(tX, tY)))
         self._toon2marker[toon] = marker
 

@@ -150,7 +150,7 @@ def doEffect(textId, speakingToon, nearbyToons):
         effect = BattleParticles.loadParticleFile('resistanceEffectSprite.ptf')
         invModel = loader.loadModel('phase_3.5/models/gui/inventory_icons')
         invModel.setScale(4)
-        invModel.flattenLight()
+
         icons = []
         if itemValue != -1:
             for item in range(6):

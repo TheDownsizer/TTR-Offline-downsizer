@@ -14,7 +14,7 @@ class CogdoMaze(MazeBase, DirectObject):
         self._initWaterCoolers()
         self.elevatorPos = self.maze.find('**/elevator_loc').getPos(render)
         self.exitPos = self.maze.find('**/exit_loc').getPos(render)
-        self.maze.flattenStrong()
+
         self._clearColor = VBase4(base.win.getClearColor())
         self._clearColor.setW(1.0)
         base.win.setClearColor(VBase4(0.0, 0.0, 0.0, 1.0))
@@ -298,7 +298,7 @@ class CogdoMazeFactory:
             CogdoUtil.initializeLightCone(np, 'fixed', 3)
 
         if flatten:
-            self._model.flattenStrong()
+
         return self._model
 
     def _createQuadrant(self, filepath, serialNum, angle, size):

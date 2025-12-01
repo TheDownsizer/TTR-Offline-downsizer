@@ -224,7 +224,7 @@ class DistributedGolfHoleAI(DistributedPhysicsWorldAI.DistributedPhysicsWorldAI,
             else:
                 self.locDict[locatorNum].removeNode()
 
-        self.hardSurfaceNodePath.flattenStrong()
+
 
     def createBall(self):
         golfBallGeom = self.createSphere(self.world, self.space, GolfGlobals.GOLF_BALL_DENSITY, GolfGlobals.GOLF_BALL_RADIUS, 1)[1]

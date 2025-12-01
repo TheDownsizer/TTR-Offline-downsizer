@@ -32,7 +32,7 @@ class DistributedHQInterior(DistributedObject.DistributedObject):
     def announceGenerate(self):
         DistributedObject.DistributedObject.announceGenerate(self)
         self.setupDoors()
-        self.interior.flattenMedium()
+
         emptyBoard = self.interior.find('**/empty_board')
         self.leaderBoard.reparentTo(emptyBoard.getChild(0))
         base.cr.hqLoaded = True #hack while a real fix is in the work

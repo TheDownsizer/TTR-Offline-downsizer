@@ -242,7 +242,7 @@ class Char(Avatar.Avatar):
                 ears.clearMat()
                 ears.node().setPreserveTransform(ModelNode.PTNone)
                 ears.setP(-40.0)
-                ears.flattenMedium()
+
                 self.ears.append(ears)
                 ears.setBillboardAxis()
 

@@ -25,7 +25,7 @@ class DistributedPartyWinterCatchActivity(DistributedPartyCatchActivity):
             else:
                 model = loader.loadModel(objType.modelPath)
             self.dropObjModels[objType.name] = model
-            model.flattenStrong()
+
 
         return
 

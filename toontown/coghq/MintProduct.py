@@ -28,7 +28,7 @@ class MintProduct(BasicEntities.NodePathEntity):
             self.model = None
         self.model = loader.loadModel(self.Models[self.mintId])
         self.model.setScale(self.Scales[self.mintId])
-        self.model.flattenStrong()
+
         if self.model:
             self.model.reparentTo(self)
         return

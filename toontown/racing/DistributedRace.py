@@ -749,7 +749,7 @@ class DistributedRace(DistributedObject.DistributedObject):
         l = self.geom.findAllMatches('**/+ModelNode')
         for n in l:
             n.node().setPreserveTransform(0)
-        self.geom.flattenLight()
+
         maxNum = 0
         for side in ['inner', 'outer']:
             self.buildingGroups[side] = []
@@ -765,7 +765,7 @@ class DistributedRace(DistributedObject.DistributedObject):
                     n2 = n.getParent().attachNewNode(n.getName())
                     n.getChildren().reparentTo(n2)
                     n.removeNode()
-                bldgGroup.flattenStrong()
+
                 if not bldgGroup.getNode(0).getBounds().isEmpty():
                     self.buildingGroups[side].append(bldgGroup)
                 i += 1
@@ -787,11 +787,9 @@ class DistributedRace(DistributedObject.DistributedObject):
                         n.removeNode()
                     self.buildingGroups[side].append(bldgGroup)
         treeNodes = self.townGeom.findAllMatches('**/prop_tree_*')
-        for tree in treeNodes:
-            tree.flattenStrong()
+
         snowTreeNodes = self.townGeom.findAllMatches('**/prop_snow_tree_*')
-        for snowTree in snowTreeNodes:
-            snowTree.flattenStrong()
+ 
         for side in ['inner', 'outer', 'innersidest', 'outersidest']:
             for grp in self.buildingGroups[side]:
                 grp.stash()
@@ -1008,10 +1006,6 @@ class DistributedRace(DistributedObject.DistributedObject):
                                     dict[i].append(bldgGroupIndex)
                             else:
                                 dict[i] = [bldgGroupIndex]
-
-        for side in ('innersidest', 'outersidest'):
-            for bldgGroup in self.buildingGroups[side]:
-                bldgGroup.flattenStrong()
 
         if self.isUrbanTrack:
             self.showBuildings(0, forceRecompute=True)

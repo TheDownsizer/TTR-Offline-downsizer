@@ -51,7 +51,8 @@ class DNALandmarkBuilding(DNANode):
         return np
 
     def _postGenerate(self, storage, np):
-        np.flattenStrong()
+        pass
+
 
     def _storeData(self, data):
         block = data.getBlock(DNAUtil.getBlockFromName(self.id))

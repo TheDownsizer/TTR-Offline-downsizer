@@ -674,7 +674,7 @@ class Playground(Place.Place):
             self.geom = hidden.attachNewNode(node)
         self.makeDictionaries(self.loader.dnaStore)
         self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.nodeList, self.zoneId)
-        self.geom.flattenMedium()
+
         gsg = base.win.getGsg()
         if gsg:
             self.geom.prepareScene(gsg)

@@ -18,7 +18,7 @@ class MazeTreasure(DirectObject):
         self.collNodePath = self.nodePath.attachNewNode(self.collNode)
         self.collNodePath.hide()
         self.accept('enter' + self.sphereName, self.__handleEnterSphere)
-        self.nodePath.flattenLight()
+
 
     def destroy(self):
         self.ignoreAll()

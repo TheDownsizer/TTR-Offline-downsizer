@@ -87,15 +87,15 @@ class DistributedRingGame(DistributedMinigame):
         loadBase = 'phase_4/models/minigames/'
         self.environModel = loader.loadModel(loadBase + 'swimming_game')
         self.environModel.setPos(0, self.ENVIRON_LENGTH / 2.0, self.SEA_FLOOR_Z)
-        self.environModel.flattenMedium()
+
         self.ringModel = loader.loadModel(loadBase + 'swimming_game_ring')
         self.ringModel.setTransparency(1)
         modelRadius = 4.0
         self.ringModel.setScale(RingGameGlobals.RING_RADIUS / modelRadius)
-        self.ringModel.flattenMedium()
+
         self.dropShadowModel = loader.loadModel('phase_3/models/props/drop_shadow')
         self.dropShadowModel.setColor(0, 0, 0, 0.5)
-        self.dropShadowModel.flattenMedium()
+
         self.toonDropShadows = []
         self.ringDropShadows = []
         self.__textGen = TextNode('ringGame')

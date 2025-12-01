@@ -704,9 +704,8 @@ class ToonHead(Actor.Actor):
                     self.__lod250lPupil.adjustAllPriorities(1)
                     self.__lod250rPupil.adjustAllPriorities(1)
                 animalType = style.getAnimal()
-                if animalType != 'dog':
-                    self.__lpupil.flattenStrong()
-                    self.__rpupil.flattenStrong()
+
+
         return
 
     def __setPupilDirection(self, x, y):

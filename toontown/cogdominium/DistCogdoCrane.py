@@ -102,7 +102,7 @@ class DistCogdoCrane(DistributedObject.DistributedObject, FSM.FSM):
         self.stick = self.craneGame.stick.copyTo(self.stickHinge)
         self.stickHinge.setHpr(self.neutralStickHinge)
         self.stick.setHpr(0, -90, 0)
-        self.stick.flattenLight()
+
         self.bottom = self.controlModel.find('**/bottom')
         self.bottom.wrtReparentTo(self.cc)
         self.bottomPos = self.bottom.getPos()
@@ -325,7 +325,7 @@ class DistCogdoCrane(DistributedObject.DistributedObject, FSM.FSM):
         self.craneShadow = loader.loadModel('phase_3/models/props/square_drop_shadow')
         self.craneShadow.setScale(0.5, 4, 1)
         self.craneShadow.setPos(0, -12, 0)
-        self.craneShadow.flattenLight()
+
         self.craneShadow.reparentTo(self.shadow)
         taskMgr.add(self.__followShadow, self.shadowName)
         rope = self.makeSpline()
@@ -556,7 +556,7 @@ class DistCogdoCrane(DistributedObject.DistributedObject, FSM.FSM):
             l = self.craneGame.lightning.copyTo(self.gripper)
             l.setScale(random.choice([1, -1]), 1, 5)
             l.setZ(random.uniform(-5, -5.5))
-            l.flattenLight()
+
             l.setTwoSided(1)
             l.setBillboardAxis()
             l.setScale(random.uniform(0.5, 1.0))

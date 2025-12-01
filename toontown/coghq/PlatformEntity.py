@@ -20,7 +20,7 @@ class PlatformEntity(BasicEntities.NodePathEntity):
         if len(self.floorName) == 0:
             return
         model.setScale(self.modelScale)
-        model.flattenMedium()
+
         self.platform = MovingPlatform.MovingPlatform()
         self.platform.setupCopyModel(self.getParentToken(), model, self.floorName)
         self.platform.reparentTo(self)

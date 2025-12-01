@@ -61,7 +61,7 @@ class TwoDBlock(DistributedObject.DistributedObject):
             self.moveIval = Sequence(forwardIval, backwardIval)
         else:
             self.platform = model.copyTo(self.model)
-        self.model.flattenLight()
+
         self.model.setPos(typeX + initX, typeY + initY, typeZ + initZ)
         self.model.setHpr(typeH + initH, typeP + initP, typeR + initR)
 

@@ -272,7 +272,7 @@ class DistributedPartyActivity(DistributedObject.DistributedObject):
         self.stick = self.party.defaultStickModel.copyTo(self.stickHinge)
         self.stickHinge.setHpr(0.0, 90.0, 0.0)
         self.stick.setHpr(0, -90.0, 0)
-        self.stick.flattenLight()
+
         self.bottom = self.leverModel.find('**/bottom')
         self.bottom.wrtReparentTo(self.controlColumn)
         self.bottomPos = self.bottom.getPos()

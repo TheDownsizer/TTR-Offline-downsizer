@@ -263,7 +263,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
         if colorVec4:
             modelColor = (colorVec4.getX(), colorVec4.getY(), colorVec4.getZ())
             self.applyColor(model, modelColor)
-        model.flattenLight()
+
         return model
 
     def requestPurchase(self, phone, callback):

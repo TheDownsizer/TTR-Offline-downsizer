@@ -44,7 +44,7 @@ class TwoDTreasure(DirectObject):
         self.collNodePath.hide()
         self.accept('enter' + self.sphereName, self.__handleEnterSphere)
         self.model.setPos(pos[0] - center[0], 0 - center[1], pos[2] - center[2])
-        self.nodePath.flattenLight()
+
         if self.isEnemyGenerated:
             self.flash = glowParticle.copyTo(self.model)
             self.flash.reparentTo(treasureMgr.treasuresNP)

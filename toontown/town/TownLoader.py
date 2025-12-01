@@ -253,7 +253,7 @@ class TownLoader(StateData.StateData):
             np.setTag('transformIndex', repr(i))
             self.holidayPropTransforms[i] = np.getNetTransform()
 
-        self.notify.info('skipping self.geom.flattenMedium')
+
         gsg = base.win.getGsg()
         if gsg:
             self.geom.prepareScene(gsg)

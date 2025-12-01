@@ -19,7 +19,7 @@ class DistributedTrigger(DistributedSwitch.DistributedSwitch):
         cSphereNode.addSolid(cSphere)
         self.cSphereNodePath = self.attachNewNode(cSphereNode)
         cSphereNode.setCollideMask(ToontownGlobals.WallBitmask)
-        self.flattenMedium()
+
 
     def delete(self):
         self.cSphereNodePath.removeNode()

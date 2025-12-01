@@ -86,7 +86,7 @@ class DistributedToonHallInterior(DistributedToonInterior):
         del self.colors
         del self.dnaStore
         del self.randomGenerator
-        self.interior.flattenMedium()
+
         self.sillyFSM.enterInitialState()
 
     def sillyMeterIsRunning(self, isRunning):
@@ -213,7 +213,7 @@ class DistributedToonHallInterior(DistributedToonInterior):
         thermometerLocator = self.sillyMeter.findAllMatches('**/uvj_progressBar')[1]
         thermometerMesh = self.sillyMeter.find('**/tube')
         thermometerMesh.setTexProjector(thermometerMesh.findTextureStage('default'), thermometerLocator, self.sillyMeter)
-        self.sillyMeter.flattenMedium()
+
         self.sillyMeter.makeSubpart('arrow', ['uvj_progressBar*', 'def_springA'])
         self.sillyMeter.makeSubpart('meter', ['def_pivot'], ['uvj_progressBar*', 'def_springA'])
         self.audio3d = Audio3DManager.Audio3DManager(base.sfxManagerList[0], camera)

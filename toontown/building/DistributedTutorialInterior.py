@@ -90,7 +90,7 @@ class DistributedTutorialInterior(DistributedObject.DistributedObject):
         dnaStore = DNAStorage()
         node = loader.loadDNA('phase_3.5/dna/tutorial_street.xml').generate(self.dnaStore)
         self.street = render.attachNewNode(node)
-        self.street.flattenMedium()
+
         self.street.setPosHpr(-17, 42, -0.5, 180, 0, 0)
         self.street.find('**/tb2:toon_landmark_TT_A1_DNARoot').stash()
         self.street.find('**/tb1:toon_landmark_hqTT_DNARoot/**/door_flat_0').stash()
@@ -124,7 +124,7 @@ class DistributedTutorialInterior(DistributedObject.DistributedObject):
         del self.colors
         del self.dnaStore
         del self.randomGenerator
-        self.interior.flattenMedium()
+
         npcOrigin = self.interior.find('**/npc_origin_' + repr((self.npc.posIndex)))
         if not npcOrigin.isEmpty():
             self.npc.reparentTo(npcOrigin)

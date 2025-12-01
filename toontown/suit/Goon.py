@@ -132,7 +132,7 @@ class Goon(Avatar.Avatar):
         beam.setHpr(0, self.halfFov, 0)
         p = self.radar.getRelativePoint(beam, Point3(0, -6, -1.8))
         self.radar.setSz(-3.5 / p[2])
-        self.radar.flattenMedium()
+
         self.radar.setColor(1, 1, 1, 0.2)
 
     def colorHat(self):

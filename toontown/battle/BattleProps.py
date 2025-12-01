@@ -325,11 +325,11 @@ class PropPool:
         elif name == 'shredder-paper':
             paper = self.props[name]
             paper.setPosHpr(2.22, -0.95, 1.16, -48.61, 26.57, -111.51)
-            paper.flattenMedium()
+
         elif name == 'lips':
             lips = self.props[name]
             lips.setPos(0, 0, -3.04)
-            lips.flattenMedium()
+
         elif name == '5dollar':
             tex = loader.loadTexture('phase_5/maps/dollar_5.jpg')
             tex.setMinfilter(Texture.FTLinearMipmapLinear)

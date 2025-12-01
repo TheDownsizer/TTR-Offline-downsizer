@@ -63,7 +63,7 @@ class DNATypesetter:
             np2 = np.getParent().attachNewNode(tn)
             np2.setTransform(np.getTransform())
             np.removeNode()
-        root.flattenStrong()
+
 
         # If and only if there == any text, we should have exactly one child:
         if root.getNumChildren():
