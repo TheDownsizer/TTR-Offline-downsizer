@@ -1160,6 +1160,8 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'Shhhh': ('shhh', ATK_TGT_GROUP),
  'BookSmart': ('speak', ATK_TGT_GROUP),
  'Promotion': ('promoting', ATK_TGT_SINGLE),
+ 'BullMarket': ('double-hand-whistle', ATK_TGT_SINGLE),
+ 'BearMarket': ('double-hand-whistle', ATK_TGT_GROUP),
  'GuiltTrip': ('magic1', ATK_TGT_GROUP),
  'HalfWindsor': ('throw-paper', ATK_TGT_SINGLE),
  'HangUp': ('phone', ATK_TGT_SINGLE),
@@ -1237,6 +1239,8 @@ GAVEL = list(SuitAttacks.keys()).index('Gavel')
 SHHHH = list(SuitAttacks.keys()).index('Shhhh')
 BOOK_SMART = list(SuitAttacks.keys()).index('BookSmart')
 PROMOTION = list(SuitAttacks.keys()).index('Promotion')
+BULL_MARKET = list(SuitAttacks.keys()).index('BullMarket')
+BEAR_MARKET = list(SuitAttacks.keys()).index('BearMarket')
 GLOWER_POWER = list(SuitAttacks.keys()).index('GlowerPower')
 GUILT_TRIP = list(SuitAttacks.keys()).index('GuiltTrip')
 HALF_WINDSOR = list(SuitAttacks.keys()).index('HalfWindsor')

@@ -179,6 +179,10 @@ def doSuitAttack(attack):
         suitTrack = doBookSmart(attack)
     elif name == PROMOTION:
         suitTrack = doPromotion(attack)
+    elif name == BULL_MARKET:
+        suitTrack = doBullMarket(attack)
+    elif name == BEAR_MARKET:
+        suitTrack = doBearMarket(attack)
     elif name == GUILT_TRIP:
         suitTrack = doGuiltTrip(attack)
     elif name == HALF_WINDSOR:
@@ -2072,6 +2076,82 @@ def doPromotion(attack):
         SoundInterval(auditorSfx, node=suit)),
         auditorCoinsLowerTrack,
         Func(auditorCoins.removeNode)
+    )
+
+    result = Sequence(auditorPromoteTrack)
+    
+
+    damageAnims = [['slip-backward', 0.01, 0.35]]
+    return Parallel(result)
+
+def doBullMarket(attack):
+    suit = attack['suit']
+    targets = attack['target']
+    battle = attack['battle']
+    attackList = attack['attackList']
+    leftKnives = []
+    rightKnives = []
+    for i in range(0, 3):
+        leftKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+        rightKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+
+    suitTrack = Sequence(getSuitAnimTrack(attack))
+    suitName = suit.getStyleName()
+    if suitName == 'hh':
+        leftPosPoints = [Point3(0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+    elif suitName == 'tbc':
+        leftPosPoints = [Point3(0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+    else:
+        leftPosPoints = [Point3(0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+    leftKnifeTracks = Parallel()
+    rightKnifeTracks = Parallel()
+
+    auditorSfx = loader.loadSfx('phase_4/audio/sfx/ttr_s_ene_cgc_cashbotAuditor_marketFlip.ogg')
+
+    auditorPromoteTrack = Sequence(
+        Parallel(Sequence(Wait(0.3), ActorInterval(suit, 'double-hand-whistle')),
+        SoundInterval(auditorSfx, node=suit)),
+    )
+
+    result = Sequence(auditorPromoteTrack)
+    
+
+    damageAnims = [['slip-backward', 0.01, 0.35]]
+    return Parallel(result)
+
+def doBearMarket(attack):
+    suit = attack['suit']
+    targets = attack['target']
+    battle = attack['battle']
+    attackList = attack['attackList']
+    leftKnives = []
+    rightKnives = []
+    for i in range(0, 3):
+        leftKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+        rightKnives.append(globalPropPool.getProp('ttr_m_prp_bat_dagger'))
+
+    suitTrack = Sequence(getSuitAnimTrack(attack))
+    suitName = suit.getStyleName()
+    if suitName == 'hh':
+        leftPosPoints = [Point3(0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
+    elif suitName == 'tbc':
+        leftPosPoints = [Point3(0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+    else:
+        leftPosPoints = [Point3(0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
+    leftKnifeTracks = Parallel()
+    rightKnifeTracks = Parallel()
+
+    auditorSfx = loader.loadSfx('phase_4/audio/sfx/ttr_s_ene_cgc_cashbotAuditor_marketFlip.ogg')
+
+    auditorPromoteTrack = Sequence(
+        Parallel(Sequence(Wait(0.3), ActorInterval(suit, 'double-hand-whistle')),
+        SoundInterval(auditorSfx, node=suit)),
     )
 
     result = Sequence(auditorPromoteTrack)
