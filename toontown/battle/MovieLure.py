@@ -99,11 +99,9 @@ def __createFishingPoleMultiTrack(lure, dollar, dollarName):
             suitTrack.append(Wait(3.5))
             suitName = suit.getStyleName()
             retardPos, retardHpr = battle.getActorPosHpr(suit)
-            retardPos.setY(retardPos.getY() + MovieUtil.SUIT_EXTRA_REACH_DISTANCE)
             if suitName in MovieUtil.largeSuits:
-                moveTrack = lerpSuit(suit, 0.0, reachAnimDuration / 2.5, retardPos, battle, trapProp)
                 reachTrack = ActorInterval(suit, 'reach', duration=reachAnimDuration)
-                suitTrack.append(Parallel(moveTrack, reachTrack))
+                suitTrack.append(reachTrack)
             else:
                 suitTrack.append(ActorInterval(suit, 'reach', duration=reachAnimDuration))
             if trapProp:
@@ -150,7 +148,7 @@ def __createMagnetMultiTrack(lure, magnet, pos, hpr, scale, isSmallMagnet = 1, n
             died = target['died']
             revived = target['revived']
             if kbbonus == 1 or hp > 0:
-                suitDelay = 2.6
+                suitDelay = 2
                 suitMoveDuration = 0.8
                 suitTrack = Sequence()
                 opos, ohpr = battle.getActorPosHpr(suit)
@@ -161,12 +159,6 @@ def __createMagnetMultiTrack(lure, magnet, pos, hpr, scale, isSmallMagnet = 1, n
                 shakeDuration = shakeTotalDuration / float(numShakes)
                 suitTrack.append(Func(suit.loop, 'neutral'))
                 suitTrack.append(Wait(suitDelay))
-                suitTrack.append(ActorInterval(suit, 'landing', startTime=2.37, endTime=1.82))
-                for i in range(0, numShakes):
-                    suitTrack.append(ActorInterval(suit, 'landing', startTime=1.82, endTime=1.16, duration=shakeDuration))
-
-                suitTrack.append(ActorInterval(suit, 'landing', startTime=1.16, endTime=0.7))
-                suitTrack.append(ActorInterval(suit, 'landing', startTime=0.7, duration=1.3))
                 suitTrack.append(Func(suit.loop, 'lured'))
                 suitTrack.append(Func(battle.lureSuit, suit))
                 if hp > 0:
@@ -176,7 +168,6 @@ def __createMagnetMultiTrack(lure, magnet, pos, hpr, scale, isSmallMagnet = 1, n
                 elif died != 0:
                     suitTrack.append(MovieUtil.createSuitDeathTrack(suit, toon, battle, npcs))
                 tracks.append(suitTrack)
-                tracks.append(lerpSuit(suit, suitDelay + 0.55 + shakeTotalDuration, suitMoveDuration, reachPos, battle, trapProp))
         else:
             tracks.append(Sequence(Wait(3.7), Func(MovieUtil.indicateMissed, suit)))
 
@@ -221,8 +212,6 @@ def __createHypnoGogglesMultiTrack(lure, npcs = []):
                 reachPos = Point3(opos[0], opos[1] - reachDist, opos[2])
                 suitTrack.append(Func(suit.loop, 'neutral'))
                 suitTrack.append(Wait(suitDelay))
-                suitTrack.append(ActorInterval(suit, 'hypnotized', duration=3.1))
-                suitTrack.append(Func(suit.setPos, battle, reachPos))
                 suitTrack.append(Func(suit.loop, 'lured'))
                 suitTrack.append(Func(battle.lureSuit, suit))
                 if hp > 0:
@@ -232,7 +221,6 @@ def __createHypnoGogglesMultiTrack(lure, npcs = []):
                 elif died != 0:
                     suitTrack.append(MovieUtil.createSuitDeathTrack(suit, toon, battle, npcs))
                 tracks.append(suitTrack)
-                tracks.append(lerpSuit(suit, suitDelay + 1.7, 0.7, reachPos, battle, trapProp))
         else:
             tracks.append(Sequence(Wait(2.3), Func(MovieUtil.indicateMissed, suit, 1.1)))
 
@@ -619,7 +607,6 @@ def __createSlideshowMultiTrack(lure, npcs = []):
                 elif died != 0:
                     suitTrack.append(MovieUtil.createSuitDeathTrack(suit, toon, battle, npcs))
                 tracks.append(suitTrack)
-                tracks.append(lerpSuit(suit, suitDelay + 1.7, 0.7, reachPos, battle, trapProp))
         else:
             tracks.append(Sequence(Wait(2.3), Func(MovieUtil.indicateMissed, suit, 1.1)))
 

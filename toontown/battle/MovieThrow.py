@@ -345,15 +345,9 @@ def __throwPie(throw, delay, hitCount):
             suitPos, suitHpr = battle.getActorPosHpr(suit)
             suitType = getSuitBodyType(suit.getStyleName())
             animTrack = Sequence()
-            animTrack.append(ActorInterval(suit, 'pie-small-react', duration=0.2))
-            if suitType == 'a':
-                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.43))
-            elif suitType == 'b':
-                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=1.94))
-            elif suitType == 'c':
-                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.58))
+            animTrack.append(ActorInterval(suit, 'pie-small-react'))
             animTrack.append(Func(battle.unlureSuit, suit))
-            moveTrack = Sequence(Wait(0.2), LerpPosInterval(suit, 0.6, pos=suitPos, other=battle))
+            moveTrack = Sequence()
             sival = Parallel(animTrack, moveTrack)
         elif hitCount == 1:
             sival = Parallel(ActorInterval(suit, 'pie-small-react'), MovieUtil.createSuitStunInterval(suit, 0.3, 1.3))

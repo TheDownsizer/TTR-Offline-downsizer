@@ -11,6 +11,7 @@ from otp.ai.MagicWordGlobal import *
 from .tracks.manager import TrackCalculatorManager
 from .cog_attacks.manager import CogAttackCalculatorManager
 from direct.showbase import DirectObject
+import math
 
 battleSkip = 0
 
@@ -215,17 +216,6 @@ class BattleCalculatorAI(DirectObject.DirectObject):
                     unluredSuits = 1
 
             if unluredSuits == 0:
-                attack[TOON_ACCBONUS_COL] = 1
-                return (0, 0)
-        elif atkTrack == DROP:
-            allLured = True
-            for i in range(len(atkTargets)):
-                if self.__suitIsLured(atkTargets[i].getDoId()):
-                    pass
-                else:
-                    allLured = False
-
-            if allLured:
                 attack[TOON_ACCBONUS_COL] = 1
                 return (0, 0)
         elif atkTrack == PETSOS:
@@ -1168,6 +1158,10 @@ class BattleCalculatorAI(DirectObject.DirectObject):
                     atkInfo = SuitBattleGlobals.getSuitAttack(theSuit.dna.name, theSuit.getLevel(), atkType)
                     result = atkInfo['hp']
                 targetIndex = self.battle.activeToons.index(toonId)
+
+                if self.__suitIsLured(theSuit.doId):
+                    result = math.ceil(result * 0.5)
+
                 attack[SUIT_HP_COL][targetIndex] = result
 
     def __getToonHp(self, toonDoId):
@@ -1213,12 +1207,6 @@ class BattleCalculatorAI(DirectObject.DirectObject):
     def __suitCanAttack(self, suitId):
         if self.__combatantDead(suitId, toon=0):
             return 0
-        # Check if suit is lured - if so, it cannot attack until lure rounds are exhausted
-        if self.__suitIsLured(suitId):
-            # Additional check to ensure suit can't attack while lured
-            # Even if somehow the lure status wasn't properly updated, double-check
-            if not self.__luredMaxRoundsReached(suitId):
-                return 0
         return 1
 
     def __updateSuitAtkStat(self, toonId):
