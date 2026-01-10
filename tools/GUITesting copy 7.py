@@ -34,7 +34,7 @@ class MyApp(ToonBase):
         from toontown.suit import DistributedSuitBase
         from toontown.suit import SuitDNA
 
-        
+        """
         self.dnaStore = DNAStorage()
 
         self.loader.loadDNA('phase_4/dna/storage.xml').store(self.dnaStore)
@@ -48,7 +48,8 @@ class MyApp(ToonBase):
         self.dnaStore.storeFont(ToontownGlobals.getInterfaceFont(), 'humanist')
         self.dnaStore.storeFont(ToontownGlobals.getSignFont(), 'mickey')
         self.dnaStore.storeFont(ToontownGlobals.getSuitFont(), 'suit')
-        """
+
+        
         self.demotedCeo = DistributedSuitBase.DistributedSuitBase(None)
         self.demotedCeo.dna = SuitDNA.SuitDNA()
         self.demotedCeo.dna.newSuit('aud')
